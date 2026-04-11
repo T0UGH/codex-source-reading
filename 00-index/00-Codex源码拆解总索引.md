@@ -63,13 +63,19 @@
 - [[../01-source-notes/2026-04-11-codex源码拆解-26-rmcp-client与OAuth链路]]
 - [[../01-source-notes/2026-04-11-codex源码拆解-27-linux-sandbox与process-hardening实现层]]
 
+### 第八批
+
+- [[../01-source-notes/2026-04-11-codex源码拆解-28-analytics与telemetry归约链]]
+- [[../01-source-notes/2026-04-11-codex源码拆解-29-realtime与collab子系统]]
+- [[../01-source-notes/2026-04-11-codex源码拆解-30-connectors与apps子系统]]
+
 ## 下一批建议
 
-1. 在现有 27 篇基础上开始 guidebook-style 重写
-2. 补 exec-server / rmcp-client / linux-sandbox 的 dedicated call-chain 图
-3. 若继续深挖，实现层下一批可看 analytics / realtime / connectors
+1. 在现有 30 篇基础上开始 guidebook-style 重写
+2. 补 dedicated call-chain 图：exec-server / rmcp-client / linux-sandbox / analytics / realtime / collab / connectors
+3. 若继续实现深挖，下一批可看 backend-client / codex-client / SSE / provider transport
 4. 按主题重组全部笔记，收敛成章节结构而不是时间顺序
-5. 后续继续挖时优先“实现细节专题”，不要再回头扫 repo 总图
+5. 后续若再继续，优先补图和章节化，而不是继续横向摊新主题
 
 ## 当前高优先级问题
 

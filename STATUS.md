@@ -6,19 +6,19 @@ Build Phase 1 source-reading materials for OpenAI Codex before attempting any gu
 
 ## Current state
 
-Seventh batch completed. Phase 1 broad architecture scan plus one layer of implementation deep-dive is now in place. Repository now covers repo map, module boundaries, app-server/core bridge, listener/event projection, turn materialization, pending request replay/resolve, rollout/state_db internals, exec layering, plugin capability packaging and install lifecycle, TUI convergence, mcp-server product boundary, review/guardian chain, remote websocket transport, memories/agents/external-agent-config, exec-server architecture, rmcp-client/OAuth client stack, linux-sandbox implementation, and plugin-mediated skills/MCP coupling.
+Eighth batch completed. Phase 1 broad architecture scan plus two layers of implementation deep-dive are now in place. Repository now covers repo map, module boundaries, app-server/core bridge, listener/event projection, turn materialization, pending request replay/resolve, rollout/state_db internals, exec layering, exec-server architecture, rmcp-client/OAuth client stack, linux-sandbox implementation, analytics/reducer pipeline, plugin capability packaging and install lifecycle, TUI convergence, realtime/collab, connectors/apps, mcp-server product boundary, review/guardian chain, remote websocket transport, memories/agents/external-agent-config, and plugin-mediated skills/MCP coupling.
 
 ## Completed in this round
 
 ### New source notes
-- exec-server architecture
-- rmcp-client / OAuth / MCP client recovery stack
-- linux-sandbox and process-hardening implementation layer
+- analytics / telemetry / reducer pipeline
+- realtime and collab subsystems
+- connectors and apps subsystem
 
 ### Strengthened judgments
-- exec-server is a process/filesystem RPC service behind the environment abstraction, not just a shell helper
-- MCP client-side complexity sits in transport/auth/recovery, not merely `call_tool`
-- Linux sandbox is now bwrap-first, with seccomp/no_new_privs layered inside and legacy Landlock pushed to fallback/reference status
+- analytics is fact ingestion + reducer enrichment + queued delivery, not ad-hoc direct POSTing
+- realtime and collab are both core-first runtimes with app-server/TUI as projection/control surfaces
+- connectors/apps is a multi-source merged subsystem: directory metadata + codex-apps MCP accessibility + plugin app declarations
 
 ## Current high-confidence judgments
 
@@ -46,14 +46,17 @@ Seventh batch completed. Phase 1 broad architecture scan plus one layer of imple
 - memories is a startup pipeline; agents is a session-scoped multi-agent control plane; external-agent-config is currently Claude-oriented migration infrastructure
 - rmcp-client is the MCP client transport/auth/recovery wrapper; recovery is currently targeted, not universal
 - Linux sandbox implementation is bwrap-first; process-hardening is a separate pre-main hardening layer
+- analytics is reducer-centered and depends on lifecycle facts plus custom business facts
+- realtime and collab are separate subsystems: realtime conversation vs multi-agent collaboration runtime
+- connectors/apps is a merged system combining directory metadata, runtime accessibility, and plugin declarations
 
 ## Next recommended moves
 
-1. start converting the current 27 notes into a guidebook-style rewrite
-2. add dedicated call-chain diagrams for exec-server / rmcp-client / linux-sandbox / review / guardian / remote transport / memories
-3. if continuing implementation deep-dives, next best topics are analytics / realtime / connectors
+1. start converting the current 30 notes into a guidebook-style rewrite
+2. add dedicated call-chain diagrams for exec-server / rmcp-client / linux-sandbox / analytics / realtime / collab / connectors
+3. if continuing implementation deep-dives, next best topic is backend-client / codex-client / SSE / provider transport
 4. reorganize the current notes into a chapter-oriented reading order
-5. avoid re-scanning repo-level architecture; focus only on specialized subsystems from here
+5. prioritize synthesis/diagrams over continuing to broaden topic coverage
 
 ## Open questions
 
@@ -64,9 +67,10 @@ Seventh batch completed. Phase 1 broad architecture scan plus one layer of imple
 - how long TUI will keep a hybrid app-server + legacy-core edge architecture
 - whether external-agent-config will remain Claude-first or become a true multi-agent migration layer
 - whether exec-server will grow stronger auth/deployment/runtime-orchestration semantics above the current environment contract
+- where guardian review analytics is actually emitted in production, if at all
 
 ## Acceptance bar for current batch
 
-- enough material to explain both the repo-level architecture and a first layer of implementation mechanics for the most important subsystems
-- enough evidence to shift future work from exploratory scanning to synthesis / guidebook writing
-- enough handoff state that later sessions can go directly into diagrams, restructuring, or a few remaining deep technical subsystems without rediscovering the basics
+- enough material to explain both repo-level architecture and a substantial slice of implementation mechanics for the most important subsystems
+- enough evidence to shift future work from exploratory scanning to synthesis, diagrams, and guidebook writing
+- enough handoff state that later sessions can go directly into restructuring or a few remaining specialized subsystems without rediscovering the main picture
