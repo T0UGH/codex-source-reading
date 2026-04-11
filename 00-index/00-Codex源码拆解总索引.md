@@ -69,13 +69,17 @@
 - [[../01-source-notes/2026-04-11-codex源码拆解-29-realtime与collab子系统]]
 - [[../01-source-notes/2026-04-11-codex源码拆解-30-connectors与apps子系统]]
 
+### 第九批
+
+- [[../01-source-notes/2026-04-11-codex源码拆解-31-backend-client与model-transport栈]]
+
 ## 下一批建议
 
-1. 在现有 30 篇基础上开始 guidebook-style 重写
-2. 补 dedicated call-chain 图：exec-server / rmcp-client / linux-sandbox / analytics / realtime / collab / connectors
-3. 若继续实现深挖，下一批可看 backend-client / codex-client / SSE / provider transport
-4. 按主题重组全部笔记，收敛成章节结构而不是时间顺序
-5. 后续若再继续，优先补图和章节化，而不是继续横向摊新主题
+1. 在现有 31 篇基础上开始 guidebook-style 重写
+2. 补 dedicated call-chain 图：exec-server / rmcp-client / linux-sandbox / analytics / realtime / collab / connectors / model transport
+3. 按主题重组全部笔记，收敛成章节结构而不是时间顺序
+4. 增加 operator-facing / reader-facing 导航页，而不是继续按时间堆笔记
+5. 若还要深挖，只剩少数边角专题，不再适合继续大面积横向扩展
 
 ## 当前高优先级问题
 

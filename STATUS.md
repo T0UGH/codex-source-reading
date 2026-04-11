@@ -6,19 +6,15 @@ Build Phase 1 source-reading materials for OpenAI Codex before attempting any gu
 
 ## Current state
 
-Eighth batch completed. Phase 1 broad architecture scan plus two layers of implementation deep-dive are now in place. Repository now covers repo map, module boundaries, app-server/core bridge, listener/event projection, turn materialization, pending request replay/resolve, rollout/state_db internals, exec layering, exec-server architecture, rmcp-client/OAuth client stack, linux-sandbox implementation, analytics/reducer pipeline, plugin capability packaging and install lifecycle, TUI convergence, realtime/collab, connectors/apps, mcp-server product boundary, review/guardian chain, remote websocket transport, memories/agents/external-agent-config, and plugin-mediated skills/MCP coupling.
+Ninth batch completed. Phase 1 broad architecture scan plus substantial implementation deep-dive are now in place. Repository now covers repo map, module boundaries, app-server/core bridge, listener/event projection, turn materialization, pending request replay/resolve, rollout/state_db internals, exec layering, exec-server architecture, rmcp-client/OAuth client stack, linux-sandbox implementation, analytics/reducer pipeline, plugin capability packaging and install lifecycle, TUI convergence, realtime/collab, connectors/apps, model transport stack, mcp-server product boundary, review/guardian chain, remote websocket transport, memories/agents/external-agent-config, and plugin-mediated skills/MCP coupling.
 
 ## Completed in this round
 
 ### New source notes
-- analytics / telemetry / reducer pipeline
-- realtime and collab subsystems
-- connectors and apps subsystem
+- backend-client / codex-client / codex-api / Responses transport stack
 
 ### Strengthened judgments
-- analytics is fact ingestion + reducer enrichment + queued delivery, not ad-hoc direct POSTing
-- realtime and collab are both core-first runtimes with app-server/TUI as projection/control surfaces
-- connectors/apps is a multi-source merged subsystem: directory metadata + codex-apps MCP accessibility + plugin app declarations
+- the model transport stack is layered as `codex-client` substrate → `codex-api` provider-aware API layer → `core::ModelClient` runtime orchestration, with `backend-client` as a separate backend/task API client line
 
 ## Current high-confidence judgments
 
@@ -49,14 +45,15 @@ Eighth batch completed. Phase 1 broad architecture scan plus two layers of imple
 - analytics is reducer-centered and depends on lifecycle facts plus custom business facts
 - realtime and collab are separate subsystems: realtime conversation vs multi-agent collaboration runtime
 - connectors/apps is a merged system combining directory metadata, runtime accessibility, and plugin declarations
+- model transport is layered as substrate (`codex-client`) → provider API (`codex-api`) → runtime orchestration (`ModelClient`), while `backend-client` serves a different backend/task API surface
 
 ## Next recommended moves
 
-1. start converting the current 30 notes into a guidebook-style rewrite
-2. add dedicated call-chain diagrams for exec-server / rmcp-client / linux-sandbox / analytics / realtime / collab / connectors
-3. if continuing implementation deep-dives, next best topic is backend-client / codex-client / SSE / provider transport
-4. reorganize the current notes into a chapter-oriented reading order
-5. prioritize synthesis/diagrams over continuing to broaden topic coverage
+1. start converting the current 31 notes into a guidebook-style rewrite
+2. add dedicated call-chain diagrams for exec-server / rmcp-client / linux-sandbox / analytics / realtime / collab / connectors / model transport
+3. reorganize the notes into a chapter-oriented reading order
+4. add reader-facing navigation/overview docs instead of continuing time-ordered accumulation
+5. if any further deep dives are needed, keep them tightly scoped to a single leftover edge subsystem
 
 ## Open questions
 
@@ -71,6 +68,6 @@ Eighth batch completed. Phase 1 broad architecture scan plus two layers of imple
 
 ## Acceptance bar for current batch
 
-- enough material to explain both repo-level architecture and a substantial slice of implementation mechanics for the most important subsystems
-- enough evidence to shift future work from exploratory scanning to synthesis, diagrams, and guidebook writing
-- enough handoff state that later sessions can go directly into restructuring or a few remaining specialized subsystems without rediscovering the main picture
+- enough material to explain both repo-level architecture and the main implementation layers for the most important subsystems
+- enough evidence that future work should shift from scanning to synthesis, diagrams, restructuring, and guidebook writing
+- enough handoff state that later sessions can proceed directly to synthesis without re-discovering the major architectural picture
