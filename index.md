@@ -223,5 +223,9 @@
 9. [01-source-notes/2026-04-11-codex源码共读-40-resolve_pending_server_request是resolved通知的有序发射器.md](01-source-notes/2026-04-11-codex源码共读-40-resolve_pending_server_request是resolved通知的有序发射器.md)
 10. [01-source-notes/2026-04-11-codex源码共读-41-handle_error是turn失败语义的写入点.md](01-source-notes/2026-04-11-codex源码共读-41-handle_error是turn失败语义的写入点.md)
 11. [01-source-notes/2026-04-11-codex源码共读-42-open_session_with_exec_env是spawn边界适配器.md](01-source-notes/2026-04-11-codex源码共读-42-open_session_with_exec_env是spawn边界适配器.md)
+12. [01-source-notes/2026-04-11-codex源码共读-43-populate_thread_turns是turn视图装配器.md](01-source-notes/2026-04-11-codex源码共读-43-populate_thread_turns是turn视图装配器.md)
+13. [01-source-notes/2026-04-11-codex源码共读-44-set_thread_status_and_interrupt_stale_turns是活跃态校正器.md](01-source-notes/2026-04-11-codex源码共读-44-set_thread_status_and_interrupt_stale_turns是活跃态校正器.md)
+14. [01-source-notes/2026-04-11-codex源码共读-45-find_and_remove_turn_summary是turn局部状态的drain边界.md](01-source-notes/2026-04-11-codex源码共读-45-find_and_remove_turn_summary是turn局部状态的drain边界.md)
+15. [01-source-notes/2026-04-11-codex源码共读-46-from_spawned与store_process是unified-exec会话生命周期的接力点.md](01-source-notes/2026-04-11-codex源码共读-46-from_spawned与store_process是unified-exec会话生命周期的接力点.md)
 
 这组的目标不是再讲模块边界，而是把单个关键函数在主链里的角色、状态迁移和设计意图拆清楚。
