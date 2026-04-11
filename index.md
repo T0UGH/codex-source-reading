@@ -227,5 +227,8 @@
 13. [01-source-notes/2026-04-11-codex源码共读-44-set_thread_status_and_interrupt_stale_turns是活跃态校正器.md](01-source-notes/2026-04-11-codex源码共读-44-set_thread_status_and_interrupt_stale_turns是活跃态校正器.md)
 14. [01-source-notes/2026-04-11-codex源码共读-45-find_and_remove_turn_summary是turn局部状态的drain边界.md](01-source-notes/2026-04-11-codex源码共读-45-find_and_remove_turn_summary是turn局部状态的drain边界.md)
 15. [01-source-notes/2026-04-11-codex源码共读-46-from_spawned与store_process是unified-exec会话生命周期的接力点.md](01-source-notes/2026-04-11-codex源码共读-46-from_spawned与store_process是unified-exec会话生命周期的接力点.md)
+16. [01-source-notes/2026-04-11-codex源码共读-47-build_turns_from_rollout_items是turn-history回放归约器.md](01-source-notes/2026-04-11-codex源码共读-47-build_turns_from_rollout_items是turn-history回放归约器.md)
+17. [01-source-notes/2026-04-11-codex源码共读-48-resolve_thread_status与track_current_turn_event是一对竞态修正组合.md](01-source-notes/2026-04-11-codex源码共读-48-resolve_thread_status与track_current_turn_event是一对竞态修正组合.md)
+18. [01-source-notes/2026-04-11-codex源码共读-49-spawn_exit_watcher与start_streaming_output是终态发射链.md](01-source-notes/2026-04-11-codex源码共读-49-spawn_exit_watcher与start_streaming_output是终态发射链.md)
 
 这组的目标不是再讲模块边界，而是把单个关键函数在主链里的角色、状态迁移和设计意图拆清楚。

@@ -6,19 +6,18 @@ Build Phase 1 source-reading materials for OpenAI Codex before attempting any gu
 
 ## Current state
 
-Function-level source-reading mode is now the dominant workstream. Repository now has 31 architecture/implementation notes plus 15 fine-grained function notes, covering listener installation, listener command dispatch, event projection, running-thread resume composition, pending-request resolution emission, rollout reconstruction, turn completion, turn-summary draining, error-to-failure writing, turn-list assembly, thread/turn status reconciliation, unified exec request assembly, unified exec runtime launch adaptation, and unified exec spawn/session/storage boundaries.
+Function-level source-reading mode is now the dominant workstream. Repository now has 31 architecture/implementation notes plus 18 fine-grained function notes, covering listener installation, listener command dispatch, event projection, running-thread resume composition, pending-request resolution emission, rollout reconstruction, turn completion, turn-summary draining, error-to-failure writing, turn-list assembly, thread/turn status reconciliation, thread-history replay reduction, unified exec request assembly, unified exec runtime launch adaptation, unified exec spawn/session/storage boundaries, and unified exec end-event/output watcher chain.
 
 ## Completed in this round
 
 ### New source notes
-- function-level note on turn-list assembly
-- function-level note on thread/turn status reconciliation
-- function-level note on turn-summary drain boundary
-- function-level note on unified-exec sessionization and store handoff
+- function-level note on turn-history replay reduction
+- function-level note on thread-status race correction and local turn-state accumulation
+- function-level note on unified-exec output/end watcher chain
 
 ### Strengthened judgments
-- the local helpers around resume/status/finalization are where app-server’s client-visible consistency actually gets enforced
-- the unified-exec lifecycle is clearer when split into request assembly → runtime adaptation → spawn/sessionization → manager storage
+- app-server consistency increasingly comes from many tiny local repair/reconciliation helpers rather than one central giant state machine
+- unified-exec lifecycle is now legible as request assembly → runtime adaptation → spawn/sessionization → store → output/end watchers
 
 ## Current high-confidence judgments
 
@@ -50,12 +49,12 @@ Function-level source-reading mode is now the dominant workstream. Repository no
 - realtime and collab are separate subsystems: realtime conversation vs multi-agent collaboration runtime
 - connectors/apps is a merged system combining directory metadata, runtime accessibility, and plugin declarations
 - model transport is layered as substrate (`codex-client`) → provider API (`codex-api`) → runtime orchestration (`ModelClient`), while `backend-client` serves a different backend/task API surface
-- function-level notes now cover many of the key consistency pivots: listener ordering, resume composition, turn finalization, and unified-exec spawn/session handoff
+- function-level notes now show many critical local pivots: listener ordering, resume composition, turn finalization, thread-history replay, and unified-exec output/end watcher sequencing
 
 ## Next recommended moves
 
 1. continue the function-level series only for the highest-value pivots
-2. likely next targets: `build_turns_from_rollout_items(...)`, `resolve_thread_status(...)`, `track_current_turn_event(...)`, `spawn_exit_watcher(...)`, `start_streaming_output(...)`
+2. likely next targets: `ThreadHistoryBuilder::handle_event(...)`, `active_turn_snapshot(...)`, `process_chunk(...)`, `emit_exec_end_for_unified_exec(...)`, `refresh_process_state(...)`
 3. after one more batch, switch from note accumulation to guidebook restructuring
 4. keep future additions tightly scoped; avoid reopening broad repo-level scans
 
