@@ -6,20 +6,21 @@ Build Phase 1 source-reading materials for OpenAI Codex before attempting any gu
 
 ## Current state
 
-Function-level source-reading mode is now the dominant workstream. Repository now has 31 architecture/implementation notes plus 22 fine-grained function notes, covering listener installation, listener command dispatch, event projection, running-thread resume composition, pending-request resolution emission, rollout reconstruction, turn completion, turn-summary draining, error-to-failure writing, turn-list assembly, thread/turn status reconciliation, thread-history replay reduction, thread-history event reduction dispatch, active-turn snapshot projection, unified exec request assembly, unified exec runtime launch adaptation, unified exec spawn/session/storage boundaries, unified exec output chunk slicing, unified exec end-event/output watcher chain, and unified exec success-end packaging.
+Function-level source-reading mode is now the dominant workstream. Repository now has 31 architecture/implementation notes plus 27 fine-grained function notes, covering listener installation, listener command dispatch, event projection, running-thread resume composition, pending-request resolution emission, rollout reconstruction, turn completion, turn-summary draining, error-to-failure writing, turn-list assembly, thread/turn status reconciliation, thread-history replay reduction, thread-history event reduction dispatch, active-turn snapshot projection, implicit-turn input routing, unified exec request assembly, unified exec runtime launch adaptation, unified exec spawn/session/storage boundaries, unified exec output chunk slicing, UTF-8 prefix guarding, transcript-first aggregated output resolution, unified exec end-event/output watcher chain, unified exec success-end packaging, unified exec failure-end packaging, and unified exec process-store lifecycle reconciliation.
 
 ## Completed in this round
 
 ### New source notes
-- function-level note on `ThreadHistoryBuilder::handle_event(...)` as the shared event-reduction entry
-- function-level note on `active_turn_snapshot(...)` as current-turn projection boundary
-- function-level note on `process_chunk(...)` as transcript/delta slicing boundary
-- function-level note on `emit_exec_end_for_unified_exec(...)` as unified-exec success-end packager
+- function-level note on `emit_failed_exec_end_for_unified_exec(...)` as unified-exec failure-end packager
+- function-level note on `resolve_aggregated_output(...)` as transcript-first output arbiter
+- function-level note on `split_valid_utf8_prefix(...)` as UTF-8-safe chunk boundary guard
+- function-level note on `refresh_process_state(...)` as process-store lifecycle reconciler
+- function-level note on `handle_user_message(...)` as implicit-turn boundary and input ownership function
 
 ### Strengthened judgments
-- `ThreadHistoryBuilder` is now clearly the turn-semantics authority; app-server mostly forwards or lightly repairs around it
-- unified-exec output path is now legible as receiver bytes → UTF-8-safe chunk slicing → transcript accumulation → end payload packaging
-- many “small helpers” in Codex are actually protocol-boundary functions, not just convenience utilities
+- the final unified-exec end semantics are now basically closed: chunk slicing, transcript authority, success/failure packaging, and store reconciliation all line up
+- thread-history correctness depends heavily on tiny boundary helpers like `handle_user_message(...)`, not just on top-level builders
+- the repo’s most important local mechanics are now captured enough to stop expanding note count and start restructuring into a guidebook
 
 ## Current high-confidence judgments
 
@@ -51,16 +52,18 @@ Function-level source-reading mode is now the dominant workstream. Repository no
 - realtime and collab are separate subsystems: realtime conversation vs multi-agent collaboration runtime
 - connectors/apps is a merged system combining directory metadata, runtime accessibility, and plugin declarations
 - model transport is layered as substrate (`codex-client`) → provider API (`codex-api`) → runtime orchestration (`ModelClient`), while `backend-client` serves a different backend/task API surface
-- function-level notes now show the repo’s core runtime pivots are mostly reducer/projection/packaging boundaries, not giant manager objects
+- function-level notes now show the repo’s core runtime pivots are mostly reducer/projection/packaging/reconciliation boundaries, not giant manager objects
 - `active_turn_snapshot(...)` is semantically closer to a current-or-last turn projection than a strict active-only getter, so it must be read together with `has_active_turn()`
+- thread-history turn slicing follows a consistent rule: explicit turn boundaries win, user-message heuristics backfill old streams, and compaction-only turns get special preservation treatment
 - unified-exec treats transcript as the primary truth for final aggregated output, while live delta streaming is explicitly budget-limited and secondary
+- `refresh_process_state(...)` confirms the process store is not the truth source; `UnifiedExecProcess` is closer to truth and store entries are reconciled against it lazily
 
 ## Next recommended moves
 
-1. do one final high-value function batch only
-2. likely next targets: `emit_failed_exec_end_for_unified_exec(...)`, `resolve_aggregated_output(...)`, `split_valid_utf8_prefix(...)`, `refresh_process_state(...)`, `handle_user_message(...)`
-3. after that, switch from note accumulation to guidebook restructuring
-4. keep future additions tightly scoped; avoid reopening broad repo-level scans
+1. stop adding more narrow notes unless a clear gap blocks guidebook writing
+2. switch to guidebook restructuring next: cluster existing notes into a readable architecture narrative and a function-level appendix
+3. likely first guidebook cuts: runtime layering, app-server/thread-state, unified-exec lifecycle, plugin/capability system, persistence/state model
+4. keep future source-note additions exception-only; avoid reopening the repo breadth-first
 
 ## Open questions
 
@@ -76,5 +79,5 @@ Function-level source-reading mode is now the dominant workstream. Repository no
 ## Acceptance bar for current batch
 
 - enough material to explain the repo at both architecture level and function/state-machine level for the most important runtime pivots
-- enough handoff state to continue with a fine-grained Codex source-reading series instead of broad subsystem scanning
+- enough handoff state to stop broad source scanning and begin guidebook-style restructuring with confidence
 - enough evidence to later rewrite the material into a guidebook without losing the key local runtime mechanics and ordering guarantees

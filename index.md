@@ -234,5 +234,10 @@
 20. [01-source-notes/2026-04-11-codex源码共读-51-active_turn_snapshot是当前turn的对外投影口.md](01-source-notes/2026-04-11-codex源码共读-51-active_turn_snapshot是当前turn的对外投影口.md)
 21. [01-source-notes/2026-04-11-codex源码共读-52-process_chunk是输出流到transcript-delta的切片器.md](01-source-notes/2026-04-11-codex源码共读-52-process_chunk是输出流到transcript-delta的切片器.md)
 22. [01-source-notes/2026-04-11-codex源码共读-53-emit_exec_end_for_unified_exec是统一exec终态封装器.md](01-source-notes/2026-04-11-codex源码共读-53-emit_exec_end_for_unified_exec是统一exec终态封装器.md)
+23. [01-source-notes/2026-04-11-codex源码共读-54-emit_failed_exec_end_for_unified_exec是失败终态封装器.md](01-source-notes/2026-04-11-codex源码共读-54-emit_failed_exec_end_for_unified_exec是失败终态封装器.md)
+24. [01-source-notes/2026-04-11-codex源码共读-55-resolve_aggregated_output是transcript优先的最终输出裁决器.md](01-source-notes/2026-04-11-codex源码共读-55-resolve_aggregated_output是transcript优先的最终输出裁决器.md)
+25. [01-source-notes/2026-04-11-codex源码共读-56-split_valid_utf8_prefix是输出切流的UTF-8边界守门员.md](01-source-notes/2026-04-11-codex源码共读-56-split_valid_utf8_prefix是输出切流的UTF-8边界守门员.md)
+26. [01-source-notes/2026-04-11-codex源码共读-57-refresh_process_state是进程存储与真实生命周期的对账器.md](01-source-notes/2026-04-11-codex源码共读-57-refresh_process_state是进程存储与真实生命周期的对账器.md)
+27. [01-source-notes/2026-04-11-codex源码共读-58-handle_user_message是implicit-turn收口与新输入归属器.md](01-source-notes/2026-04-11-codex源码共读-58-handle_user_message是implicit-turn收口与新输入归属器.md)
 
 这组的目标不是再讲模块边界，而是把单个关键函数在主链里的角色、状态迁移和设计意图拆清楚。
