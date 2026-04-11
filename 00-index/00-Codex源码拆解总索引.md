@@ -43,13 +43,20 @@
 - [[../01-source-notes/2026-04-11-codex源码拆解-15-listener与event投影链]]
 - [[../01-source-notes/2026-04-11-codex源码拆解-16-thread_watch_manager与thread_state_manager的分工]]
 
+### 第五批
+
+- [[../01-source-notes/2026-04-11-codex源码拆解-17-turn-materialization与pending-request链]]
+- [[../01-source-notes/2026-04-11-codex源码拆解-18-codex_rollout与state_db内部结构]]
+- [[../01-source-notes/2026-04-11-codex源码拆解-19-plugin能力打包与skills-MCP-apps关系]]
+- [[../01-source-notes/2026-04-11-codex源码拆解-20-TUI向app-server收敛的现状]]
+
 ## 下一批建议
 
-1. `handle_turn_complete` / `handle_turn_interrupted` / turn materialization 细链
-2. pending request replay / callback / resolve 机制细拆
-3. `codex_rollout` crate 深拆（不只看 core bridge）
-4. `plugin` manifest 如何同时影响 skills 与 MCP
-5. TUI 现阶段到底有多少逻辑已切到 app-server contract
+1. plugin hooks / marketplace / install 生命周期细拆
+2. review / guardian / detached review thread 链
+3. remote app-server transport / websocket 协议链
+4. memories / agents / external-agent-config 体系
+5. 在现有 Phase 1 材料基础上开始 guidebook-style 重写
 
 ## 当前高优先级问题
 
