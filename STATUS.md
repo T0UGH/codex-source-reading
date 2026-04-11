@@ -6,34 +6,52 @@ Build Phase 1 source-reading materials for OpenAI Codex before attempting any gu
 
 ## Current state
 
-First batch of repository-level materials has been created.
+Second batch completed. Repository now has an initial repo-level map plus first architecture slices for runtime, config/state, capability integration, safety, and embedding.
 
 ## Completed in this round
 
-- repository structure established
-- top-level reading index created
-- entry/distribution code-path index created
-- 3 source-reading notes written:
-  - repository overview and layering
-  - why npm is only a distribution shell
-  - CLI entry and command routing
+### New source notes
+- TUI vs core boundary
+- core as runtime aggregation layer
+- config model and state restoration
+- MCP / hooks / skills integration layer
+- sandbox / execpolicy / approval division
+- app-server and SDK embedding architecture
+
+### New drafts
+- interactive TUI call-chain draft
+- exec call-chain draft
+
+### New boundary artifact
+- module boundary judgment v1
+
+## Current high-confidence judgments
+
+- `codex-cli/` is only a distribution shell
+- `codex-rs/cli` is the unified command/mode entry layer
+- `tui` and `exec` are front-ends over deeper runtime surfaces
+- `core` is the runtime aggregation center
+- `config` and `state` are intentionally split concerns
+- MCP / hooks / skills are separate capability-ingress lines
+- sandbox / execpolicy / approval are three different control layers
+- app-server is the richer control-plane embedding surface; SDKs currently diverge
 
 ## Next recommended moves
 
-1. write `codex-rs/tui` note: UI layer vs core boundary
-2. write `codex-rs/core` note: runtime aggregation and export surface
-3. draft interactive TUI call chain
-4. draft exec call chain
-5. start config/state slice
+1. inspect app-server internal bridge from protocol handlers to `ThreadManager`
+2. deepen `rollout` / `state_db_bridge` / session reconstruction chain
+3. inspect `exec` vs `core::exec` vs `unified_exec` ownership split
+4. inspect `mcp-server` vs `app-server` product boundary
+5. inspect `skills` ↔ MCP dependency path
 
 ## Open questions
 
-- exact TUI ↔ app-server relationship
-- exact `core` ↔ `exec` division
-- how rollout/session metadata and `state` crate divide responsibilities
+- exact app-server → core bridge implementation path
+- exact `rollout` crate/file-layout and materialization details
+- whether TS SDK will remain CLI-first or later converge toward app-server
+- how complete current hook support is intended to become
 
 ## Acceptance bar for current batch
 
-- enough evidence to support repo-level layering judgment
-- enough evidence to justify not treating `codex-cli/` as the main implementation
-- enough evidence to start reading `tui/core/exec` as the next slice
+- enough material to support Phase 1 repo map and module boundary map
+- enough evidence to begin second-wave deeper notes without reopening repo-level questions
