@@ -38,10 +38,15 @@
 - [[../01-source-notes/2026-04-11-codex源码拆解-13-mcp-server与app-server的产品边界]]
 - [[../01-source-notes/2026-04-11-codex源码拆解-14-skills与MCP的依赖路径]]
 
+### 第四批
+
+- [[../01-source-notes/2026-04-11-codex源码拆解-15-listener与event投影链]]
+- [[../01-source-notes/2026-04-11-codex源码拆解-16-thread_watch_manager与thread_state_manager的分工]]
+
 ## 下一批建议
 
-1. `ensure_conversation_listener` / event 投影链
-2. `thread_watch_manager` / `thread_state_manager` 的细分工
+1. `handle_turn_complete` / `handle_turn_interrupted` / turn materialization 细链
+2. pending request replay / callback / resolve 机制细拆
 3. `codex_rollout` crate 深拆（不只看 core bridge）
 4. `plugin` manifest 如何同时影响 skills 与 MCP
 5. TUI 现阶段到底有多少逻辑已切到 app-server contract
