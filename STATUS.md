@@ -6,24 +6,20 @@ Build Phase 1 source-reading materials for OpenAI Codex before attempting any gu
 
 ## Current state
 
-Second batch completed. Repository now has an initial repo-level map plus first architecture slices for runtime, config/state, capability integration, safety, and embedding.
+Third batch completed. Repository now has repo map, boundary map v1, two call-chain drafts, and a deeper third-wave slice on app-server bridging, rollout recovery, exec layering, mcp-server product boundary, and plugin-mediated skills/MCP coupling.
 
 ## Completed in this round
 
 ### New source notes
-- TUI vs core boundary
-- core as runtime aggregation layer
-- config model and state restoration
-- MCP / hooks / skills integration layer
-- sandbox / execpolicy / approval division
-- app-server and SDK embedding architecture
+- app-server → ThreadManager bridge
+- rollout / state_db / session reconstruction chain
+- exec vs unified_exec responsibility split
+- mcp-server vs app-server product boundary
+- skills ↔ MCP dependency path (reframed as plugin-mediated coupling)
 
-### New drafts
-- interactive TUI call-chain draft
-- exec call-chain draft
-
-### New boundary artifact
-- module boundary judgment v1
+### Updated artifacts
+- total index expanded to three batches
+- boundary judgment v1 refined with app-server / mcp-server / plugins / unified_exec / rollout-state_db distinctions
 
 ## Current high-confidence judgments
 
@@ -31,27 +27,30 @@ Second batch completed. Repository now has an initial repo-level map plus first 
 - `codex-rs/cli` is the unified command/mode entry layer
 - `tui` and `exec` are front-ends over deeper runtime surfaces
 - `core` is the runtime aggregation center
-- `config` and `state` are intentionally split concerns
-- MCP / hooks / skills are separate capability-ingress lines
-- sandbox / execpolicy / approval are three different control layers
-- app-server is the richer control-plane embedding surface; SDKs currently diverge
+- `ThreadManager` is the runtime creation/ownership entry, not app-server
+- `app-server` is a native control-plane facade over core runtime
+- `mcp-server` is a toolified MCP exposure layer, not the same product surface as app-server
+- rollout is the durable history truth source; `state_db_bridge` is a thin bridge, not the main restore logic
+- `exec.rs` is the execution primitive layer; `unified_exec` is the sessionful agent-facing execution subsystem
+- skills and MCP are parallel capability lines whose strongest visible coupling today is mediated by plugins/config
 
 ## Next recommended moves
 
-1. inspect app-server internal bridge from protocol handlers to `ThreadManager`
-2. deepen `rollout` / `state_db_bridge` / session reconstruction chain
-3. inspect `exec` vs `core::exec` vs `unified_exec` ownership split
-4. inspect `mcp-server` vs `app-server` product boundary
-5. inspect `skills` ↔ MCP dependency path
+1. inspect `ensure_conversation_listener` / listener task / event projection from thread events to app-server events
+2. inspect `thread_watch_manager` vs `thread_state_manager` ownership split
+3. go one layer deeper into `codex_rollout` crate instead of only core-side bridges
+4. inspect plugin manifest / capability packaging path that affects both skill roots and MCP provenance
+5. inspect how much TUI has already converged onto app-server contract vs remaining core-direct paths
 
 ## Open questions
 
-- exact app-server → core bridge implementation path
-- exact `rollout` crate/file-layout and materialization details
-- whether TS SDK will remain CLI-first or later converge toward app-server
-- how complete current hook support is intended to become
+- exact listener/event bridge internals from `CodexThread` to app-server clients
+- exact `codex_rollout` physical internals and state-db table semantics
+- whether app-server will become the dominant long-term embedding surface across all SDKs
+- how explicit plugin packaging declares both skill and MCP capabilities
 
 ## Acceptance bar for current batch
 
-- enough material to support Phase 1 repo map and module boundary map
-- enough evidence to begin second-wave deeper notes without reopening repo-level questions
+- enough material to support a Phase 1 module map plus first deeper architecture slices
+- enough evidence to start a second-wave guidebook rewrite without reopening repo-level boundary questions
+- enough state handoff for a later session to continue from listener / rollout internals instead of redoing current judgments

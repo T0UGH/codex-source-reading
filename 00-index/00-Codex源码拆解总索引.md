@@ -9,22 +9,42 @@
 - 能力接入主线
 - 执行边界主线
 
-## 第一批产物
+## 已完成产物
 
-### 已完成
+### 索引
 
 - [[01-代码路径索引-入口与分发]]
+
+### 第一批
+
 - [[../01-source-notes/2026-04-11-codex源码拆解-01-仓库总貌与分层判断]]
 - [[../01-source-notes/2026-04-11-codex源码拆解-02-为什么npm只是分发壳]]
 - [[../01-source-notes/2026-04-11-codex源码拆解-03-Codex-CLI总入口与命令分流]]
 
+### 第二批
+
+- [[../01-source-notes/2026-04-11-codex源码拆解-04-TUI与core的边界]]
+- [[../01-source-notes/2026-04-11-codex源码拆解-05-core作为runtime聚合核心]]
+- [[../01-source-notes/2026-04-11-codex源码拆解-06-config模型与状态恢复]]
+- [[../01-source-notes/2026-04-11-codex源码拆解-07-MCP-hooks-skills的接入层]]
+- [[../01-source-notes/2026-04-11-codex源码拆解-08-sandbox与execpolicy的分工]]
+- [[../01-source-notes/2026-04-11-codex源码拆解-09-app-server与SDK嵌入架构]]
+
+### 第三批
+
+- [[../01-source-notes/2026-04-11-codex源码拆解-10-app-server到ThreadManager的桥]]
+- [[../01-source-notes/2026-04-11-codex源码拆解-11-rollout-state_db与会话恢复链]]
+- [[../01-source-notes/2026-04-11-codex源码拆解-12-exec与unified_exec的职责分工]]
+- [[../01-source-notes/2026-04-11-codex源码拆解-13-mcp-server与app-server的产品边界]]
+- [[../01-source-notes/2026-04-11-codex源码拆解-14-skills与MCP的依赖路径]]
+
 ## 下一批建议
 
-1. `codex-rs/tui` 主链
-2. `codex-rs/config` 模型与层叠加载
-3. `codex-rs/state` / rollout / SQLite 状态关系
-4. `sandboxing` / `execpolicy` 的分工
-5. `codex-mcp` / `mcp-server` / `rmcp-client` 的接入关系
+1. `ensure_conversation_listener` / event 投影链
+2. `thread_watch_manager` / `thread_state_manager` 的细分工
+3. `codex_rollout` crate 深拆（不只看 core bridge）
+4. `plugin` manifest 如何同时影响 skills 与 MCP
+5. TUI 现阶段到底有多少逻辑已切到 app-server contract
 
 ## 当前高优先级问题
 
