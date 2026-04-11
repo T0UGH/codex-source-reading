@@ -6,18 +6,20 @@ Build Phase 1 source-reading materials for OpenAI Codex before attempting any gu
 
 ## Current state
 
-Function-level source-reading mode is now the dominant workstream. Repository now has 31 architecture/implementation notes plus 18 fine-grained function notes, covering listener installation, listener command dispatch, event projection, running-thread resume composition, pending-request resolution emission, rollout reconstruction, turn completion, turn-summary draining, error-to-failure writing, turn-list assembly, thread/turn status reconciliation, thread-history replay reduction, unified exec request assembly, unified exec runtime launch adaptation, unified exec spawn/session/storage boundaries, and unified exec end-event/output watcher chain.
+Function-level source-reading mode is now the dominant workstream. Repository now has 31 architecture/implementation notes plus 22 fine-grained function notes, covering listener installation, listener command dispatch, event projection, running-thread resume composition, pending-request resolution emission, rollout reconstruction, turn completion, turn-summary draining, error-to-failure writing, turn-list assembly, thread/turn status reconciliation, thread-history replay reduction, thread-history event reduction dispatch, active-turn snapshot projection, unified exec request assembly, unified exec runtime launch adaptation, unified exec spawn/session/storage boundaries, unified exec output chunk slicing, unified exec end-event/output watcher chain, and unified exec success-end packaging.
 
 ## Completed in this round
 
 ### New source notes
-- function-level note on turn-history replay reduction
-- function-level note on thread-status race correction and local turn-state accumulation
-- function-level note on unified-exec output/end watcher chain
+- function-level note on `ThreadHistoryBuilder::handle_event(...)` as the shared event-reduction entry
+- function-level note on `active_turn_snapshot(...)` as current-turn projection boundary
+- function-level note on `process_chunk(...)` as transcript/delta slicing boundary
+- function-level note on `emit_exec_end_for_unified_exec(...)` as unified-exec success-end packager
 
 ### Strengthened judgments
-- app-server consistency increasingly comes from many tiny local repair/reconciliation helpers rather than one central giant state machine
-- unified-exec lifecycle is now legible as request assembly → runtime adaptation → spawn/sessionization → store → output/end watchers
+- `ThreadHistoryBuilder` is now clearly the turn-semantics authority; app-server mostly forwards or lightly repairs around it
+- unified-exec output path is now legible as receiver bytes → UTF-8-safe chunk slicing → transcript accumulation → end payload packaging
+- many “small helpers” in Codex are actually protocol-boundary functions, not just convenience utilities
 
 ## Current high-confidence judgments
 
@@ -49,13 +51,15 @@ Function-level source-reading mode is now the dominant workstream. Repository no
 - realtime and collab are separate subsystems: realtime conversation vs multi-agent collaboration runtime
 - connectors/apps is a merged system combining directory metadata, runtime accessibility, and plugin declarations
 - model transport is layered as substrate (`codex-client`) → provider API (`codex-api`) → runtime orchestration (`ModelClient`), while `backend-client` serves a different backend/task API surface
-- function-level notes now show many critical local pivots: listener ordering, resume composition, turn finalization, thread-history replay, and unified-exec output/end watcher sequencing
+- function-level notes now show the repo’s core runtime pivots are mostly reducer/projection/packaging boundaries, not giant manager objects
+- `active_turn_snapshot(...)` is semantically closer to a current-or-last turn projection than a strict active-only getter, so it must be read together with `has_active_turn()`
+- unified-exec treats transcript as the primary truth for final aggregated output, while live delta streaming is explicitly budget-limited and secondary
 
 ## Next recommended moves
 
-1. continue the function-level series only for the highest-value pivots
-2. likely next targets: `ThreadHistoryBuilder::handle_event(...)`, `active_turn_snapshot(...)`, `process_chunk(...)`, `emit_exec_end_for_unified_exec(...)`, `refresh_process_state(...)`
-3. after one more batch, switch from note accumulation to guidebook restructuring
+1. do one final high-value function batch only
+2. likely next targets: `emit_failed_exec_end_for_unified_exec(...)`, `resolve_aggregated_output(...)`, `split_valid_utf8_prefix(...)`, `refresh_process_state(...)`, `handle_user_message(...)`
+3. after that, switch from note accumulation to guidebook restructuring
 4. keep future additions tightly scoped; avoid reopening broad repo-level scans
 
 ## Open questions

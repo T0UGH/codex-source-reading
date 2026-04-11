@@ -230,5 +230,9 @@
 16. [01-source-notes/2026-04-11-codex源码共读-47-build_turns_from_rollout_items是turn-history回放归约器.md](01-source-notes/2026-04-11-codex源码共读-47-build_turns_from_rollout_items是turn-history回放归约器.md)
 17. [01-source-notes/2026-04-11-codex源码共读-48-resolve_thread_status与track_current_turn_event是一对竞态修正组合.md](01-source-notes/2026-04-11-codex源码共读-48-resolve_thread_status与track_current_turn_event是一对竞态修正组合.md)
 18. [01-source-notes/2026-04-11-codex源码共读-49-spawn_exit_watcher与start_streaming_output是终态发射链.md](01-source-notes/2026-04-11-codex源码共读-49-spawn_exit_watcher与start_streaming_output是终态发射链.md)
+19. [01-source-notes/2026-04-11-codex源码共读-50-ThreadHistoryBuilder-handle_event是turn语义归约总分发器.md](01-source-notes/2026-04-11-codex源码共读-50-ThreadHistoryBuilder-handle_event是turn语义归约总分发器.md)
+20. [01-source-notes/2026-04-11-codex源码共读-51-active_turn_snapshot是当前turn的对外投影口.md](01-source-notes/2026-04-11-codex源码共读-51-active_turn_snapshot是当前turn的对外投影口.md)
+21. [01-source-notes/2026-04-11-codex源码共读-52-process_chunk是输出流到transcript-delta的切片器.md](01-source-notes/2026-04-11-codex源码共读-52-process_chunk是输出流到transcript-delta的切片器.md)
+22. [01-source-notes/2026-04-11-codex源码共读-53-emit_exec_end_for_unified_exec是统一exec终态封装器.md](01-source-notes/2026-04-11-codex源码共读-53-emit_exec_end_for_unified_exec是统一exec终态封装器.md)
 
 这组的目标不是再讲模块边界，而是把单个关键函数在主链里的角色、状态迁移和设计意图拆清楚。
