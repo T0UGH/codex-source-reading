@@ -2,25 +2,36 @@
 
 ## Goal
 
-Build Phase 1 source-reading materials for OpenAI Codex before attempting any guidebook-style rewrite.
+Turn the accumulated Codex Phase 1 source-reading materials into a guidebook-quality, continuously readable architecture narrative without losing the function-level evidence layer.
 
 ## Current state
 
-Function-level source-reading mode is now the dominant workstream. Repository now has 31 architecture/implementation notes plus 27 fine-grained function notes, covering listener installation, listener command dispatch, event projection, running-thread resume composition, pending-request resolution emission, rollout reconstruction, turn completion, turn-summary draining, error-to-failure writing, turn-list assembly, thread/turn status reconciliation, thread-history replay reduction, thread-history event reduction dispatch, active-turn snapshot projection, implicit-turn input routing, unified exec request assembly, unified exec runtime launch adaptation, unified exec spawn/session/storage boundaries, unified exec output chunk slicing, UTF-8 prefix guarding, transcript-first aggregated output resolution, unified exec end-event/output watcher chain, unified exec success-end packaging, unified exec failure-end packaging, and unified exec process-store lifecycle reconciliation.
+Phase 1 broad architecture scan is effectively complete, and one additional implementation-deep-dive layer is also in place. Repository currently contains:
+
+- 31 architecture / implementation notes
+- 27 fine-grained function-level source-reading notes
+- a rewritten root `index.md` that now acts as a guidebook-oriented reading map
+- an initial `00-guidebook/` layer with:
+  - `README.md` (guidebook writing plan)
+  - `2026-04-11-Codex-guidebook-章节与架构设计.md` (chapter / structure design)
+  - `00-如何阅读这份导读.md` (intro chapter draft)
+- `LEO_HANDOFF.md` for direct takeover by Leo or another agent
+
+The repo is no longer in “keep scanning breadth-first” mode. It has entered **guidebook restructuring mode**.
 
 ## Completed in this round
 
-### New source notes
-- function-level note on `emit_failed_exec_end_for_unified_exec(...)` as unified-exec failure-end packager
-- function-level note on `resolve_aggregated_output(...)` as transcript-first output arbiter
-- function-level note on `split_valid_utf8_prefix(...)` as UTF-8-safe chunk boundary guard
-- function-level note on `refresh_process_state(...)` as process-store lifecycle reconciler
-- function-level note on `handle_user_message(...)` as implicit-turn boundary and input ownership function
+### Guidebook-layer artifacts added
+- formal guidebook writing plan in `00-guidebook/README.md`
+- explicit chapter / architecture design doc in `00-guidebook/2026-04-11-Codex-guidebook-章节与架构设计.md`
+- first正文入口稿 `00-guidebook/00-如何阅读这份导读.md`
+- rewritten root `index.md` as a reading map rather than a file dump
+- `LEO_HANDOFF.md` for cross-agent continuation
 
-### Strengthened judgments
-- the final unified-exec end semantics are now basically closed: chunk slicing, transcript authority, success/failure packaging, and store reconciliation all line up
-- thread-history correctness depends heavily on tiny boundary helpers like `handle_user_message(...)`, not just on top-level builders
-- the repo’s most important local mechanics are now captured enough to stop expanding note count and start restructuring into a guidebook
+### State handoff improvements
+- current phase is now explicitly documented as guidebook restructuring, not further broad source scan
+- navigation layer /正文层 / evidence layer split is now written into the repo, not just kept in chat
+- next recommended moves now bias toward writing guidebook chapters instead of adding more scattered source notes
 
 ## Current high-confidence judgments
 
@@ -52,18 +63,30 @@ Function-level source-reading mode is now the dominant workstream. Repository no
 - realtime and collab are separate subsystems: realtime conversation vs multi-agent collaboration runtime
 - connectors/apps is a merged system combining directory metadata, runtime accessibility, and plugin declarations
 - model transport is layered as substrate (`codex-client`) → provider API (`codex-api`) → runtime orchestration (`ModelClient`), while `backend-client` serves a different backend/task API surface
-- function-level notes now show the repo’s core runtime pivots are mostly reducer/projection/packaging/reconciliation boundaries, not giant manager objects
+- function-level notes show the repo’s most important runtime pivots are mostly reducer / projection / packaging / reconciliation boundaries, not giant manager objects
 - `active_turn_snapshot(...)` is semantically closer to a current-or-last turn projection than a strict active-only getter, so it must be read together with `has_active_turn()`
 - thread-history turn slicing follows a consistent rule: explicit turn boundaries win, user-message heuristics backfill old streams, and compaction-only turns get special preservation treatment
+- `ThreadHistoryBuilder` is now the clearest turn-semantics authority discovered so far
 - unified-exec treats transcript as the primary truth for final aggregated output, while live delta streaming is explicitly budget-limited and secondary
+- unified-exec lifecycle is now sufficiently legible end-to-end: request assembly → runtime adaptation → spawn/sessionization → store → output watcher → transcript authority → success/failure end packaging → process-store reconciliation
 - `refresh_process_state(...)` confirms the process store is not the truth source; `UnifiedExecProcess` is closer to truth and store entries are reconciled against it lazily
+- the repo should now be read as a three-layer system of artifacts: navigation (`index.md`), guidebook正文 (`00-guidebook/`), and evidence (`01-source-notes/`)
 
 ## Next recommended moves
 
-1. stop adding more narrow notes unless a clear gap blocks guidebook writing
-2. switch to guidebook restructuring next: cluster existing notes into a readable architecture narrative and a function-level appendix
-3. likely first guidebook cuts: runtime layering, app-server/thread-state, unified-exec lifecycle, plugin/capability system, persistence/state model
-4. keep future source-note additions exception-only; avoid reopening the repo breadth-first
+1. do **not** resume broad source scanning unless a real guidebook gap appears
+2. continue guidebook正文 writing next
+3. recommended writing order:
+   - `00-guidebook/01-系统总图与分层.md`
+   - `00-guidebook/05-unified-exec执行子系统.md`
+   - `00-guidebook/03-app-server与thread-turn主线.md`
+   - `00-guidebook/02-状态持久化与恢复.md`
+   - `00-guidebook/04-turn-history语义层.md`
+4. after 2-3 main chapters exist, add appendices:
+   - key function index
+   - call-chain draft index
+   - open questions
+5. keep future source-note additions exception-only and explicitly justified
 
 ## Open questions
 
@@ -76,8 +99,9 @@ Function-level source-reading mode is now the dominant workstream. Repository no
 - whether exec-server will grow stronger auth/deployment/runtime-orchestration semantics above the current environment contract
 - where guardian review analytics is actually emitted in production, if at all
 
-## Acceptance bar for current batch
+## Acceptance bar for current phase
 
-- enough material to explain the repo at both architecture level and function/state-machine level for the most important runtime pivots
-- enough handoff state to stop broad source scanning and begin guidebook-style restructuring with confidence
-- enough evidence to later rewrite the material into a guidebook without losing the key local runtime mechanics and ordering guarantees
+- enough material exists to explain the repo at both architecture and function/state-machine level for the key runtime pivots
+- enough state has been written into the repo for Leo or another agent to take over without reconstructing context from chat
+- navigation layer, guidebook正文 layer, and evidence layer are now explicitly separated in the repository
+- next work can begin directly from guidebook chapter writing rather than repo re-discovery
