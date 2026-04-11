@@ -50,13 +50,20 @@
 - [[../01-source-notes/2026-04-11-codex源码拆解-19-plugin能力打包与skills-MCP-apps关系]]
 - [[../01-source-notes/2026-04-11-codex源码拆解-20-TUI向app-server收敛的现状]]
 
+### 第六批
+
+- [[../01-source-notes/2026-04-11-codex源码拆解-21-plugin安装市场与生效链]]
+- [[../01-source-notes/2026-04-11-codex源码拆解-22-review与guardian链路]]
+- [[../01-source-notes/2026-04-11-codex源码拆解-23-remote-app-server与websocket链路]]
+- [[../01-source-notes/2026-04-11-codex源码拆解-24-memories-agents与external-agent-config]]
+
 ## 下一批建议
 
-1. plugin hooks / marketplace / install 生命周期细拆
-2. review / guardian / detached review thread 链
-3. remote app-server transport / websocket 协议链
-4. memories / agents / external-agent-config 体系
-5. 在现有 Phase 1 材料基础上开始 guidebook-style 重写
+1. 在现有 Phase 1 材料基础上开始 guidebook-style 重写
+2. 补 dedicated call-chain 图：review / guardian / remote transport / memories
+3. 补 plugin marketplace 与 external-agent-config 的操作手册视角
+4. 按主题重组现有 24 篇，做成更适合阅读的章节结构
+5. 若继续深挖，再进入更偏产品策略的细枝末节，而不是重新扫 repo 总体结构
 
 ## 当前高优先级问题
 
