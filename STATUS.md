@@ -6,21 +6,19 @@ Build Phase 1 source-reading materials for OpenAI Codex before attempting any gu
 
 ## Current state
 
-Sixth batch completed. Phase 1 architecture scanning is now broadly complete at the repo/module/system level. Repository now covers repo map, module boundaries, app-server/core bridge, listener/event projection, turn materialization, pending request replay/resolve, rollout/state_db internals, exec layering, plugin capability packaging and install lifecycle, TUI convergence, mcp-server product boundary, review/guardian chain, remote websocket transport, memories/agents/external-agent-config, and plugin-mediated skills/MCP coupling.
+Seventh batch completed. Phase 1 broad architecture scan plus one layer of implementation deep-dive is now in place. Repository now covers repo map, module boundaries, app-server/core bridge, listener/event projection, turn materialization, pending request replay/resolve, rollout/state_db internals, exec layering, plugin capability packaging and install lifecycle, TUI convergence, mcp-server product boundary, review/guardian chain, remote websocket transport, memories/agents/external-agent-config, exec-server architecture, rmcp-client/OAuth client stack, linux-sandbox implementation, and plugin-mediated skills/MCP coupling.
 
 ## Completed in this round
 
 ### New source notes
-- plugin marketplace / install / activation lifecycle
-- review / guardian / detached review-thread chain
-- remote app-server / websocket transport chain
-- memories / agents / external-agent-config system
+- exec-server architecture
+- rmcp-client / OAuth / MCP client recovery stack
+- linux-sandbox and process-hardening implementation layer
 
 ### Strengthened judgments
-- plugin activation is filesystem cache + config enablement + runtime derivation, not a one-shot registry call
-- review and guardian are related but distinct: user-facing review workflow vs approval-review infrastructure
-- remote app-server is the same app-server contract over websocket, not a different control plane
-- memories is a startup two-phase generation pipeline; agents is a session-scoped control plane; external-agent-config is currently Claude-first migration infrastructure
+- exec-server is a process/filesystem RPC service behind the environment abstraction, not just a shell helper
+- MCP client-side complexity sits in transport/auth/recovery, not merely `call_tool`
+- Linux sandbox is now bwrap-first, with seccomp/no_new_privs layered inside and legacy Landlock pushed to fallback/reference status
 
 ## Current high-confidence judgments
 
@@ -38,6 +36,7 @@ Sixth batch completed. Phase 1 architecture scanning is now broadly complete at 
 - rollout is the durable history truth source; `state_db_bridge` is a thin bridge, not the main restore logic
 - rollout JSONL stores session body; SQLite stores metadata/index/sidecar state
 - `exec.rs` is the execution primitive layer; `unified_exec` is the sessionful agent-facing execution subsystem
+- exec-server is a process/filesystem RPC backend selected through `EnvironmentManager` / `Environment`
 - plugin is the shared capability packaging unit above skills / MCP / apps
 - plugin install lifecycle is cache-on-disk + config enable + runtime re-derivation
 - skills and MCP are parallel capability lines whose strongest visible coupling today is mediated by plugins/config
@@ -45,14 +44,16 @@ Sixth batch completed. Phase 1 architecture scanning is now broadly complete at 
 - review and guardian are separate systems: user review workflow vs approval reviewer infrastructure
 - remote app-server is transport variation over the same contract, not a parallel server model
 - memories is a startup pipeline; agents is a session-scoped multi-agent control plane; external-agent-config is currently Claude-oriented migration infrastructure
+- rmcp-client is the MCP client transport/auth/recovery wrapper; recovery is currently targeted, not universal
+- Linux sandbox implementation is bwrap-first; process-hardening is a separate pre-main hardening layer
 
 ## Next recommended moves
 
-1. start converting the current Phase 1 notes into a guidebook-style rewrite
-2. add dedicated call-chain diagrams for review / guardian / remote transport / memories
-3. add operator-facing notes for plugin marketplace and external-agent-config
-4. reorganize the current 24 notes into a chapter-oriented reading order
-5. only after that, continue into deeper product/policy corners instead of rescanning the main architecture
+1. start converting the current 27 notes into a guidebook-style rewrite
+2. add dedicated call-chain diagrams for exec-server / rmcp-client / linux-sandbox / review / guardian / remote transport / memories
+3. if continuing implementation deep-dives, next best topics are analytics / realtime / connectors
+4. reorganize the current notes into a chapter-oriented reading order
+5. avoid re-scanning repo-level architecture; focus only on specialized subsystems from here
 
 ## Open questions
 
@@ -62,9 +63,10 @@ Sixth batch completed. Phase 1 architecture scanning is now broadly complete at 
 - whether app-server will become the dominant long-term embedding surface across all SDKs
 - how long TUI will keep a hybrid app-server + legacy-core edge architecture
 - whether external-agent-config will remain Claude-first or become a true multi-agent migration layer
+- whether exec-server will grow stronger auth/deployment/runtime-orchestration semantics above the current environment contract
 
 ## Acceptance bar for current batch
 
-- enough material to explain the main repo-level architecture and the major cross-cutting subsystems without reopening earlier boundary questions
-- enough evidence to begin a guidebook-style rewrite instead of continuing broad exploratory scanning
-- enough handoff state that a later session can shift from discovery mode to synthesis mode with minimal recovery cost
+- enough material to explain both the repo-level architecture and a first layer of implementation mechanics for the most important subsystems
+- enough evidence to shift future work from exploratory scanning to synthesis / guidebook writing
+- enough handoff state that later sessions can go directly into diagrams, restructuring, or a few remaining deep technical subsystems without rediscovering the basics

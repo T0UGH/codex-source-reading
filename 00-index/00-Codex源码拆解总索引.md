@@ -57,13 +57,19 @@
 - [[../01-source-notes/2026-04-11-codex源码拆解-23-remote-app-server与websocket链路]]
 - [[../01-source-notes/2026-04-11-codex源码拆解-24-memories-agents与external-agent-config]]
 
+### 第七批
+
+- [[../01-source-notes/2026-04-11-codex源码拆解-25-exec-server体系]]
+- [[../01-source-notes/2026-04-11-codex源码拆解-26-rmcp-client与OAuth链路]]
+- [[../01-source-notes/2026-04-11-codex源码拆解-27-linux-sandbox与process-hardening实现层]]
+
 ## 下一批建议
 
-1. 在现有 Phase 1 材料基础上开始 guidebook-style 重写
-2. 补 dedicated call-chain 图：review / guardian / remote transport / memories
-3. 补 plugin marketplace 与 external-agent-config 的操作手册视角
-4. 按主题重组现有 24 篇，做成更适合阅读的章节结构
-5. 若继续深挖，再进入更偏产品策略的细枝末节，而不是重新扫 repo 总体结构
+1. 在现有 27 篇基础上开始 guidebook-style 重写
+2. 补 exec-server / rmcp-client / linux-sandbox 的 dedicated call-chain 图
+3. 若继续深挖，实现层下一批可看 analytics / realtime / connectors
+4. 按主题重组全部笔记，收敛成章节结构而不是时间顺序
+5. 后续继续挖时优先“实现细节专题”，不要再回头扫 repo 总图
 
 ## 当前高优先级问题
 
