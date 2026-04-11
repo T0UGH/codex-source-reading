@@ -6,19 +6,18 @@ Build Phase 1 source-reading materials for OpenAI Codex before attempting any gu
 
 ## Current state
 
-Function-level source-reading mode has started on top of the existing architecture scan. Repository now has 31 architecture/implementation notes plus the first 4 fine-grained function notes, covering `ensure_listener_task_running_task(...)`, `apply_bespoke_event_handling(...)`, `reconstruct_history_from_rollout(...)`, and `UnifiedExecHandler::handle(...)`.
+Function-level source-reading mode is now firmly underway. Repository now has 31 architecture/implementation notes plus 7 fine-grained function notes, covering `ensure_listener_task_running_task(...)`, `apply_bespoke_event_handling(...)`, `reconstruct_history_from_rollout(...)`, `UnifiedExecHandler::handle(...)`, `handle_thread_listener_command(...)`, `handle_turn_complete(...)`, and `UnifiedExecRuntime::run(...)`.
 
 ## Completed in this round
 
 ### New source notes
-- function-level note on listener installation / ownership
-- function-level note on event projection / side-effect hub
-- function-level note on rollout reconstruction
-- function-level note on unified exec request assembly
+- function-level note on listener command dispatch / ordering
+- function-level note on turn completion finalization
+- function-level note on unified exec runtime launch adaptation
 
 ### Strengthened judgments
-- some of the most important Codex internals are better explained at the function/state-machine level than at the module level
-- the next useful deep-dive mode is no longer “new subsystem coverage”, but “single critical function / local chain” coverage
+- some Codex internals that looked “simple” at module level only become clear after drilling into tiny sequencing helpers
+- the most useful next work is now a controlled function-level series over a small number of critical runtime pivots
 
 ## Current high-confidence judgments
 
@@ -50,13 +49,13 @@ Function-level source-reading mode has started on top of the existing architectu
 - realtime and collab are separate subsystems: realtime conversation vs multi-agent collaboration runtime
 - connectors/apps is a merged system combining directory metadata, runtime accessibility, and plugin declarations
 - model transport is layered as substrate (`codex-client`) → provider API (`codex-api`) → runtime orchestration (`ModelClient`), while `backend-client` serves a different backend/task API surface
-- function-level notes are now being used to explain critical runtime pivots that module-level notes still compress too much
+- function-level notes are now revealing the real value of small sequencing functions and finalization helpers inside the broader module architecture
 
 ## Next recommended moves
 
-1. continue the function-level series for the most critical runtime pivots
-2. likely next targets: `handle_thread_listener_command(...)`, `handle_turn_complete(...)`, `UnifiedExecRuntime::run(...)`, `UnifiedExecProcessManager::exec_command(...)`
-3. after another batch or two of function-level notes, regroup everything into a guidebook structure
+1. continue the function-level series for a small set of high-value runtime pivots
+2. likely next targets: `handle_pending_thread_resume_request(...)`, `resolve_pending_server_request(...)`, `handle_error(...)`, `UnifiedExecProcessManager::open_session_with_exec_env(...)`
+3. after another small batch, regroup everything into a guidebook structure
 4. keep future additions tightly scoped; avoid reopening broad repo-level scans
 
 ## Open questions
