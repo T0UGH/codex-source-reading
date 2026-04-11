@@ -219,5 +219,9 @@
 5. [01-source-notes/2026-04-11-codex源码共读-36-handle_thread_listener_command是有序控制动作分发点.md](01-source-notes/2026-04-11-codex源码共读-36-handle_thread_listener_command是有序控制动作分发点.md)
 6. [01-source-notes/2026-04-11-codex源码共读-37-handle_turn_complete是turn终态封口器.md](01-source-notes/2026-04-11-codex源码共读-37-handle_turn_complete是turn终态封口器.md)
 7. [01-source-notes/2026-04-11-codex源码共读-38-UnifiedExecRuntime-run是执行请求到实际进程的最后适配层.md](01-source-notes/2026-04-11-codex源码共读-38-UnifiedExecRuntime-run是执行请求到实际进程的最后适配层.md)
+8. [01-source-notes/2026-04-11-codex源码共读-39-handle_pending_thread_resume_request是running-thread恢复态拼装器.md](01-source-notes/2026-04-11-codex源码共读-39-handle_pending_thread_resume_request是running-thread恢复态拼装器.md)
+9. [01-source-notes/2026-04-11-codex源码共读-40-resolve_pending_server_request是resolved通知的有序发射器.md](01-source-notes/2026-04-11-codex源码共读-40-resolve_pending_server_request是resolved通知的有序发射器.md)
+10. [01-source-notes/2026-04-11-codex源码共读-41-handle_error是turn失败语义的写入点.md](01-source-notes/2026-04-11-codex源码共读-41-handle_error是turn失败语义的写入点.md)
+11. [01-source-notes/2026-04-11-codex源码共读-42-open_session_with_exec_env是spawn边界适配器.md](01-source-notes/2026-04-11-codex源码共读-42-open_session_with_exec_env是spawn边界适配器.md)
 
 这组的目标不是再讲模块边界，而是把单个关键函数在主链里的角色、状态迁移和设计意图拆清楚。

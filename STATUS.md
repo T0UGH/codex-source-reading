@@ -6,18 +6,19 @@ Build Phase 1 source-reading materials for OpenAI Codex before attempting any gu
 
 ## Current state
 
-Function-level source-reading mode is now firmly underway. Repository now has 31 architecture/implementation notes plus 7 fine-grained function notes, covering `ensure_listener_task_running_task(...)`, `apply_bespoke_event_handling(...)`, `reconstruct_history_from_rollout(...)`, `UnifiedExecHandler::handle(...)`, `handle_thread_listener_command(...)`, `handle_turn_complete(...)`, and `UnifiedExecRuntime::run(...)`.
+Function-level source-reading mode is now the main active mode. Repository now has 31 architecture/implementation notes plus 11 fine-grained function notes, covering listener installation, listener command dispatch, event projection, running-thread resume composition, pending-request resolution emission, rollout reconstruction, turn completion, error-to-failure writing, unified exec request assembly, unified exec runtime launch adaptation, and unified exec spawn-boundary adaptation.
 
 ## Completed in this round
 
 ### New source notes
-- function-level note on listener command dispatch / ordering
-- function-level note on turn completion finalization
-- function-level note on unified exec runtime launch adaptation
+- function-level note on running-thread resume composition
+- function-level note on resolved-notification emission
+- function-level note on error-to-turn-failure write path
+- function-level note on unified exec process-manager spawn boundary
 
 ### Strengthened judgments
-- some Codex internals that looked “simple” at module level only become clear after drilling into tiny sequencing helpers
-- the most useful next work is now a controlled function-level series over a small number of critical runtime pivots
+- the small helper functions around listener/resume/request-resolution/finalization are where Codex’s ordering guarantees really become visible
+- unified exec clarity now comes from reading three layers together: handler → runtime → process manager
 
 ## Current high-confidence judgments
 
@@ -49,13 +50,13 @@ Function-level source-reading mode is now firmly underway. Repository now has 31
 - realtime and collab are separate subsystems: realtime conversation vs multi-agent collaboration runtime
 - connectors/apps is a merged system combining directory metadata, runtime accessibility, and plugin declarations
 - model transport is layered as substrate (`codex-client`) → provider API (`codex-api`) → runtime orchestration (`ModelClient`), while `backend-client` serves a different backend/task API surface
-- function-level notes are now revealing the real value of small sequencing functions and finalization helpers inside the broader module architecture
+- function-level notes are now surfacing the real sequencing pivots: listener ownership, resume ordering, turn finalization, and unified exec spawn boundaries
 
 ## Next recommended moves
 
-1. continue the function-level series for a small set of high-value runtime pivots
-2. likely next targets: `handle_pending_thread_resume_request(...)`, `resolve_pending_server_request(...)`, `handle_error(...)`, `UnifiedExecProcessManager::open_session_with_exec_env(...)`
-3. after another small batch, regroup everything into a guidebook structure
+1. continue the function-level series only for the highest-value pivots
+2. likely next targets: `populate_thread_turns(...)`, `set_thread_status_and_interrupt_stale_turns(...)`, `find_and_remove_turn_summary(...)`, `UnifiedExecProcess::from_spawned(...)`, `store_process(...)`
+3. after one more batch, switch from note accumulation to guidebook restructuring
 4. keep future additions tightly scoped; avoid reopening broad repo-level scans
 
 ## Open questions
@@ -71,6 +72,6 @@ Function-level source-reading mode is now firmly underway. Repository now has 31
 
 ## Acceptance bar for current batch
 
-- enough material to explain the repo at both architecture level and selected function/state-machine level
+- enough material to explain the repo at both architecture level and function/state-machine level for the most important runtime pivots
 - enough handoff state to continue with a fine-grained Codex source-reading series instead of broad subsystem scanning
-- enough evidence to later rewrite the material into a guidebook without losing the most important local runtime mechanics
+- enough evidence to later rewrite the material into a guidebook without losing the key local runtime mechanics and ordering guarantees
