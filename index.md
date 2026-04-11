@@ -199,8 +199,22 @@
 
 ## 现在最值得做的下一步
 
-不是继续堆笔记，而是：
+不是继续横向扩主题，而是：
 
-1. 把这 31 篇按章节重组
-2. 补关键 call-chain 图
-3. 写成一份真正连续可读的 Codex 架构指南
+1. 把这 31 篇架构/实现稿按章节重组
+2. 把新的函数级共读稿继续补成一组稳定系列
+3. 补关键 call-chain 图
+4. 最后再写成一份真正连续可读的 Codex 架构指南
+
+---
+
+## 附：函数级源码共读（更细颗粒度）
+
+如果你觉得上面的架构稿还不够细，先从这一组开始：
+
+1. [01-source-notes/2026-04-11-codex源码共读-32-ensure_listener_task_running_task是线程事件泵的安装器.md](01-source-notes/2026-04-11-codex源码共读-32-ensure_listener_task_running_task是线程事件泵的安装器.md)
+2. [01-source-notes/2026-04-11-codex源码共读-33-apply_bespoke_event_handling是协议投影与副作用汇合点.md](01-source-notes/2026-04-11-codex源码共读-33-apply_bespoke_event_handling是协议投影与副作用汇合点.md)
+3. [01-source-notes/2026-04-11-codex源码共读-34-reconstruct_history_from_rollout是恢复态重建器.md](01-source-notes/2026-04-11-codex源码共读-34-reconstruct_history_from_rollout是恢复态重建器.md)
+4. [01-source-notes/2026-04-11-codex源码共读-35-UnifiedExecHandler-handle是执行请求的入口装配线.md](01-source-notes/2026-04-11-codex源码共读-35-UnifiedExecHandler-handle是执行请求的入口装配线.md)
+
+这组的目标不是再讲模块边界，而是把单个关键函数在主链里的角色、状态迁移和设计意图拆清楚。

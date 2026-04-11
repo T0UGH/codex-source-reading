@@ -6,15 +6,19 @@ Build Phase 1 source-reading materials for OpenAI Codex before attempting any gu
 
 ## Current state
 
-Ninth batch completed. Phase 1 broad architecture scan plus substantial implementation deep-dive are now in place. Repository now covers repo map, module boundaries, app-server/core bridge, listener/event projection, turn materialization, pending request replay/resolve, rollout/state_db internals, exec layering, exec-server architecture, rmcp-client/OAuth client stack, linux-sandbox implementation, analytics/reducer pipeline, plugin capability packaging and install lifecycle, TUI convergence, realtime/collab, connectors/apps, model transport stack, mcp-server product boundary, review/guardian chain, remote websocket transport, memories/agents/external-agent-config, and plugin-mediated skills/MCP coupling.
+Function-level source-reading mode has started on top of the existing architecture scan. Repository now has 31 architecture/implementation notes plus the first 4 fine-grained function notes, covering `ensure_listener_task_running_task(...)`, `apply_bespoke_event_handling(...)`, `reconstruct_history_from_rollout(...)`, and `UnifiedExecHandler::handle(...)`.
 
 ## Completed in this round
 
 ### New source notes
-- backend-client / codex-client / codex-api / Responses transport stack
+- function-level note on listener installation / ownership
+- function-level note on event projection / side-effect hub
+- function-level note on rollout reconstruction
+- function-level note on unified exec request assembly
 
 ### Strengthened judgments
-- the model transport stack is layered as `codex-client` substrate → `codex-api` provider-aware API layer → `core::ModelClient` runtime orchestration, with `backend-client` as a separate backend/task API client line
+- some of the most important Codex internals are better explained at the function/state-machine level than at the module level
+- the next useful deep-dive mode is no longer “new subsystem coverage”, but “single critical function / local chain” coverage
 
 ## Current high-confidence judgments
 
@@ -46,14 +50,14 @@ Ninth batch completed. Phase 1 broad architecture scan plus substantial implemen
 - realtime and collab are separate subsystems: realtime conversation vs multi-agent collaboration runtime
 - connectors/apps is a merged system combining directory metadata, runtime accessibility, and plugin declarations
 - model transport is layered as substrate (`codex-client`) → provider API (`codex-api`) → runtime orchestration (`ModelClient`), while `backend-client` serves a different backend/task API surface
+- function-level notes are now being used to explain critical runtime pivots that module-level notes still compress too much
 
 ## Next recommended moves
 
-1. start converting the current 31 notes into a guidebook-style rewrite
-2. add dedicated call-chain diagrams for exec-server / rmcp-client / linux-sandbox / analytics / realtime / collab / connectors / model transport
-3. reorganize the notes into a chapter-oriented reading order
-4. add reader-facing navigation/overview docs instead of continuing time-ordered accumulation
-5. if any further deep dives are needed, keep them tightly scoped to a single leftover edge subsystem
+1. continue the function-level series for the most critical runtime pivots
+2. likely next targets: `handle_thread_listener_command(...)`, `handle_turn_complete(...)`, `UnifiedExecRuntime::run(...)`, `UnifiedExecProcessManager::exec_command(...)`
+3. after another batch or two of function-level notes, regroup everything into a guidebook structure
+4. keep future additions tightly scoped; avoid reopening broad repo-level scans
 
 ## Open questions
 
@@ -68,6 +72,6 @@ Ninth batch completed. Phase 1 broad architecture scan plus substantial implemen
 
 ## Acceptance bar for current batch
 
-- enough material to explain both repo-level architecture and the main implementation layers for the most important subsystems
-- enough evidence that future work should shift from scanning to synthesis, diagrams, restructuring, and guidebook writing
-- enough handoff state that later sessions can proceed directly to synthesis without re-discovering the major architectural picture
+- enough material to explain the repo at both architecture level and selected function/state-machine level
+- enough handoff state to continue with a fine-grained Codex source-reading series instead of broad subsystem scanning
+- enough evidence to later rewrite the material into a guidebook without losing the most important local runtime mechanics
