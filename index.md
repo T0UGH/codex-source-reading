@@ -1,0 +1,206 @@
+# Codex 源码拆解 Index
+
+这不是流水账索引，而是**阅读导航页**。
+
+如果你第一次进这个仓库，建议按下面顺序读。
+
+---
+
+## 0. 先看结论页
+
+- [03-boundary-judgments/2026-04-11-codex模块边界判断-v1.md](03-boundary-judgments/2026-04-11-codex模块边界判断-v1.md)
+- [STATUS.md](STATUS.md)
+
+这两篇先帮你建立：
+- 当前最稳的边界判断
+- 当前已经拆到哪
+- 还有哪些开放问题
+
+---
+
+## 1. 仓库总图：先搞清主体在哪
+
+建议顺序：
+
+1. [01-source-notes/2026-04-11-codex源码拆解-01-仓库总貌与分层判断.md](01-source-notes/2026-04-11-codex源码拆解-01-仓库总貌与分层判断.md)
+2. [01-source-notes/2026-04-11-codex源码拆解-02-为什么npm只是分发壳.md](01-source-notes/2026-04-11-codex源码拆解-02-为什么npm只是分发壳.md)
+3. [01-source-notes/2026-04-11-codex源码拆解-03-Codex-CLI总入口与命令分流.md](01-source-notes/2026-04-11-codex源码拆解-03-Codex-CLI总入口与命令分流.md)
+4. [00-index/01-代码路径索引-入口与分发.md](00-index/01-代码路径索引-入口与分发.md)
+
+读完这组，你应该明确：
+- `codex-cli/` 不是主体
+- `codex-rs/cli` 是统一入口
+- `core` 才是 runtime 核心
+
+---
+
+## 2. 核心架构：TUI / core / app-server / mcp-server
+
+建议顺序：
+
+1. [01-source-notes/2026-04-11-codex源码拆解-04-TUI与core的边界.md](01-source-notes/2026-04-11-codex源码拆解-04-TUI与core的边界.md)
+2. [01-source-notes/2026-04-11-codex源码拆解-05-core作为runtime聚合核心.md](01-source-notes/2026-04-11-codex源码拆解-05-core作为runtime聚合核心.md)
+3. [01-source-notes/2026-04-11-codex源码拆解-09-app-server与SDK嵌入架构.md](01-source-notes/2026-04-11-codex源码拆解-09-app-server与SDK嵌入架构.md)
+4. [01-source-notes/2026-04-11-codex源码拆解-10-app-server到ThreadManager的桥.md](01-source-notes/2026-04-11-codex源码拆解-10-app-server到ThreadManager的桥.md)
+5. [01-source-notes/2026-04-11-codex源码拆解-13-mcp-server与app-server的产品边界.md](01-source-notes/2026-04-11-codex源码拆解-13-mcp-server与app-server的产品边界.md)
+6. [01-source-notes/2026-04-11-codex源码拆解-20-TUI向app-server收敛的现状.md](01-source-notes/2026-04-11-codex源码拆解-20-TUI向app-server收敛的现状.md)
+7. [01-source-notes/2026-04-11-codex源码拆解-23-remote-app-server与websocket链路.md](01-source-notes/2026-04-11-codex源码拆解-23-remote-app-server与websocket链路.md)
+
+读完这组，你应该明确：
+- `ThreadManager` 才是 runtime 入口
+- `app-server` 是控制面 facade
+- `mcp-server` 是 toolified 暴露面
+- TUI 主链已经大幅 app-server 化
+
+---
+
+## 3. 状态与持久化：config / rollout / state_db / 恢复
+
+建议顺序：
+
+1. [01-source-notes/2026-04-11-codex源码拆解-06-config模型与状态恢复.md](01-source-notes/2026-04-11-codex源码拆解-06-config模型与状态恢复.md)
+2. [01-source-notes/2026-04-11-codex源码拆解-11-rollout-state_db与会话恢复链.md](01-source-notes/2026-04-11-codex源码拆解-11-rollout-state_db与会话恢复链.md)
+3. [01-source-notes/2026-04-11-codex源码拆解-18-codex_rollout与state_db内部结构.md](01-source-notes/2026-04-11-codex源码拆解-18-codex_rollout与state_db内部结构.md)
+
+读完这组，你应该明确：
+- rollout JSONL 是正文真相源
+- SQLite 是 metadata/index/sidecar
+- 历史恢复靠 replay + checkpoint，不靠纯 DB
+
+---
+
+## 4. 事件与线程状态：listener / turn / pending request
+
+建议顺序：
+
+1. [01-source-notes/2026-04-11-codex源码拆解-15-listener与event投影链.md](01-source-notes/2026-04-11-codex源码拆解-15-listener与event投影链.md)
+2. [01-source-notes/2026-04-11-codex源码拆解-16-thread_watch_manager与thread_state_manager的分工.md](01-source-notes/2026-04-11-codex源码拆解-16-thread_watch_manager与thread_state_manager的分工.md)
+3. [01-source-notes/2026-04-11-codex源码拆解-17-turn-materialization与pending-request链.md](01-source-notes/2026-04-11-codex源码拆解-17-turn-materialization与pending-request链.md)
+
+读完这组，你应该明确：
+- listener 是事件泵
+- `bespoke_event_handling` 是协议投影层
+- turn 状态是 event 累积 + finalization
+- pending request 有 replay / abort / resolve 语义
+
+---
+
+## 5. 执行链：sandbox / exec / unified_exec / exec-server
+
+建议顺序：
+
+1. [01-source-notes/2026-04-11-codex源码拆解-08-sandbox与execpolicy的分工.md](01-source-notes/2026-04-11-codex源码拆解-08-sandbox与execpolicy的分工.md)
+2. [01-source-notes/2026-04-11-codex源码拆解-12-exec与unified_exec的职责分工.md](01-source-notes/2026-04-11-codex源码拆解-12-exec与unified_exec的职责分工.md)
+3. [01-source-notes/2026-04-11-codex源码拆解-25-exec-server体系.md](01-source-notes/2026-04-11-codex源码拆解-25-exec-server体系.md)
+4. [01-source-notes/2026-04-11-codex源码拆解-27-linux-sandbox与process-hardening实现层.md](01-source-notes/2026-04-11-codex源码拆解-27-linux-sandbox与process-hardening实现层.md)
+
+配套草图：
+- [02-call-chain-drafts/2026-04-11-codex主链草图-exec链.md](02-call-chain-drafts/2026-04-11-codex主链草图-exec链.md)
+
+读完这组，你应该明确：
+- `exec.rs` 是底座
+- `unified_exec` 是会话化执行产品
+- `exec-server` 是 process/filesystem RPC backend
+- Linux sandbox 当前是 bwrap-first
+
+---
+
+## 6. 能力接入：skills / plugins / MCP / apps / connectors
+
+建议顺序：
+
+1. [01-source-notes/2026-04-11-codex源码拆解-07-MCP-hooks-skills的接入层.md](01-source-notes/2026-04-11-codex源码拆解-07-MCP-hooks-skills的接入层.md)
+2. [01-source-notes/2026-04-11-codex源码拆解-14-skills与MCP的依赖路径.md](01-source-notes/2026-04-11-codex源码拆解-14-skills与MCP的依赖路径.md)
+3. [01-source-notes/2026-04-11-codex源码拆解-19-plugin能力打包与skills-MCP-apps关系.md](01-source-notes/2026-04-11-codex源码拆解-19-plugin能力打包与skills-MCP-apps关系.md)
+4. [01-source-notes/2026-04-11-codex源码拆解-21-plugin安装市场与生效链.md](01-source-notes/2026-04-11-codex源码拆解-21-plugin安装市场与生效链.md)
+5. [01-source-notes/2026-04-11-codex源码拆解-26-rmcp-client与OAuth链路.md](01-source-notes/2026-04-11-codex源码拆解-26-rmcp-client与OAuth链路.md)
+6. [01-source-notes/2026-04-11-codex源码拆解-30-connectors与apps子系统.md](01-source-notes/2026-04-11-codex源码拆解-30-connectors与apps子系统.md)
+
+读完这组，你应该明确：
+- plugin 是更上游的 capability packaging unit
+- MCP client/server 是两条不同链
+- apps/connectors 是目录态 + 运行态 + plugin 声明态的合并结果
+
+---
+
+## 7. 协作与高级系统：review / guardian / realtime / collab / memories / agents
+
+建议顺序：
+
+1. [01-source-notes/2026-04-11-codex源码拆解-22-review与guardian链路.md](01-source-notes/2026-04-11-codex源码拆解-22-review与guardian链路.md)
+2. [01-source-notes/2026-04-11-codex源码拆解-29-realtime与collab子系统.md](01-source-notes/2026-04-11-codex源码拆解-29-realtime与collab子系统.md)
+3. [01-source-notes/2026-04-11-codex源码拆解-24-memories-agents与external-agent-config.md](01-source-notes/2026-04-11-codex源码拆解-24-memories-agents与external-agent-config.md)
+
+读完这组，你应该明确：
+- `/review` 和 guardian 是两套系统
+- realtime 和 collab 也不是一回事
+- memories 是启动期 pipeline
+- agents 是 session-scoped control plane
+
+---
+
+## 8. 可观测性与传输底层
+
+建议顺序：
+
+1. [01-source-notes/2026-04-11-codex源码拆解-28-analytics与telemetry归约链.md](01-source-notes/2026-04-11-codex源码拆解-28-analytics与telemetry归约链.md)
+2. [01-source-notes/2026-04-11-codex源码拆解-31-backend-client与model-transport栈.md](01-source-notes/2026-04-11-codex源码拆解-31-backend-client与model-transport栈.md)
+
+读完这组，你应该明确：
+- analytics 是 reducer-centered
+- model transport 是 `codex-client -> codex-api -> ModelClient`
+- `backend-client` 是另一条后端 API client 线
+
+---
+
+## 9. 草图与辅助材料
+
+- [02-call-chain-drafts/2026-04-11-codex主链草图-interactive-TUI链.md](02-call-chain-drafts/2026-04-11-codex主链草图-interactive-TUI链.md)
+- [02-call-chain-drafts/2026-04-11-codex主链草图-exec链.md](02-call-chain-drafts/2026-04-11-codex主链草图-exec链.md)
+- [00-index/00-Codex源码拆解总索引.md](00-index/00-Codex源码拆解总索引.md)
+
+---
+
+## 推荐阅读路径
+
+### 路径 A：只想快速建立全局认知
+按这个顺序：
+
+1. 边界判断 v1
+2. 仓库总貌
+3. core 作为 runtime 核心
+4. app-server 到 ThreadManager 的桥
+5. rollout/state_db 内部结构
+6. plugin 能力打包
+7. review 与 guardian
+8. model transport 栈
+
+### 路径 B：只关心执行链
+按这个顺序：
+
+1. sandbox 与 execpolicy
+2. exec 与 unified_exec
+3. exec-server
+4. linux-sandbox
+5. remote app-server 与 websocket
+6. rmcp-client 与 OAuth
+
+### 路径 C：只关心 agent/runtime 协作
+按这个顺序：
+
+1. listener 与 event 投影链
+2. thread state/watch 分工
+3. turn materialization
+4. review 与 guardian
+5. realtime 与 collab
+6. memories / agents / external-agent-config
+
+---
+
+## 现在最值得做的下一步
+
+不是继续堆笔记，而是：
+
+1. 把这 31 篇按章节重组
+2. 补关键 call-chain 图
+3. 写成一份真正连续可读的 Codex 架构指南
