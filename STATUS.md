@@ -54,6 +54,11 @@ This is enough structure for future work to be selective rather than exploratory
 - narrowed the `DynamicToolCall` question from “likely not migrated yet” to “intentionally item-scoped, transport-reused, but not `ServerRequestResolved`-based semantics”
 - request-shape audit now classifies the current enum as: 5 resolved + 1 semantic split + 1 global bridge + 2 legacy holdouts
 
+### Cross-link / terminology pass added
+- appended or expanded `相关阅读` / `延伸阅读` across appendices and micro-gap docs (`10`–`15` plus `11`/`12`/`13`)
+- normalized lingering terminology drift such as `façade` → `facade`, `projection runtime` → clearer layer wording
+- updated appendix/open-questions wording so request semantics now align with the post-audit 5+1+1+2 classification
+
 ## Current high-confidence judgments
 
 - `codex-cli/` is only a distribution shell
@@ -91,7 +96,7 @@ This is enough structure for future work to be selective rather than exploratory
 - guardian runtime is observable via `EventMsg::GuardianAssessment` and app-server notifications, but not yet via analytics events
 - realtime and collab are separate systems: realtime conversation vs multi-agent collaboration runtime
 - realtime handoff is a bridge back into the ordinary session turn engine, not a fully separate execution world
-- `AgentControl` is the rooted thread-tree multi-agent control plane; multi-agent tool handlers are façades over it
+- `AgentControl` is the rooted thread-tree multi-agent control plane; multi-agent tool handlers are facades over it
 - memories is a startup pipeline; agents is a session-scoped multi-agent control plane; external-agent-config is currently migration-oriented infrastructure
 - model transport is layered as substrate (`codex-client`) → provider API (`codex-api`) → runtime orchestration (`ModelClient`), while `backend-client` serves a different backend/task API surface
 - `DynamicToolCall` is not best modeled as an un-migrated `ServerRequestResolved` holdout; it reuses thread-scoped request transport/replay/cancel machinery, but its product semantics are item lifecycle (`ItemStarted`/`ItemCompleted` + `DynamicToolCallResponse`), not resolved-notification semantics
@@ -104,8 +109,8 @@ This is enough structure for future work to be selective rather than exploratory
 ## Next recommended moves
 
 1. do **not** resume broad source scanning unless a real正文 gap appears
-2. do a cross-link pass across chapters 01-10, appendices 11-13, and micro-gap docs 14-15
-3. do a light terminology consistency pass on:
+2. do one more light consistency sweep only if needed; the highest-value cross-link / terminology pass is now largely done
+3. if you still polish terms, focus on:
    - runtime owner / facade / control plane
    - replay / reconstruction / projection
    - topic / appendix / micro-gap / evidence

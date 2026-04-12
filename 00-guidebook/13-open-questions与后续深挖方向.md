@@ -20,16 +20,26 @@ purpose: appendix
 
 ## 1. app-server / thread / request 线还没完全打死的问题
 
-### 1. 哪些 request type 天生就不走 `ServerRequestResolved`，哪些只是还没迁完
-这是目前很值继续确认的一点。
+### 1. 未来新增 request shape 会不会打破当前 5+1+1+2 分类
+当前这条线的**现状分类**已经基本收口：
+
+- 5 个 resolved request
+- 1 个 semantic split（`DynamicToolCall`）
+- 1 个 global bridge（`ChatgptAuthTokensRefresh`）
+- 2 个 legacy holdout（V1 deprecated）
+
+现在更值继续确认的，不再是“当前谁最可疑”，而是：
+
+- 后面会不会新增第 10 类 request
+- 新 request 会不会落到一个新的 semantic bucket
 
 为什么重要：
-- 它关系到 pending request replay / resolve 语义是否统一
-- 也关系到 app-server 协议面到底是不是已经完整收口
+- 它关系到 app-server request 语义面是不是已经稳定成型
+- 也关系到 guidebook 里这套分类能不能长期成立
 
 继续建议：
-- 沿 `ResolveServerRequest` 相关路径反查所有 request 类型
-- 对照 app-server protocol 和 `bespoke_event_handling` 的投影面
+- 持续盯 `ServerRequest` 枚举变动
+- 对照 `bespoke_event_handling` 看新 request 是走 resolved、item lifecycle，还是别的完成模型
 
 ---
 
@@ -178,8 +188,8 @@ purpose: appendix
 
 ### 第一优先级
 1. guardian analytics emission
-2. `ServerRequestResolved` 覆盖面
-3. app-server 是否继续吞并更多 embedding surface
+2. app-server 是否继续吞并更多 embedding surface
+3. 新 request shape 会不会打破当前 5+1+1+2 分类
 
 ### 第二优先级
 4. SQLite search/indexing 演化方向
@@ -189,6 +199,7 @@ purpose: appendix
 ### 第三优先级
 7. memories phase2 global/splitting 演化
 8. external-agent-config 的长期定位
+9. deprecated V1 request path 是否真的会被移除
 
 ---
 
@@ -214,6 +225,12 @@ purpose: appendix
 - 这时再补 1~2 篇函数级 note
 
 ---
+
+## 延伸阅读
+
+- request 语义收口：[[14-ServerRequestResolved覆盖面与未迁移疑点]]、[[03-boundary-judgments/2026-04-12-DynamicToolCall为什么不走ServerRequestResolved]]、[[03-boundary-judgments/2026-04-12-app-server-request-shape分类与收口]]
+- guardian analytics 缺口：[[15-guardian-analytics为何还没真正接上]]
+- 主干回查：[[03-app-server与thread-turn主线]]、[[02-状态持久化与恢复]]、[[06-capability与高级子系统]]
 
 ## 最后一句判断
 

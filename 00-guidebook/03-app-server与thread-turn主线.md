@@ -42,7 +42,7 @@ app-server 自己持有的，主要是这些东西：
 - **thread 执行真相**在 core
 - **thread 协议投影真相**在 app-server
 
-这就是 app-server 的角色：**projection runtime**。
+这就是 app-server 的角色：**thread 语义投影层 + control plane facade**。
 
 ---
 

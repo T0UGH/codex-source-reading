@@ -277,6 +277,12 @@ analytics 侧架子不是空的。
 
 ---
 
+## 相关阅读
+
+- review / guardian 主专题：[[09-review工作流与guardian审查基础设施]]
+- analytics / telemetry 总体图：[[06-capability与高级子系统]]
+- 长期演化问题：[[13-open-questions与后续深挖方向]]
+
 ## 关键文件
 
 - `codex-rs/analytics/src/client.rs`
