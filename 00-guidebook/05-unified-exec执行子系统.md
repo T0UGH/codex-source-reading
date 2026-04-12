@@ -332,6 +332,12 @@ process id、store、watch、cleanup 共同证明它不是一次性调用。
 
 ---
 
+## 相关阅读
+
+- 想先回看 unified-exec 挂在哪条系统总图里：[[01-系统总图与分层]]
+- 想继续看 capability / guardian 如何与执行审批边界交叉：[[06-capability与高级子系统]]、[[09-review工作流与guardian审查基础设施]]
+- 想直接看执行链函数与顺序：[[11-关键函数索引]]、[[12-调用链索引]]
+
 ## 关键文件
 
 - `codex-rs/core/src/tools/handlers/unified_exec.rs`

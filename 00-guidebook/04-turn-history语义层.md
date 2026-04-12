@@ -306,6 +306,12 @@ turn-history 语义说清以后，下一步最自然的问题就是：
 
 ---
 
+## 相关阅读
+
+- 想回看这条语义层挂在哪条控制面主线里：[[03-app-server与thread-turn主线]]
+- 想继续看执行系统如何把输出和 turn 语义接起来：[[05-unified-exec执行子系统]]
+- 想直接定位 turn 语义相关关键函数：[[11-关键函数索引]]、[[12-调用链索引]]
+
 ## 关键文件
 
 - `codex-rs/app-server-protocol/src/protocol/thread_history.rs`

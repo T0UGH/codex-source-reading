@@ -298,6 +298,11 @@ model transport 和 backend-client 分清以后，接下来最自然的深挖就
 
 ---
 
+## 相关阅读
+
+- 想先看 transport 栈的上层编排怎么装请求：[[07-model-client与provider请求主链]]
+- 想直接找 transport / backend 边界的关键函数与链路：[[11-关键函数索引]]、[[12-调用链索引]]
+
 ## 关键文件
 
 - `codex-rs/codex-client/src/lib.rs`

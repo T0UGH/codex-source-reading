@@ -420,6 +420,13 @@ realtime 没有自成平行世界。
 
 ---
 
+## 相关阅读
+
+- 想回看这些高级系统在总章里是怎么被定位的：[[06-capability与高级子系统]]
+- 想继续看这条线剩下的未决问题：[[13-open-questions与后续深挖方向]]
+- 想继续看 guardian analytics 微缺口：[[15-guardian-analytics为何还没真正接上]]
+- 想直接定位控制面与 memories 管线的关键函数：[[11-关键函数索引]]、[[12-调用链索引]]
+
 ## 关键文件
 
 - `codex-rs/core/src/realtime_conversation.rs`
