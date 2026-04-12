@@ -18,6 +18,7 @@ Repository currently contains:
 - an appendix layer in `00-guidebook/` with 11-13
 - a micro-gap layer in `00-guidebook/` with:
   - `14-ServerRequestResolved覆盖面与未迁移疑点.md`
+  - `15-guardian-analytics为何还没真正接上.md`
 - `LEO_HANDOFF.md` for cross-agent continuation
 
 The repo now has a usable progression:
@@ -31,15 +32,21 @@ This is enough structure for future work to be selective rather than exploratory
 
 ## Completed in this round
 
-### Micro-gap doc added
+### Micro-gap docs added
 - `00-guidebook/14-ServerRequestResolved覆盖面与未迁移疑点.md`
+- `00-guidebook/15-guardian-analytics为何还没真正接上.md`
 
-### Gap stabilized
+### Gaps stabilized
 - callback-map resolution and `ServerRequestResolved` semantics are now explicitly separated
 - 5 V2 thread-scoped request types are confirmed to be fully migrated into `ServerRequestResolved`
 - threadless/global request (`ChatgptAuthTokensRefresh`) is now explicitly classified as intentionally outside this semantic model
 - deprecated V1 requests (`ApplyPatchApproval`, `ExecCommandApproval`) are now explicitly classified as legacy holdouts rather than the highest-priority gap
 - `DynamicToolCall` is now called out as the clearest likely partial migration / suspicious gap
+- guardian analytics are now explicitly classified as:
+  - schema/client/reducer present
+  - runtime emission absent
+  - protocol/UI observability present
+  - analytics observability still unwired
 
 ## Current high-confidence judgments
 
@@ -74,7 +81,8 @@ This is enough structure for future work to be selective rather than exploratory
 - skills and MCP are parallel capability lines whose strongest visible coupling today is mediated by plugins/config
 - apps/connectors is a merged capability surface combining directory metadata, runtime accessibility, and plugin declarations
 - `/review` and guardian are separate systems: user review workflow vs approval reviewer infrastructure
-- guardian review analytics schema exists and reducer support exists, but runtime emission appears incomplete in this source tree
+- guardian review analytics schema exists and reducer support exists, but runtime emission is not wired in this source tree
+- guardian runtime is observable via `EventMsg::GuardianAssessment` and app-server notifications, but not yet via analytics events
 - realtime and collab are separate systems: realtime conversation vs multi-agent collaboration runtime
 - realtime handoff is a bridge back into the ordinary session turn engine, not a fully separate execution world
 - `AgentControl` is the rooted thread-tree multi-agent control plane; multi-agent tool handlers are façades over it
@@ -88,13 +96,13 @@ This is enough structure for future work to be selective rather than exploratory
 ## Next recommended moves
 
 1. do **not** resume broad source scanning unless a real正文 gap appears
-2. do a cross-link pass across chapters 01-10, appendices 11-13, and micro-gap doc 14
+2. do a cross-link pass across chapters 01-10, appendices 11-13, and micro-gap docs 14-15
 3. do a light terminology consistency pass on:
    - runtime owner / facade / control plane
    - replay / reconstruction / projection
    - topic / appendix / micro-gap / evidence
 4. if one more micro-gap is worth filling, the highest-value next target is:
-   - why `DynamicToolCall` still lacks `ServerRequestResolved`
+   - prove whether `DynamicToolCall` omission is intentional or finish the evidence that it is an incomplete migration
 5. after that, prefer polish over expansion
 
 ## Open questions
@@ -117,7 +125,7 @@ This is enough structure for future work to be selective rather than exploratory
 - a complete first-pass guidebook正文 spine now exists
 - a second-layer topic expansion now covers the most valuable non-spine systems (model transport, backend boundary, guardian/review, realtime/collab, memories/migration)
 - an appendix layer now exists for key functions, call chains, and open questions
-- at least one concrete micro-gap has been pulled out of the open-question pool and turned into a focused note with a stable answer shape
+- at least two concrete micro-gaps have been pulled out of the open-question pool and turned into focused notes with stable answer shapes
 - enough state has been written into the repo for another agent to continue by cross-linking, polishing, or very targeted gap-filling rather than rediscovering the codebase
 - navigation layer, guidebook正文 layer, topic layer, appendix layer, micro-gap layer, and evidence layer are explicitly separated in the repository
 - next work can begin directly from polish or one more targeted micro-gap rather than repo re-discovery

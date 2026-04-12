@@ -3,7 +3,7 @@
 这不是文件堆砌索引，
 而是这套材料的**总导航页**。
 
-现在仓库已经不再处在“继续横向扫源码”的阶段，而是进入了 **guidebook 重组 + 专题补洞 + 附录建设 + 微缺口补洞阶段**：
+现在仓库已经不再处在“继续横向扫源码”的阶段，而是进入了 **guidebook 重组 + 专题补洞 + 附录建设 + 微缺口清理阶段**：
 
 - `00-guidebook/` 负责连续正文、专题正文、附录和小专题
 - `01-source-notes/` 负责证据层
@@ -96,6 +96,9 @@
 ### Micro-topic 14
 - [00-guidebook/14-ServerRequestResolved覆盖面与未迁移疑点.md](00-guidebook/14-ServerRequestResolved覆盖面与未迁移疑点.md)
 
+### Micro-topic 15
+- [00-guidebook/15-guardian-analytics为何还没真正接上.md](00-guidebook/15-guardian-analytics为何还没真正接上.md)
+
 ---
 
 ## 推荐阅读路径
@@ -158,7 +161,8 @@
 
 1. `09-review工作流与guardian审查基础设施`
 2. `10-realtime-collab与memory迁移专题`
-3. `13-open-questions与后续深挖方向`
+3. `15-guardian-analytics为何还没真正接上`
+4. `13-open-questions与后续深挖方向`
 
 适合：
 - 想理解 review/guardian/realtime/collab/memories 这些高级系统
