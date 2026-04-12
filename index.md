@@ -185,6 +185,8 @@
 ### 3. 调用链草图
 - [02-call-chain-drafts/2026-04-11-codex主链草图-interactive-TUI链.md](02-call-chain-drafts/2026-04-11-codex主链草图-interactive-TUI链.md)
 - [02-call-chain-drafts/2026-04-11-codex主链草图-exec链.md](02-call-chain-drafts/2026-04-11-codex主链草图-exec链.md)
+- [03-boundary-judgments/2026-04-12-DynamicToolCall为什么不走ServerRequestResolved.md](03-boundary-judgments/2026-04-12-DynamicToolCall为什么不走ServerRequestResolved.md)
+- [STATUS.md](STATUS.md)
 
 ---
 

@@ -41,12 +41,16 @@ This is enough structure for future work to be selective rather than exploratory
 - 5 V2 thread-scoped request types are confirmed to be fully migrated into `ServerRequestResolved`
 - threadless/global request (`ChatgptAuthTokensRefresh`) is now explicitly classified as intentionally outside this semantic model
 - deprecated V1 requests (`ApplyPatchApproval`, `ExecCommandApproval`) are now explicitly classified as legacy holdouts rather than the highest-priority gap
-- `DynamicToolCall` is now called out as the clearest likely partial migration / suspicious gap
+- `DynamicToolCall` is now narrowed from “clearest suspicious gap” to a more stable read: transport reuses pending request machinery, but product semantics intentionally run through item lifecycle rather than `ServerRequestResolved`
 - guardian analytics are now explicitly classified as:
   - schema/client/reducer present
   - runtime emission absent
   - protocol/UI observability present
   - analytics observability still unwired
+
+### Micro-gap follow-up added
+- added `03-boundary-judgments/2026-04-12-DynamicToolCall为什么不走ServerRequestResolved.md`
+- narrowed the `DynamicToolCall` question from “likely not migrated yet” to “intentionally item-scoped, transport-reused, but not `ServerRequestResolved`-based semantics”
 
 ## Current high-confidence judgments
 
@@ -69,7 +73,7 @@ This is enough structure for future work to be selective rather than exploratory
   - `PermissionsRequestApproval`
 - `ChatgptAuthTokensRefresh` is intentionally outside the `ServerRequestResolved` model because it is threadless/global
 - deprecated V1 requests remain legacy holdouts rather than first-priority migration targets
-- `DynamicToolCall` is currently the clearest suspicious gap in `ServerRequestResolved` coverage
+- `DynamicToolCall` should no longer be described as the clearest `ServerRequestResolved` gap; it is better modeled as a request-transport reuse plus item-lifecycle semantic split
 - `mcp-server` is a toolified MCP exposure layer, not the same product surface as app-server
 - rollout is the durable history truth source; `state_db_bridge` is a thin bridge, not the main restore logic
 - rollout JSONL stores session body; SQLite stores metadata/index/sidecar state
@@ -88,6 +92,7 @@ This is enough structure for future work to be selective rather than exploratory
 - `AgentControl` is the rooted thread-tree multi-agent control plane; multi-agent tool handlers are façades over it
 - memories is a startup pipeline; agents is a session-scoped multi-agent control plane; external-agent-config is currently migration-oriented infrastructure
 - model transport is layered as substrate (`codex-client`) → provider API (`codex-api`) → runtime orchestration (`ModelClient`), while `backend-client` serves a different backend/task API surface
+- `DynamicToolCall` is not best modeled as an un-migrated `ServerRequestResolved` holdout; it reuses thread-scoped request transport/replay/cancel machinery, but its product semantics are item lifecycle (`ItemStarted`/`ItemCompleted` + `DynamicToolCallResponse`), not resolved-notification semantics
 - function-level notes show the repo’s most important runtime pivots are mostly reducer / projection / packaging / reconciliation boundaries, not giant manager objects
 - `ThreadHistoryBuilder` is the clearest turn-semantics authority discovered so far
 - unified-exec lifecycle is now sufficiently legible end-to-end: request assembly → runtime adaptation → spawn/sessionization → store → output watcher → transcript authority → success/failure end packaging → process-store reconciliation
@@ -101,14 +106,13 @@ This is enough structure for future work to be selective rather than exploratory
    - runtime owner / facade / control plane
    - replay / reconstruction / projection
    - topic / appendix / micro-gap / evidence
-4. if one more micro-gap is worth filling, the highest-value next target is:
-   - prove whether `DynamicToolCall` omission is intentional or finish the evidence that it is an incomplete migration
+4. if one more micro-gap is worth filling, the highest-value next target is now:
+   - audit remaining legacy request shapes and prove which ones truly still miss `ServerRequestResolved` semantics
 5. after that, prefer polish over expansion
 
 ## Open questions
 
-- which request types intentionally skip `ServerRequestResolved` semantics vs which are just not migrated yet
-- specifically: is `DynamicToolCall` intentionally outside `ServerRequestResolved`, or simply not fully migrated
+- besides `DynamicToolCall`, which legacy request types intentionally skip `ServerRequestResolved` semantics vs which are just not migrated yet
 - whether SQLite search/indexing will grow beyond current metadata tables and substring filters
 - whether `interface.capabilities` will remain presentation-only or become runtime-significant
 - whether app-server will become the dominant long-term embedding surface across all SDKs

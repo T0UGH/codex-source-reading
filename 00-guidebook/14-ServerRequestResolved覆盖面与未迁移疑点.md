@@ -19,11 +19,11 @@ purpose: micro-topic
 2. **本来就不适合走这套语义的 request**
 3. **看起来像还没迁完的 request**
 
-而当前最值得记录的疑点只有一个：
+而当前最值得记录、也已经进一步收敛的点只有一个：
 
-> **`DynamicToolCall` 是 thread-scoped、可 replay、也属于 V2 风格 request，但没有走 `ServerRequestResolved`。这比其他缺口更像“未迁移完成”，而不是“设计上就不该走”。**
+> **`DynamicToolCall` 虽然是 thread-scoped、可 replay、也属于 V2 风格 request，但现在更适合被理解为：复用了 pending request transport 机制，却故意不走 `ServerRequestResolved`，而是走 item lifecycle。**
 
-这篇就是把这件事写死，避免以后再反复猜。
+这篇要做的不是继续把它当“最可疑未迁移点”，而是把这个边界写死，避免以后再把 transport 复用误判成 protocol 语义未迁完。
 
 ---
 
@@ -154,9 +154,9 @@ purpose: micro-topic
 
 ---
 
-## 5. 真正可疑的点：`DynamicToolCall`
+## 5. `DynamicToolCall`：transport 上像 request，语义上像 item
 
-这条线是现在最值得记下来的。
+这条线仍然最值得记，但结论已经变了。
 
 `DynamicToolCall` 具备这些特征：
 
@@ -166,28 +166,35 @@ purpose: micro-topic
 - reconnect / resume 时可以 replay
 - 属于明显偏新的 V2 request 世界
 
-按理说，它很像那 5 类已经迁完的 request。
+这些都没错。
 
-但现在的问题是：
+但继续往下追会发现，它真正的闭环不是：
 
-- 它的 response 会在 callback map 内部完成
-- 也会被真正消费
-- **但没有显式接 `resolve_server_request_on_thread_listener(...)`**
-- 也就没有进入 `ServerRequestResolved` 语义面
+- callback 完成
+- `resolve_server_request_on_thread_listener(...)`
+- `ServerRequestResolved`
 
-这让它和其他 V2 thread-scoped request 看起来不一致。
+而是：
 
-所以这里最合理的判断是：
+- `ItemStarted`
+- `item/tool/call`
+- 客户端返回 `DynamicToolCallResponse`
+- app-server 直接 `submit(Op::DynamicToolResponse { ... })`
+- core 再发 `DynamicToolCallResponse`
+- `ItemCompleted`
 
-> **`DynamicToolCall` 是目前最像“还没迁完”的那一个 request 类型。**
+也就是说，它虽然借用了 thread request transport，
+但产品语义上真正暴露给客户端/线程世界的，是 dynamic tool item 的开始与完成。
 
-不是说它一定是 bug，而是从系统形态一致性上看，它比其他未覆盖项更可疑。
+所以现在更稳的判断是：
+
+> **`DynamicToolCall` 不是最像“还没迁完”的 request；它更像“实现层复用 request，语义层故意走 item lifecycle”的分叉设计。**
 
 ---
 
-## 6. 为什么 `DynamicToolCall` 比 legacy 请求更可疑
+## 6. 为什么 `DynamicToolCall` 最容易让人误判成未迁移缺口
 
-因为它不具备 legacy 的借口。
+因为它在 transport 形态上，确实太像那批已经接进 `ServerRequestResolved` 的 request 了。
 
 和 `ApplyPatchApproval` / `ExecCommandApproval` 不同，`DynamicToolCall`：
 
@@ -197,9 +204,15 @@ purpose: micro-topic
 - 本身已经能 replay
 - 也站在 V2 request 世界里
 
-所以如果只问“下一个最该查的 request gap 是谁”，答案应该不是 V1 那两类，而是：
+所以只看发送/回放/取消机制，很容易得出：
 
-> **先查 `DynamicToolCall` 为什么没有 `ServerRequestResolved`。**
+> **它应该也走 `ServerRequestResolved`。**
+
+但这次继续往下追后，真正更稳的理解是：
+
+> **它只是复用了同一套 transport machinery，并没有选择同一套 protocol completion semantics。**
+
+也因此，后面如果还要继续补 gap，不该再优先追它，而该转去看剩余 legacy request 形态里到底还有哪些是真残留、哪些是有意保留。
 
 ---
 
@@ -222,8 +235,11 @@ purpose: micro-topic
 - `ApplyPatchApproval`
 - `ExecCommandApproval`
 
-### D. 当前最可疑的未迁移点
+### D. transport 复用但语义不走 resolved 的特殊分支
 - `DynamicToolCall`
+  - thread-scoped / replayable / callback-completing
+  - 但完成语义走 `ItemStarted` / `ItemCompleted` + `DynamicToolCallResponse`
+  - 不应再简单归类为“最可疑未迁移点”
 
 这张表已经足够让后续继续读的人少走很多弯路。
 
@@ -241,9 +257,12 @@ purpose: micro-topic
 不是。已经有一批明显迁完了。
 
 ### 误判 2
-“是不是所有没接的都是合理设计？”
+“是不是所有不发 `ServerRequestResolved` 的 request 都只是没迁完？”
 
-也不是。至少 `DynamicToolCall` 这个点看起来明显更可疑。
+也不是。至少 `DynamicToolCall` 这个点现在更清楚地说明：
+
+- 有些 request 会复用 pending request transport
+- 但故意不复用 resolved completion semantics
 
 所以把它写成一篇微专题，比继续把它塞在 open questions 列表里更值。
 
@@ -265,27 +284,34 @@ purpose: micro-topic
 ### 判断 4：V1 deprecated requests 不进这套语义，更像 intentional legacy holdout
 不该优先追。
 
-### 判断 5：`DynamicToolCall` 是当前最像未迁移完成的缺口
-这是下一步最值继续确认的点。
+### 判断 5：`DynamicToolCall` 不该再被写成“最像未迁移完成的缺口”
+它更准确的边界是：transport 上复用 thread-scoped request machinery，语义上走 item lifecycle。
 
 ---
 
 ## 10. 如果继续追，这一刀怎么下
 
-如果未来还要继续补这条线，最值的动作不是再广撒网，而是只追一件事：
+如果未来还要继续补这条线，最值的动作就不该再围着 `DynamicToolCall` 打转了。
 
-> **为什么 `DynamicToolCall` 没有接上 `ServerRequestResolved`。**
+更值的是：
+
+> **顺剩余 legacy request 形态继续查，确认还有哪些是真正没迁到 `ServerRequestResolved`，哪些只是像 `DynamicToolCall` 一样在语义上故意走别的完成模型。**
 
 具体建议：
-- 顺 `DynamicToolCall` 的 emit path 往下追
 - 对照那 5 类已迁 request 的 resolve path
-- 确认这是：
-  - 有意不接
-  - 还是单纯没迁完
+- 继续查 legacy / edge request 分支
+- 区分：
+  - intentional semantic split
+  - intentional legacy holdout
+  - actual incomplete migration
 
-这就是这条线后续最自然的一刀。
+这才是这条线后续最自然的一刀。
 
 ---
+
+## 延伸阅读
+
+- [03-boundary-judgments/2026-04-12-DynamicToolCall为什么不走ServerRequestResolved.md](../03-boundary-judgments/2026-04-12-DynamicToolCall为什么不走ServerRequestResolved.md)
 
 ## 关键文件
 
