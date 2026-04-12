@@ -3,9 +3,9 @@
 这不是文件堆砌索引，
 而是这套材料的**总导航页**。
 
-现在仓库已经不再处在“继续横向扫源码”的阶段，而是进入了 **guidebook 重组 + 专题补洞阶段**：
+现在仓库已经不再处在“继续横向扫源码”的阶段，而是进入了 **guidebook 重组 + 专题补洞 + 附录建设阶段**：
 
-- `00-guidebook/` 负责连续正文与专题正文
+- `00-guidebook/` 负责连续正文、专题正文和附录
 - `01-source-notes/` 负责证据层
 - `STATUS.md` 负责状态交接
 
@@ -74,6 +74,21 @@
 
 ---
 
+## 第三层：附录
+
+这些附录不是新主章，而是为了让后续继续阅读和继续深挖不再断状态。
+
+### Appendix 11
+- [00-guidebook/11-关键函数索引.md](00-guidebook/11-关键函数索引.md)
+
+### Appendix 12
+- [00-guidebook/12-调用链索引.md](00-guidebook/12-调用链索引.md)
+
+### Appendix 13
+- [00-guidebook/13-open-questions与后续深挖方向.md](00-guidebook/13-open-questions与后续深挖方向.md)
+
+---
+
 ## 推荐阅读路径
 
 ### 路径 A：先建立全局认知
@@ -97,6 +112,8 @@
 2. `02-状态持久化与恢复`
 3. `03-app-server与thread-turn主线`
 4. `04-turn-history语义层`
+5. `11-关键函数索引`
+6. `12-调用链索引`
 
 适合：
 - 想搞清 listener / thread state / turn history
@@ -107,7 +124,8 @@
 
 1. `01-系统总图与分层`
 2. `05-unified-exec执行子系统`
-3. `02-call-chain-drafts/2026-04-11-codex主链草图-exec链.md`
+3. `12-调用链索引`
+4. `02-call-chain-drafts/2026-04-11-codex主链草图-exec链.md`
 
 适合：
 - 想搞清 exec 和 unified-exec 的差别
@@ -118,6 +136,8 @@
 
 1. `07-model-client与provider请求主链`
 2. `08-codex-client-codex-api与backend-client分层`
+3. `11-关键函数索引`
+4. `12-调用链索引`
 
 适合：
 - 想搞清模型请求是怎么出去的
@@ -128,6 +148,7 @@
 
 1. `09-review工作流与guardian审查基础设施`
 2. `10-realtime-collab与memory迁移专题`
+3. `13-open-questions与后续深挖方向`
 
 适合：
 - 想理解 review/guardian/realtime/collab/memories 这些高级系统
@@ -161,7 +182,7 @@
 1. 以 guidebook / 专题正文为主阅读层
 2. 把 `01-source-notes/` 当作证据层回查
 3. 只在正文出现真实缺口时，再补新的函数级或专题笔记
-4. 后续优先做 appendix，而不是再堆新章节
+4. 优先继续做 appendix / cross-link / chapter polish，而不是再堆新章节
 
 一句话说：
 

@@ -6,65 +6,47 @@ Turn the accumulated Codex Phase 1 source-reading materials into a guidebook-qua
 
 ## Current state
 
-Phase 1 broad architecture scan is effectively complete. The repo has now moved beyond “guidebook restructuring only” into a **guidebook + deep-dive topic expansion** phase.
+Phase 1 broad architecture scan is effectively complete. The repo has now moved into a **guidebook + deep-dive topics + appendix layer** phase.
 
 Repository currently contains:
 
 - 31 architecture / implementation notes
 - 27 fine-grained function-level source-reading notes
 - rewritten navigation files (`index.md`, `00-index/...`)
-- a guidebook正文 spine in `00-guidebook/` with:
-  - `00-如何阅读这份导读.md`
-  - `01-系统总图与分层.md`
-  - `02-状态持久化与恢复.md`
-  - `03-app-server与thread-turn主线.md`
-  - `04-turn-history语义层.md`
-  - `05-unified-exec执行子系统.md`
-  - `06-capability与高级子系统.md`
-- an additional topic layer in `00-guidebook/` with:
-  - `07-model-client与provider请求主链.md`
-  - `08-codex-client-codex-api与backend-client分层.md`
-  - `09-review工作流与guardian审查基础设施.md`
-  - `10-realtime-collab与memory迁移专题.md`
+- a guidebook正文 spine in `00-guidebook/` with chapters 00-06
+- a topic layer in `00-guidebook/` with deep dives 07-10
+- an appendix layer in `00-guidebook/` with:
+  - `11-关键函数索引.md`
+  - `12-调用链索引.md`
+  - `13-open-questions与后续深挖方向.md`
 - `LEO_HANDOFF.md` for cross-agent continuation
 
-The repo now has both:
-- a readable main正文 spine
-- a second-layer topic expansion for the most valuable non-spine systems
+The repo now has four clearly separated layers:
+1. navigation (`index.md`)
+2. guidebook正文 (`00-guidebook/` chapters 00-06)
+3. deep-dive topics (`00-guidebook/` topics 07-10)
+4. evidence (`01-source-notes/`)
 
-Future work should bias toward appendices, cross-linking, and selective gap-filling rather than restarting large breadth-first scans.
+Appendices now provide a stable handoff surface for future deep-dive work without forcing another agent to rediscover the most important pivots.
 
 ## Completed in this round
 
-### Topic deep-dives added
-- `00-guidebook/07-model-client与provider请求主链.md`
-- `00-guidebook/08-codex-client-codex-api与backend-client分层.md`
-- `00-guidebook/09-review工作流与guardian审查基础设施.md`
-- `00-guidebook/10-realtime-collab与memory迁移专题.md`
+### Appendices added
+- `00-guidebook/11-关键函数索引.md`
+- `00-guidebook/12-调用链索引.md`
+- `00-guidebook/13-open-questions与后续深挖方向.md`
 
 ### Navigation updates
-- root `index.md` now distinguishes:
-  - guidebook main spine
-  - deep-dive topic layer
-  - evidence layer
-- reading paths were extended to include model transport/backend boundary and review/realtime/memory topics
+- root `index.md` now routes readers through three reading layers:
+  - main正文
+  - topic deep-dives
+  - appendices
+- reading paths now explicitly point to appendix docs when a reader wants to continue from prose into function/call-chain/open-question space
 
-### Topic-layer judgments stabilized
-- `ModelClient` is a session/turn orchestration layer, not the raw transport layer
-- the model request stack is layered as:
-  - `core::ModelClient` → `codex-api` → `codex-client`
-- `codex-client` is generic HTTP transport substrate
-- `codex-api` is model/provider wire adapter
-- `backend-client` is a separate business-resource client, not part of inference transport
-- `/review` is a user-facing review workflow; guardian is approval reviewer infrastructure
-- guardian is fail-closed and routes privileged approvals back through parent-session authority
-- guardian uses a trunk + ephemeral review session model, with fork snapshots for context reuse
-- realtime and collab are distinct live control planes:
-  - realtime = conversation/session live transport plane
-  - collab = rooted thread-tree multi-agent control plane
-- memories is a startup pipeline with phase1 extract + phase2 global consolidation
-- external-agent-config is migration/compatibility infrastructure, not a core runtime spine
-- `McpServerConfig` migration appears scaffolded in type/API shape but not fully implemented in behavior
+### Handoff improvements
+- “where to continue” is now written into the repo explicitly instead of living only in STATUS/open questions
+- key runtime pivots are now indexed by function role, not just by article title
+- call-chain reading order is now documented for the major subsystems
 
 ## Current high-confidence judgments
 
@@ -98,19 +80,21 @@ Future work should bias toward appendices, cross-linking, and selective gap-fill
 - function-level notes show the repo’s most important runtime pivots are mostly reducer / projection / packaging / reconciliation boundaries, not giant manager objects
 - `ThreadHistoryBuilder` is the clearest turn-semantics authority discovered so far
 - unified-exec lifecycle is now sufficiently legible end-to-end: request assembly → runtime adaptation → spawn/sessionization → store → output watcher → transcript authority → success/failure end packaging → process-store reconciliation
-- the repo should now be read as a three-layer system of artifacts: navigation (`index.md`), guidebook正文 (`00-guidebook/`), and evidence (`01-source-notes/`)
+- the repo should now be read as a layered artifact system: navigation → guidebook正文 → topic deep-dives → evidence, with appendices providing stable drill-down entrypoints
 
 ## Next recommended moves
 
 1. do **not** resume broad source scanning unless a real正文 gap appears
-2. add appendices next:
-   - key function index
-   - call-chain index
-   - open questions appendix
-   - maybe a “where to continue source-reading by subsystem” appendix
-3. do a cross-link pass across chapters 01-10 so each chapter explicitly points to the most relevant note/topic/article neighbors
-4. optionally split `10-realtime-collab与memory迁移专题` later if that topic layer grows too large, but do not split preemptively
-5. keep future source-note additions exception-only and explicitly justified
+2. do a cross-link pass across chapters 01-10 and appendices 11-13
+3. do a light consistency pass on terminology across chapters:
+   - runtime owner / facade / control plane
+   - turn semantic projection / replay / reconstruction
+   - topic vs appendix vs evidence
+4. if any new work is added, prefer one of these forms only:
+   - appendix expansion
+   - gap-filling micro-topic
+   - narrowly justified function-level note
+5. only after the cross-link/consistency pass, decide whether topic 10 should be split
 
 ## Open questions
 
@@ -130,6 +114,7 @@ Future work should bias toward appendices, cross-linking, and selective gap-fill
 - enough material exists to explain the repo at both architecture and function/state-machine level for the key runtime pivots
 - a complete first-pass guidebook正文 spine now exists
 - a second-layer topic expansion now covers the most valuable non-spine systems (model transport, backend boundary, guardian/review, realtime/collab, memories/migration)
-- enough state has been written into the repo for another agent to continue by polishing, cross-linking, and appendix-writing rather than rediscovering the codebase
-- navigation layer, guidebook正文 layer, and evidence layer are explicitly separated in the repository
-- next work can begin directly from appendix building rather than repo re-discovery
+- an appendix layer now exists for key functions, call chains, and open questions
+- enough state has been written into the repo for another agent to continue by cross-linking, polishing, or very targeted gap-filling rather than rediscovering the codebase
+- navigation layer, guidebook正文 layer, topic layer, appendix layer, and evidence layer are explicitly separated in the repository
+- next work can begin directly from appendix refinement or chapter cross-linking rather than repo re-discovery
