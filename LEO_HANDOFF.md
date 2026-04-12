@@ -121,7 +121,7 @@
 ## Risks / open edges
 
 这些点仍然没有完全收敛，正文里要谨慎表述：
-- `DynamicToolCall` 基本已收敛为“transport 上复用 pending request，语义上走 item lifecycle”，但其他 legacy request type 里哪些有意跳过 `ServerRequestResolved`、哪些只是尚未迁移，仍需区分
+- `DynamicToolCall` 基本已收敛为“transport 上复用 pending request，语义上走 item lifecycle”；当前 `ServerRequest` 枚举也基本已收口为 5 resolved + 1 semantic split + 1 global bridge + 2 legacy holdouts，后续真正的风险更像 future drift，而不是当前分类不清
 - SQLite search/indexing 后续会不会加强
 - `interface.capabilities` 会不会从展示层变成 runtime-significant
 - app-server 会不会成为未来更主导的嵌入 surface

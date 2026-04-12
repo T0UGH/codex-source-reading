@@ -50,7 +50,9 @@ This is enough structure for future work to be selective rather than exploratory
 
 ### Micro-gap follow-up added
 - added `03-boundary-judgments/2026-04-12-DynamicToolCall为什么不走ServerRequestResolved.md`
+- added `03-boundary-judgments/2026-04-12-app-server-request-shape分类与收口.md`
 - narrowed the `DynamicToolCall` question from “likely not migrated yet” to “intentionally item-scoped, transport-reused, but not `ServerRequestResolved`-based semantics”
+- request-shape audit now classifies the current enum as: 5 resolved + 1 semantic split + 1 global bridge + 2 legacy holdouts
 
 ## Current high-confidence judgments
 
@@ -93,6 +95,7 @@ This is enough structure for future work to be selective rather than exploratory
 - memories is a startup pipeline; agents is a session-scoped multi-agent control plane; external-agent-config is currently migration-oriented infrastructure
 - model transport is layered as substrate (`codex-client`) → provider API (`codex-api`) → runtime orchestration (`ModelClient`), while `backend-client` serves a different backend/task API surface
 - `DynamicToolCall` is not best modeled as an un-migrated `ServerRequestResolved` holdout; it reuses thread-scoped request transport/replay/cancel machinery, but its product semantics are item lifecycle (`ItemStarted`/`ItemCompleted` + `DynamicToolCallResponse`), not resolved-notification semantics
+- the current `ServerRequest` enum is now legible as a complete set: 5 V2 thread-scoped requests in resolved semantics, 1 item-lifecycle semantic split (`DynamicToolCall`), 1 global bridge request (`ChatgptAuthTokensRefresh`), and 2 deprecated V1 legacy holdouts
 - function-level notes show the repo’s most important runtime pivots are mostly reducer / projection / packaging / reconciliation boundaries, not giant manager objects
 - `ThreadHistoryBuilder` is the clearest turn-semantics authority discovered so far
 - unified-exec lifecycle is now sufficiently legible end-to-end: request assembly → runtime adaptation → spawn/sessionization → store → output watcher → transcript authority → success/failure end packaging → process-store reconciliation
@@ -106,13 +109,15 @@ This is enough structure for future work to be selective rather than exploratory
    - runtime owner / facade / control plane
    - replay / reconstruction / projection
    - topic / appendix / micro-gap / evidence
-4. if one more micro-gap is worth filling, the highest-value next target is now:
-   - audit remaining legacy request shapes and prove which ones truly still miss `ServerRequestResolved` semantics
+4. request-shape audit is now basically done for the current enum; if one more targeted pass is worth doing, it should focus on:
+   - whether any future/new request shapes are being added outside this 5+1+1+2 classification
+   - or whether legacy V1 request paths are actually on a removal/deprecation path
 5. after that, prefer polish over expansion
 
 ## Open questions
 
-- besides `DynamicToolCall`, which legacy request types intentionally skip `ServerRequestResolved` semantics vs which are just not migrated yet
+- whether future/new request shapes will preserve the current 5+1+1+2 classification, or introduce a genuinely new semantic bucket
+- whether deprecated V1 request paths (`ApplyPatchApproval`, `ExecCommandApproval`) are on an actual removal path or will persist as long-tail compatibility seams
 - whether SQLite search/indexing will grow beyond current metadata tables and substring filters
 - whether `interface.capabilities` will remain presentation-only or become runtime-significant
 - whether app-server will become the dominant long-term embedding surface across all SDKs

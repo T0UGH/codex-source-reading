@@ -186,6 +186,7 @@
 - [02-call-chain-drafts/2026-04-11-codex主链草图-interactive-TUI链.md](02-call-chain-drafts/2026-04-11-codex主链草图-interactive-TUI链.md)
 - [02-call-chain-drafts/2026-04-11-codex主链草图-exec链.md](02-call-chain-drafts/2026-04-11-codex主链草图-exec链.md)
 - [03-boundary-judgments/2026-04-12-DynamicToolCall为什么不走ServerRequestResolved.md](03-boundary-judgments/2026-04-12-DynamicToolCall为什么不走ServerRequestResolved.md)
+- [03-boundary-judgments/2026-04-12-app-server-request-shape分类与收口.md](03-boundary-judgments/2026-04-12-app-server-request-shape分类与收口.md)
 - [STATUS.md](STATUS.md)
 
 ---
