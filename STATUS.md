@@ -6,7 +6,7 @@ Turn the accumulated Codex Phase 1 source-reading materials into a guidebook-qua
 
 ## Current state
 
-Phase 1 broad architecture scan is effectively complete. The repo has now moved into a **guidebook + deep-dive topics + appendix layer** phase.
+Phase 1 broad architecture scan is effectively complete. The repo has now moved into a **guidebook + deep-dive topics + appendix layer + micro-gap cleanup** phase.
 
 Repository currently contains:
 
@@ -15,38 +15,31 @@ Repository currently contains:
 - rewritten navigation files (`index.md`, `00-index/...`)
 - a guidebook正文 spine in `00-guidebook/` with chapters 00-06
 - a topic layer in `00-guidebook/` with deep dives 07-10
-- an appendix layer in `00-guidebook/` with:
-  - `11-关键函数索引.md`
-  - `12-调用链索引.md`
-  - `13-open-questions与后续深挖方向.md`
+- an appendix layer in `00-guidebook/` with 11-13
+- a micro-gap layer in `00-guidebook/` with:
+  - `14-ServerRequestResolved覆盖面与未迁移疑点.md`
 - `LEO_HANDOFF.md` for cross-agent continuation
 
-The repo now has four clearly separated layers:
-1. navigation (`index.md`)
-2. guidebook正文 (`00-guidebook/` chapters 00-06)
-3. deep-dive topics (`00-guidebook/` topics 07-10)
-4. evidence (`01-source-notes/`)
+The repo now has a usable progression:
+1. main正文
+2. deep-dive topics
+3. appendices
+4. targeted micro-gap docs
+5. evidence layer
 
-Appendices now provide a stable handoff surface for future deep-dive work without forcing another agent to rediscover the most important pivots.
+This is enough structure for future work to be selective rather than exploratory.
 
 ## Completed in this round
 
-### Appendices added
-- `00-guidebook/11-关键函数索引.md`
-- `00-guidebook/12-调用链索引.md`
-- `00-guidebook/13-open-questions与后续深挖方向.md`
+### Micro-gap doc added
+- `00-guidebook/14-ServerRequestResolved覆盖面与未迁移疑点.md`
 
-### Navigation updates
-- root `index.md` now routes readers through three reading layers:
-  - main正文
-  - topic deep-dives
-  - appendices
-- reading paths now explicitly point to appendix docs when a reader wants to continue from prose into function/call-chain/open-question space
-
-### Handoff improvements
-- “where to continue” is now written into the repo explicitly instead of living only in STATUS/open questions
-- key runtime pivots are now indexed by function role, not just by article title
-- call-chain reading order is now documented for the major subsystems
+### Gap stabilized
+- callback-map resolution and `ServerRequestResolved` semantics are now explicitly separated
+- 5 V2 thread-scoped request types are confirmed to be fully migrated into `ServerRequestResolved`
+- threadless/global request (`ChatgptAuthTokensRefresh`) is now explicitly classified as intentionally outside this semantic model
+- deprecated V1 requests (`ApplyPatchApproval`, `ExecCommandApproval`) are now explicitly classified as legacy holdouts rather than the highest-priority gap
+- `DynamicToolCall` is now called out as the clearest likely partial migration / suspicious gap
 
 ## Current high-confidence judgments
 
@@ -60,6 +53,16 @@ Appendices now provide a stable handoff surface for future deep-dive work withou
 - `thread_state_manager` and `thread_watch_manager` are intentionally split: internal coordination vs outward status projection
 - turn materialization uses active-turn in-memory state plus persisted rollout turns
 - pending server requests are stored with thread scope and can be replayed/aborted across reconnect/resume
+- callback-map resolution and `ServerRequestResolved` are not the same layer of semantics
+- 5 V2 thread-scoped request types are now clearly in the `ServerRequestResolved` model:
+  - `CommandExecutionRequestApproval`
+  - `FileChangeRequestApproval`
+  - `ToolRequestUserInput`
+  - `McpServerElicitationRequest`
+  - `PermissionsRequestApproval`
+- `ChatgptAuthTokensRefresh` is intentionally outside the `ServerRequestResolved` model because it is threadless/global
+- deprecated V1 requests remain legacy holdouts rather than first-priority migration targets
+- `DynamicToolCall` is currently the clearest suspicious gap in `ServerRequestResolved` coverage
 - `mcp-server` is a toolified MCP exposure layer, not the same product surface as app-server
 - rollout is the durable history truth source; `state_db_bridge` is a thin bridge, not the main restore logic
 - rollout JSONL stores session body; SQLite stores metadata/index/sidecar state
@@ -80,25 +83,24 @@ Appendices now provide a stable handoff surface for future deep-dive work withou
 - function-level notes show the repo’s most important runtime pivots are mostly reducer / projection / packaging / reconciliation boundaries, not giant manager objects
 - `ThreadHistoryBuilder` is the clearest turn-semantics authority discovered so far
 - unified-exec lifecycle is now sufficiently legible end-to-end: request assembly → runtime adaptation → spawn/sessionization → store → output watcher → transcript authority → success/failure end packaging → process-store reconciliation
-- the repo should now be read as a layered artifact system: navigation → guidebook正文 → topic deep-dives → evidence, with appendices providing stable drill-down entrypoints
+- the repo should now be read as a layered artifact system: navigation → guidebook正文 → topic deep-dives → appendices → micro-gap docs → evidence
 
 ## Next recommended moves
 
 1. do **not** resume broad source scanning unless a real正文 gap appears
-2. do a cross-link pass across chapters 01-10 and appendices 11-13
-3. do a light consistency pass on terminology across chapters:
+2. do a cross-link pass across chapters 01-10, appendices 11-13, and micro-gap doc 14
+3. do a light terminology consistency pass on:
    - runtime owner / facade / control plane
-   - turn semantic projection / replay / reconstruction
-   - topic vs appendix vs evidence
-4. if any new work is added, prefer one of these forms only:
-   - appendix expansion
-   - gap-filling micro-topic
-   - narrowly justified function-level note
-5. only after the cross-link/consistency pass, decide whether topic 10 should be split
+   - replay / reconstruction / projection
+   - topic / appendix / micro-gap / evidence
+4. if one more micro-gap is worth filling, the highest-value next target is:
+   - why `DynamicToolCall` still lacks `ServerRequestResolved`
+5. after that, prefer polish over expansion
 
 ## Open questions
 
 - which request types intentionally skip `ServerRequestResolved` semantics vs which are just not migrated yet
+- specifically: is `DynamicToolCall` intentionally outside `ServerRequestResolved`, or simply not fully migrated
 - whether SQLite search/indexing will grow beyond current metadata tables and substring filters
 - whether `interface.capabilities` will remain presentation-only or become runtime-significant
 - whether app-server will become the dominant long-term embedding surface across all SDKs
@@ -115,6 +117,7 @@ Appendices now provide a stable handoff surface for future deep-dive work withou
 - a complete first-pass guidebook正文 spine now exists
 - a second-layer topic expansion now covers the most valuable non-spine systems (model transport, backend boundary, guardian/review, realtime/collab, memories/migration)
 - an appendix layer now exists for key functions, call chains, and open questions
+- at least one concrete micro-gap has been pulled out of the open-question pool and turned into a focused note with a stable answer shape
 - enough state has been written into the repo for another agent to continue by cross-linking, polishing, or very targeted gap-filling rather than rediscovering the codebase
-- navigation layer, guidebook正文 layer, topic layer, appendix layer, and evidence layer are explicitly separated in the repository
-- next work can begin directly from appendix refinement or chapter cross-linking rather than repo re-discovery
+- navigation layer, guidebook正文 layer, topic layer, appendix layer, micro-gap layer, and evidence layer are explicitly separated in the repository
+- next work can begin directly from polish or one more targeted micro-gap rather than repo re-discovery
