@@ -298,6 +298,11 @@ HTTP Responses 路径同样是完整主链的一部分：
 
 ---
 
+## 相关阅读
+
+- 想继续看 transport substrate / backend 边界：[[08-codex-client-codex-api与backend-client分层]]
+- 想看模型请求主链对应的关键函数与调用顺序：[[11-关键函数索引]]、[[12-调用链索引]]
+
 ## 关键文件
 
 - `codex-rs/core/src/client.rs`
