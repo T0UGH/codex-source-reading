@@ -1,206 +1,76 @@
-# Codex 源码导读 Index
-
-这不是文件堆砌索引，
-而是这套材料的**总导航页**。
-
-现在仓库已经不再处在“继续横向扫源码”的阶段，而是进入了 **guidebook 重组 + 专题补洞 + 附录建设 + 微缺口清理阶段**：
-
-- `00-guidebook/` 负责连续正文、专题正文、附录和小专题
-- `01-source-notes/` 负责证据层
-- `STATUS.md` 负责状态交接
-
+---
+title: Codex 源码导读手册
+date: 2026-04-14
 ---
 
-## 先给结论
+# Codex 源码导读手册
 
-如果你第一次进入这个仓库，先读这 4 个文件：
+> 一套按 **6 个认知台阶** 重组 OpenAI Codex 内部结构的中文源码导读手册。
 
-1. [STATUS.md](STATUS.md)
-2. [00-guidebook/00-如何阅读这份导读.md](00-guidebook/00-如何阅读这份导读.md)
-3. [00-guidebook/01-系统总图与分层.md](00-guidebook/01-系统总图与分层.md)
-4. [03-boundary-judgments/2026-04-11-codex模块边界判断-v1.md](03-boundary-judgments/2026-04-11-codex模块边界判断-v1.md)
+这里是公开站点首页。当前站点直接以 **`codex-source-reading` 仓库内现有文章** 作为唯一内容来源，不再维护第二份正文副本。
 
-读完后，应该先建立这些总判断：
+## 从哪里开始
 
-- `codex-cli/` 只是分发壳，不是主体
-- `codex-rs/cli` 是统一入口层
-- `core` 是 runtime 聚合中心
-- `ThreadManager` 比 app-server 更接近 runtime owner
-- `app-server` 是控制面 facade，不是另一套 runtime
-- 这套系统的很多一致性来自一批 reducer / projection / reconciliation helper，而不是一个中心大状态机
+### 第一次进入这个项目
+建议直接从这里开始：
 
----
+- [00｜如何阅读这份导读](./00-guidebook/00-如何阅读这份导读.md)
+- [01｜系统总图与分层](./00-guidebook/01-系统总图与分层.md)
+- [02｜状态持久化与恢复](./00-guidebook/02-状态持久化与恢复.md)
 
-## 第一层：guidebook 主干正文
+### 如果你想先抓整套结构
+可以直接按六卷主线进入：
 
-### Chapter 0
-- [00-guidebook/00-如何阅读这份导读.md](00-guidebook/00-如何阅读这份导读.md)
+1. [卷一｜系统入口与总图](./00-guidebook/00-如何阅读这份导读.md)
+2. [卷二｜状态、持久化与恢复](./00-guidebook/02-状态持久化与恢复.md)
+3. [卷三｜app-server、thread 与 turn 主线](./00-guidebook/03-app-server与thread-turn主线.md)
+4. [卷四｜统一执行子系统](./00-guidebook/05-unified-exec执行子系统.md)
+5. [卷五｜能力系统与高级子系统](./00-guidebook/06-capability与高级子系统.md)
+6. [卷六｜附录、微缺口与继续深挖入口](./00-guidebook/11-关键函数索引.md)
 
-### Chapter 1
-- [00-guidebook/01-系统总图与分层.md](00-guidebook/01-系统总图与分层.md)
+## 这套手册在讲什么
 
-### Chapter 2
-- [00-guidebook/02-状态持久化与恢复.md](00-guidebook/02-状态持久化与恢复.md)
+这套手册不是带你“逛源码目录”，而是在回答一串更关键的问题：
 
-### Chapter 3
-- [00-guidebook/03-app-server与thread-turn主线.md](00-guidebook/03-app-server与thread-turn主线.md)
+- Codex 到底是什么系统
+- 它为什么不是一个简单命令壳，而是一个有 runtime owner 的系统
+- rollout、SQLite、thread、turn、listener、turn-history 这些对象为什么能让系统持续工作
+- app-server 为什么更像控制面 facade，而不是另一套平行 runtime
+- unified-exec 为什么不是普通执行器，而是一条 execution session 主线
+- model transport、backend、review、guardian、realtime、collab、memories 又怎样把它推向更高层 runtime 组织
 
-### Chapter 4
-- [00-guidebook/04-turn-history语义层.md](00-guidebook/04-turn-history语义层.md)
+## 六卷各自回答什么
 
-### Chapter 5
-- [00-guidebook/05-unified-exec执行子系统.md](00-guidebook/05-unified-exec执行子系统.md)
+- **卷一**：先看清 Codex 到底是什么系统，以及该怎么读这套材料
+- **卷二**：看状态、持久化和恢复机制为什么能让系统续跑
+- **卷三**：看 app-server、thread、turn、listener、turn-history 怎样形成控制面主线
+- **卷四**：看执行能力怎样被统一收口成 execution session
+- **卷五**：看能力系统、模型传输、审查基础设施和高级 runtime 子系统
+- **卷六**：看索引、开放问题和微缺口怎样支撑继续深挖
 
-### Chapter 6
-- [00-guidebook/06-capability与高级子系统.md](00-guidebook/06-capability与高级子系统.md)
+## 推荐阅读路线
 
----
+### 路线 A：第一次系统阅读
+- [00｜如何阅读这份导读](./00-guidebook/00-如何阅读这份导读.md)
+- [01｜系统总图与分层](./00-guidebook/01-系统总图与分层.md)
+- [02｜状态持久化与恢复](./00-guidebook/02-状态持久化与恢复.md)
+- 然后按 03 → 15 顺序继续
 
-## 第二层：追加专题正文
+### 路线 B：只想抓 runtime 主线
+- [02｜状态持久化与恢复](./00-guidebook/02-状态持久化与恢复.md)
+- [03｜app-server 与 thread-turn 主线](./00-guidebook/03-app-server与thread-turn主线.md)
+- [04｜turn-history 语义层](./00-guidebook/04-turn-history语义层.md)
+- [05｜unified-exec 执行子系统](./00-guidebook/05-unified-exec执行子系统.md)
 
-这些不是主 spine 必需章节，但它们把之前正文里提过的关键边界继续打深。
+### 路线 C：只想抓高级系统与 future-looking 问题
+- [06｜capability 与高级子系统](./00-guidebook/06-capability与高级子系统.md)
+- [09｜review 工作流与 guardian 审查基础设施](./00-guidebook/09-review工作流与guardian审查基础设施.md)
+- [10｜realtime、collab 与 memory 迁移专题](./00-guidebook/10-realtime-collab与memory迁移专题.md)
+- [13｜open questions 与后续深挖方向](./00-guidebook/13-open-questions与后续深挖方向.md)
 
-### Topic 7
-- [00-guidebook/07-model-client与provider请求主链.md](00-guidebook/07-model-client与provider请求主链.md)
+## 当前入口说明
 
-### Topic 8
-- [00-guidebook/08-codex-client-codex-api与backend-client分层.md](00-guidebook/08-codex-client-codex-api与backend-client分层.md)
-
-### Topic 9
-- [00-guidebook/09-review工作流与guardian审查基础设施.md](00-guidebook/09-review工作流与guardian审查基础设施.md)
-
-### Topic 10
-- [00-guidebook/10-realtime-collab与memory迁移专题.md](00-guidebook/10-realtime-collab与memory迁移专题.md)
-
----
-
-## 第三层：附录
-
-这些附录不是新主章，而是为了让后续继续阅读和继续深挖不再断状态。
-
-### Appendix 11
-- [00-guidebook/11-关键函数索引.md](00-guidebook/11-关键函数索引.md)
-
-### Appendix 12
-- [00-guidebook/12-调用链索引.md](00-guidebook/12-调用链索引.md)
-
-### Appendix 13
-- [00-guidebook/13-open-questions与后续深挖方向.md](00-guidebook/13-open-questions与后续深挖方向.md)
-
----
-
-## 第四层：微缺口补洞
-
-这层不是再开大章，而是把正文和附录里真正“卡手”的小疑点单独打死。
-
-### Micro-topic 14
-- [00-guidebook/14-ServerRequestResolved覆盖面与未迁移疑点.md](00-guidebook/14-ServerRequestResolved覆盖面与未迁移疑点.md)
-
-### Micro-topic 15
-- [00-guidebook/15-guardian-analytics为何还没真正接上.md](00-guidebook/15-guardian-analytics为何还没真正接上.md)
-
----
-
-## 推荐阅读路径
-
-### 路径 A：先建立全局认知
-按这个顺序：
-
-1. `00-如何阅读这份导读`
-2. `01-系统总图与分层`
-3. `02-状态持久化与恢复`
-4. `03-app-server与thread-turn主线`
-5. `05-unified-exec执行子系统`
-6. `06-capability与高级子系统`
-
-适合：
-- 第一次进入 Codex 源码
-- 想快速建立整体架构认知
-
-### 路径 B：只看 app-server / thread / turn 主线
-按这个顺序：
-
-1. `01-系统总图与分层`
-2. `02-状态持久化与恢复`
-3. `03-app-server与thread-turn主线`
-4. `04-turn-history语义层`
-5. `11-关键函数索引`
-6. `12-调用链索引`
-7. `14-ServerRequestResolved覆盖面与未迁移疑点`
-
-适合：
-- 想搞清 listener / thread state / turn history
-- 想理解 app-server 为什么能恢复、rejoin、修正状态
-
-### 路径 C：只看执行主线
-按这个顺序：
-
-1. `01-系统总图与分层`
-2. `05-unified-exec执行子系统`
-3. `12-调用链索引`
-4. `02-call-chain-drafts/2026-04-11-codex主链草图-exec链.md`
-
-适合：
-- 想搞清 exec 和 unified-exec 的差别
-- 想看 output / transcript / end-event / process-store 怎么闭环
-
-### 路径 D：只看模型请求与后端边界
-按这个顺序：
-
-1. `07-model-client与provider请求主链`
-2. `08-codex-client-codex-api与backend-client分层`
-3. `11-关键函数索引`
-4. `12-调用链索引`
-
-适合：
-- 想搞清模型请求是怎么出去的
-- 想分清 transport stack 和 backend business client stack
-
-### 路径 E：只看审查与高级运行专题
-按这个顺序：
-
-1. `09-review工作流与guardian审查基础设施`
-2. `10-realtime-collab与memory迁移专题`
-3. `15-guardian-analytics为何还没真正接上`
-4. `13-open-questions与后续深挖方向`
-
-适合：
-- 想理解 review/guardian/realtime/collab/memories 这些高级系统
-- 想看 Codex 如何超出单线程对话 agent 形态
-
----
-
-## 证据层入口
-
-如果你已经读完正文，想追到证据层，可以按专题回看这些目录：
-
-### 1. 架构拆解批次
-- [00-index/00-Codex源码拆解总索引.md](00-index/00-Codex源码拆解总索引.md)
-- [00-index/01-代码路径索引-入口与分发.md](00-index/01-代码路径索引-入口与分发.md)
-
-### 2. 函数级源码共读
-重点函数级笔记在：
-- `01-source-notes/2026-04-11-codex源码共读-32-...` 到 `58-...`
-
-### 3. 调用链草图
-- [02-call-chain-drafts/2026-04-11-codex主链草图-interactive-TUI链.md](02-call-chain-drafts/2026-04-11-codex主链草图-interactive-TUI链.md)
-- [02-call-chain-drafts/2026-04-11-codex主链草图-exec链.md](02-call-chain-drafts/2026-04-11-codex主链草图-exec链.md)
-- [03-boundary-judgments/2026-04-12-DynamicToolCall为什么不走ServerRequestResolved.md](03-boundary-judgments/2026-04-12-DynamicToolCall为什么不走ServerRequestResolved.md)
-- [03-boundary-judgments/2026-04-12-app-server-request-shape分类与收口.md](03-boundary-judgments/2026-04-12-app-server-request-shape分类与收口.md)
-- [STATUS.md](STATUS.md)
-
----
-
-## 现在的建议
-
-这份仓库接下来不该再继续横向铺更多 source notes。
-
-更合理的下一步是：
-1. 以 guidebook / 专题正文为主阅读层
-2. 把 `01-source-notes/` 当作证据层回查
-3. 只在正文出现真实缺口时，再补新的函数级或微专题
-4. 优先继续做 appendix / cross-link / chapter polish，而不是再堆新章节
-
-一句话说：
-
-> **Phase 1 的“拆散、验证、补证据”已经完成，当前阶段应该以“正文收束、专题补洞、附录建设、微缺口清理”为主。**
+- GitHub Pages 直接读取这个仓库里的现有文章，不再维护第二套站点正文
+- `00-guidebook/` 是主阅读层
+- `01-source-notes/` 是证据层
+- `00-index/`、`02-call-chain-drafts/`、`03-boundary-judgments/` 提供继续深挖入口

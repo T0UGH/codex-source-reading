@@ -59,6 +59,9 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
 
+exclude_docs: |
+  guidebookv2/*
+
 validation:
   omitted_files: ignore
   absolute_links: warn
@@ -73,32 +76,33 @@ extra_javascript:
 
 nav:
   - 首页: index.md
-  - 开始阅读｜Guidebook v2 总览: guidebookv2/README.md
-  - 卷一｜Codex 系统全景导论:
-      - 导读: guidebookv2/volume-1/index.md
-      - 01 如何阅读这份 Codex 导读: guidebookv2/volume-1/01-how-to-read-this-guidebook.md
-      - 02 系统总图与分层: guidebookv2/volume-1/02-system-overview-and-layering.md
+  - 卷一｜系统入口与总图:
+      - 00 如何阅读这份导读: 00-guidebook/00-如何阅读这份导读.md
+      - 01 系统总图与分层: 00-guidebook/01-系统总图与分层.md
   - 卷二｜状态、持久化与恢复:
-      - 导读: guidebookv2/volume-2/index.md
-      - 01 状态持久化与恢复: guidebookv2/volume-2/01-state-persistence-and-recovery.md
+      - 02 状态持久化与恢复: 00-guidebook/02-状态持久化与恢复.md
   - 卷三｜app-server、thread 与 turn 主线:
-      - 导读: guidebookv2/volume-3/index.md
-      - 01 app-server 与 thread-turn 主线: guidebookv2/volume-3/01-app-server-and-thread-turn-mainline.md
-      - 02 turn-history 语义层: guidebookv2/volume-3/02-turn-history-semantics.md
+      - 03 app-server 与 thread-turn 主线: 00-guidebook/03-app-server与thread-turn主线.md
+      - 04 turn-history 语义层: 00-guidebook/04-turn-history语义层.md
   - 卷四｜统一执行子系统:
-      - 导读: guidebookv2/volume-4/index.md
-      - 01 unified-exec 执行子系统: guidebookv2/volume-4/01-unified-exec-runtime.md
+      - 05 unified-exec 执行子系统: 00-guidebook/05-unified-exec执行子系统.md
   - 卷五｜能力系统与高级子系统:
-      - 导读: guidebookv2/volume-5/index.md
-      - 01 capability 与高级子系统: guidebookv2/volume-5/01-capability-and-advanced-systems.md
-      - 02 model-client 与 provider 请求主链: guidebookv2/volume-5/02-model-client-and-provider-mainline.md
-      - 03 codex-client、codex-api 与 backend-client 分层: guidebookv2/volume-5/03-codex-client-codex-api-and-backend-client.md
-      - 04 review 工作流与 guardian 审查基础设施: guidebookv2/volume-5/04-review-and-guardian-infra.md
-      - 05 realtime、collab 与 memory 迁移专题: guidebookv2/volume-5/05-realtime-collab-and-memory-migration.md
+      - 06 capability 与高级子系统: 00-guidebook/06-capability与高级子系统.md
+      - 07 model-client 与 provider 请求主链: 00-guidebook/07-model-client与provider请求主链.md
+      - 08 codex-client、codex-api 与 backend-client 分层: 00-guidebook/08-codex-client-codex-api与backend-client分层.md
+      - 09 review 工作流与 guardian 审查基础设施: 00-guidebook/09-review工作流与guardian审查基础设施.md
+      - 10 realtime、collab 与 memory 迁移专题: 00-guidebook/10-realtime-collab与memory迁移专题.md
   - 卷六｜附录、微缺口与继续深挖入口:
-      - 导读: guidebookv2/volume-6/index.md
-      - 01 关键函数索引: guidebookv2/volume-6/01-key-function-index.md
-      - 02 调用链索引: guidebookv2/volume-6/02-call-chain-index.md
-      - 03 open questions 与后续深挖方向: guidebookv2/volume-6/03-open-questions-and-next-deep-dives.md
-      - 04 ServerRequestResolved 覆盖面与未迁移疑点: guidebookv2/volume-6/04-serverrequestresolved-coverage-and-gaps.md
-      - 05 guardian analytics 为何还没真正接上: guidebookv2/volume-6/05-why-guardian-analytics-is-not-fully-wired.md
+      - 11 关键函数索引: 00-guidebook/11-关键函数索引.md
+      - 12 调用链索引: 00-guidebook/12-调用链索引.md
+      - 13 open questions 与后续深挖方向: 00-guidebook/13-open-questions与后续深挖方向.md
+      - 14 ServerRequestResolved 覆盖面与未迁移疑点: 00-guidebook/14-ServerRequestResolved覆盖面与未迁移疑点.md
+      - 15 guardian analytics 为何还没真正接上: 00-guidebook/15-guardian-analytics为何还没真正接上.md
+  - 证据层入口:
+      - Codex 源码拆解总索引: 00-index/00-Codex源码拆解总索引.md
+      - 代码路径索引｜入口与分发: 00-index/01-代码路径索引-入口与分发.md
+      - 调用链草图｜interactive TUI 链: 02-call-chain-drafts/2026-04-11-codex主链草图-interactive-TUI链.md
+      - 调用链草图｜exec 链: 02-call-chain-drafts/2026-04-11-codex主链草图-exec链.md
+      - 模块边界判断: 03-boundary-judgments/2026-04-11-codex模块边界判断-v1.md
+      - DynamicToolCall 为什么不走 ServerRequestResolved: 03-boundary-judgments/2026-04-12-DynamicToolCall为什么不走ServerRequestResolved.md
+      - app-server request shape 分类与收口: 03-boundary-judgments/2026-04-12-app-server-request-shape分类与收口.md
