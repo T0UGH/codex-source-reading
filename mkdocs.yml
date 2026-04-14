@@ -1,0 +1,104 @@
+site_name: Codex 源码导读手册
+site_description: A public-facing source guide for understanding OpenAI Codex internals
+site_url: https://t0ugh.github.io/codex-source-reading/
+repo_url: https://github.com/T0UGH/codex-source-reading
+repo_name: T0UGH/codex-source-reading
+
+docs_dir: docs
+site_dir: site
+
+use_directory_urls: true
+
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  palette:
+    - scheme: default
+      primary: white
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: 切换到深色模式
+    - scheme: slate
+      primary: black
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: 切换到浅色模式
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+validation:
+  omitted_files: ignore
+  absolute_links: warn
+  unrecognized_links: warn
+
+extra_css:
+  - stylesheets/mermaid.css
+
+extra_javascript:
+  - https://unpkg.com/mermaid@10/dist/mermaid.min.js
+  - javascripts/mermaid-init.js
+
+nav:
+  - 首页: index.md
+  - 开始阅读｜Guidebook v2 总览: guidebookv2/README.md
+  - 卷一｜Codex 系统全景导论:
+      - 导读: guidebookv2/volume-1/index.md
+      - 01 如何阅读这份 Codex 导读: guidebookv2/volume-1/01-how-to-read-this-guidebook.md
+      - 02 系统总图与分层: guidebookv2/volume-1/02-system-overview-and-layering.md
+  - 卷二｜状态、持久化与恢复:
+      - 导读: guidebookv2/volume-2/index.md
+      - 01 状态持久化与恢复: guidebookv2/volume-2/01-state-persistence-and-recovery.md
+  - 卷三｜app-server、thread 与 turn 主线:
+      - 导读: guidebookv2/volume-3/index.md
+      - 01 app-server 与 thread-turn 主线: guidebookv2/volume-3/01-app-server-and-thread-turn-mainline.md
+      - 02 turn-history 语义层: guidebookv2/volume-3/02-turn-history-semantics.md
+  - 卷四｜统一执行子系统:
+      - 导读: guidebookv2/volume-4/index.md
+      - 01 unified-exec 执行子系统: guidebookv2/volume-4/01-unified-exec-runtime.md
+  - 卷五｜能力系统与高级子系统:
+      - 导读: guidebookv2/volume-5/index.md
+      - 01 capability 与高级子系统: guidebookv2/volume-5/01-capability-and-advanced-systems.md
+      - 02 model-client 与 provider 请求主链: guidebookv2/volume-5/02-model-client-and-provider-mainline.md
+      - 03 codex-client、codex-api 与 backend-client 分层: guidebookv2/volume-5/03-codex-client-codex-api-and-backend-client.md
+      - 04 review 工作流与 guardian 审查基础设施: guidebookv2/volume-5/04-review-and-guardian-infra.md
+      - 05 realtime、collab 与 memory 迁移专题: guidebookv2/volume-5/05-realtime-collab-and-memory-migration.md
+  - 卷六｜附录、微缺口与继续深挖入口:
+      - 导读: guidebookv2/volume-6/index.md
+      - 01 关键函数索引: guidebookv2/volume-6/01-key-function-index.md
+      - 02 调用链索引: guidebookv2/volume-6/02-call-chain-index.md
+      - 03 open questions 与后续深挖方向: guidebookv2/volume-6/03-open-questions-and-next-deep-dives.md
+      - 04 ServerRequestResolved 覆盖面与未迁移疑点: guidebookv2/volume-6/04-serverrequestresolved-coverage-and-gaps.md
+      - 05 guardian analytics 为何还没真正接上: guidebookv2/volume-6/05-why-guardian-analytics-is-not-fully-wired.md

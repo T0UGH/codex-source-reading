@@ -1,0 +1,342 @@
+---
+title: Codex guidebook 02｜状态持久化与恢复
+date: 2026-04-12
+status: draft
+---
+
+# 02｜状态持久化与恢复
+
+## 先给结论
+
+Codex 的恢复机制，不是典型的“查数据库、拼对象、恢复会话”。
+
+它更像两条线并行协作：
+
+> **rollout JSONL 负责保存会话正文真相，SQLite state DB 负责提供元数据、索引和恢复辅助。真正的恢复主线更接近 replay，而不是 ORM 式重建。**
+
+这章要回答四个问题：
+
+1. config、rollout、SQLite 分别是什么
+2. 为什么 rollout 更像 durable truth source
+3. 为什么 state DB 不是恢复核心
+4. 为什么恢复过程本质上是 replay + projection
+
+---
+
+## 1. 先把几种“状态”分开
+
+Codex 里最容易混淆的，就是把所有持久化都看成同一种状态。但源码里其实至少有三类东西：
+
+### 1. 配置状态
+这类状态定义系统应该怎么跑，比如：
+
+- home 目录
+- sqlite 路径
+- model/provider
+- cwd
+- 持久化模式
+- feature / policy 相关设置
+
+配置不是会话正文，但它会影响 recorder、恢复、runtime 装配和 live thread 行为。
+
+### 2. 正文历史状态
+这类状态是会话本身发生过什么。
+
+在 Codex 里，这条线主要由 rollout 承载。它记录的是：
+
+- session meta
+- 历史事件 / history items
+- 可 replay 的会话正文
+
+这条线最接近“thread 的 durable body truth”。
+
+### 3. 元数据 / 索引 / 辅助状态
+这类状态主要由 SQLite state DB 承载，负责：
+
+- 索引
+- 元数据查询
+- 快速 listing
+- 辅助恢复
+- sidecar state
+
+它很重要，但不是正文真相源。
+
+---
+
+## 2. rollout 为什么是正文真相源
+
+源码里最关键的判断是：**resume 的正文基础来自 rollout。**
+
+这点可以从 recorder 的接口直接看出来。`RolloutRecorder` 在恢复时会把历史读出来，并转成 `InitialHistory::Resumed`，里面带着：
+
+- conversation_id
+- history
+- rollout_path
+
+也就是说，当系统要恢复一个 thread 时，最核心的数据不是先从 SQLite 拼，而是先从 rollout 里把正文拿出来。
+
+从设计上看，这意味着：
+
+- rollout 保存的是会话 body
+- 恢复依赖的是 rollout replay
+- 其他状态更多是加速、索引和修正层
+
+所以，把 rollout 理解成“正文真相源”是比较稳的。
+
+---
+
+## 3. recorder 的两种模式：创建与恢复
+
+`RolloutRecorder` 有两种明显不同的工作方式。
+
+### 新会话
+新建 session 时，系统会：
+
+- 先确定 rollout path
+- 建立 `SessionMeta`
+- 准备异步 writer 和命令通道
+- 进入后续写入流程
+
+### 恢复会话
+恢复 session 时，系统会：
+
+- 直接打开现有 rollout
+- 在已有历史基础上继续 append
+
+也就是说，recorder 不是单纯的文件写手，而是：
+
+> **会区分新建和恢复，并在恢复态里把旧正文接回来的 durability 组件。**
+
+这点和普通日志文件写入器不一样。它既负责持续记录，也负责让后续恢复成为可能。
+
+---
+
+## 4. SQLite state DB 的真实角色
+
+如果只看名字，很容易把 state DB 想成主恢复数据库。但从 `state` crate 和 rollout/state bridge 的组织方式看，它更像：
+
+> **rollout 元数据的本地投影层和索引层。**
+
+它主要负责的事情包括：
+
+- 维护版本化 SQLite 文件
+- 跑 migrations
+- 用 WAL 模式提供较好的并发体验
+- 承载 thread metadata / search / sidecar 信息
+- 在运行中不断同步 rollout 对应的元数据变化
+
+所以，这一层的价值不是“替代 rollout”，而是让系统更容易做这些事：
+
+- 快速列出会话
+- 快速查找线程
+- 补齐 metadata
+- 对恢复做辅助
+- 让 app-server/UI 层不必每次全扫 rollout 文件
+
+这也是为什么 `state` crate 本身很小、很克制：它更像 metadata projection layer，而不是主语义来源。
+
+---
+
+## 5. 为什么 `state_db_bridge` 不是恢复核心
+
+之前很容易被名字误导的一点是 `state_db_bridge`。
+
+从实际职责看，这层更像一个隔离层：
+
+- 把 core 和 state 的存储细节隔开
+- 让 core 不用直接依赖复杂的 SQLite/migration/backfill 细节
+- 把“什么时候 state DB 值得信任”这件事交给 rollout/state 这边判断
+
+也就是说，它是 bridge，不是主恢复器。
+
+真正决定恢复正文的，仍然是 rollout 和 replay 逻辑；bridge 只是让这条线更干净。
+
+---
+
+## 6. backfill 与“DB 是否可信”
+
+Codex 对 SQLite state DB 的态度并不是“有库就直接信”。
+
+系统启动后，会检查 backfill 状态：
+
+- 如果 backfill 没完成
+- 就触发元数据补建流程
+- 在补完之前，某些读取路径不会把它当成完整可信的来源
+
+这说明一个很重要的设计态度：
+
+> **SQLite 是可以逐步建好的索引层，不一定从第一秒就是完整 truth。**
+
+所以在恢复设计里，系统不是先假设 DB 总是完整，然后让 rollout 当备份；而更像是：
+
+- rollout 才是正文基础
+- SQLite 是不断对齐和补建的投影层
+
+这也是为什么 backfill、checkpoint 和 metadata rebuild 在这套设计里很重要。
+
+---
+
+## 7. metadata 是怎么从 rollout 里长出来的
+
+状态恢复不只是把正文读回来，还要让系统知道这个 thread 的元信息。
+
+这部分的思路不是维护一份完全独立的真相，而是：
+
+- 从 rollout items 和 session meta 中抽取 metadata
+- 把这些 metadata 应用到 SQLite state DB
+- 在后续写入中持续同步
+
+所以，metadata 更像从正文中归约出来的投影，而不是先天独立存在的来源。
+
+换句话说：
+
+- rollout 负责“发生了什么”
+- metadata projection 负责“把这些事整理成好查好列的状态”
+
+这也是为什么系统在某些路径上会做 full apply，在另一些路径上只 touch 更新时间。
+
+---
+
+## 8. 恢复为什么更像 replay，而不是查库组装
+
+理解 Codex 恢复机制的关键，是放弃传统“恢复对象图”的直觉。
+
+在这里，恢复更像三步：
+
+1. 找到 rollout
+2. 把 rollout items 读出来
+3. 按语义重放成 history / turns / summary / current projection
+
+这里的“重放”不是简单文本回放，而是带语义的 rebuild：
+
+- 要识别 turn 边界
+- 要处理 compaction
+- 要处理 rollback
+- 要合并 active turn snapshot
+- 要修正 stale in-progress 状态
+
+所以，Codex 的恢复更接近：
+
+> **event/body replay + semantic rebuild**
+
+而不是：
+
+> **从关系表里直接拼一个对象树**
+
+---
+
+## 9. 运行中 thread 的恢复更复杂：持久化历史 + 活跃态合并
+
+如果 thread 已经不在运行，恢复相对简单：
+
+- 找 rollout
+- 读历史
+- rebuild 出可见 history 和 summary
+
+但如果 thread 还在运行，事情会复杂一点。因为这时会同时存在：
+
+- 已持久化到 rollout 的历史
+- 还活在内存里的当前 turn
+- app-server 侧的 watch/status 状态
+
+这时系统做的不是“完全重建一个新 thread”，而是：
+
+- 先拿 rollout 历史
+- 再叠加 live active turn snapshot
+- 再修正 thread status 和 stale turn 语义
+
+所以 running-thread resume 本质上是：
+
+> **持久化历史重建 + live state merge**
+
+这也是为什么 app-server、turn builder 和 thread state/watch state 会在恢复路径里同时出现。
+
+---
+
+## 10. fork 也复用了恢复链
+
+恢复链不只服务 resume，也服务 fork。
+
+这是一个很说明问题的点：系统把“恢复历史”和“基于历史再切出一个新分支”放在同一套语义体系里处理。
+
+也就是说，rollout/replay 机制不只是灾难恢复或冷启动恢复工具，它还是会话再利用的基础设施。
+
+从架构上说，这说明 rollout 不是一个附属日志，而是会话正文的核心基础层。
+
+---
+
+## 11. config reload 不是单纯重读文件
+
+另一个容易忽略的点是 config reload。
+
+在 app-server 里，reload config 不是简单地把配置文件重新读一下就结束，而是会显式把这件事传播到 live threads 上，让运行中的线程收到 `ReloadUserConfig` 之类的运行期操作。
+
+这说明配置在这套系统里也不是静态背景板，而是会影响 live runtime 的东西。
+
+因此，在“状态与恢复”这章里，config 更合理的定位不是 durable body 的一部分，而是：
+
+> **决定 runtime 如何读取、恢复和继续运行的环境性状态。**
+
+---
+
+## 12. 这一章最重要的判断
+
+读完这章，应该稳定这几个结论。
+
+### 判断 1：rollout 是正文真相源
+resume 的正文基础主要来自 rollout，而不是 SQLite。
+
+### 判断 2：SQLite state DB 是索引与辅助层
+它很重要，但不是主恢复核心。
+
+### 判断 3：`state_db_bridge` 是薄桥，不是主恢复器
+它负责隔离和桥接，不负责定义恢复语义。
+
+### 判断 4：恢复本质上是 replay + projection
+不是传统 ORM 式对象重建。
+
+### 判断 5：metadata 是从正文里归约出来的投影
+它帮助 listing/search/recovery，但不替代正文事实。
+
+### 判断 6：running-thread resume 是历史重建 + 活跃态合并
+不是单纯冷恢复。
+
+### 判断 7：fork 复用了恢复链
+说明 rollout/replay 是正文基础设施，而不是附带功能。
+
+---
+
+## 13. 下一章该接什么
+
+状态、持久化和恢复说清以后，最自然的下一步就是追问：
+
+> **这些恢复出来的 thread/history，如何在 app-server 里被持续观察、投影和对外暴露？**
+
+所以，下一章应该进入：
+
+- app-server 怎么接上 `ThreadManager`
+- listener 为什么是事件泵
+- `thread_state_manager` 和 `thread_watch_manager` 为什么拆开
+- pending request 为什么能 replay / resolve / abort
+
+也就是下一章的主题：**app-server / listener / thread / turn 主线。**
+
+---
+
+## 相关阅读
+
+- 想继续看恢复后的 thread 如何被 listener / watch / protocol 面接住：[[03-app-server与thread-turn主线]]
+- 想继续看 rollout replay 如何变成 turn history：[[04-turn-history语义层]]
+- 想直接看这条线的函数入口：[[11-关键函数索引]]、[[12-调用链索引]]
+
+## 关键文件
+
+- `codex-rs/core/src/codex.rs`
+- `codex-rs/core/src/state_db_bridge.rs`
+- `codex-rs/rollout/src/recorder.rs`
+- `codex-rs/rollout/src/state_db.rs`
+- `codex-rs/rollout/src/metadata.rs`
+- `codex-rs/state/src/lib.rs`
+- `codex-rs/state/src/runtime.rs`
+- `codex-rs/state/src/runtime/threads.rs`
+- `codex-rs/app-server/src/codex_message_processor.rs`
