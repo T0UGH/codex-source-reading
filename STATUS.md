@@ -8,6 +8,12 @@ Turn the accumulated Codex Phase 1 source-reading materials into a guidebook-qua
 
 Phase 1 broad architecture scan is effectively complete. The repo has now moved into a **guidebook + deep-dive topics + appendix layer + micro-gap cleanup** phase.
 
+In parallel, the external guidebook delivery has moved one step further: **Codex 新卷二（runtime core）已经在 knowledge-vault 中一次性写完 8 篇正文，并已整批导入飞书**。这意味着当前工作不再是“继续把新卷二写出来”，而是：
+
+- 接受这 8 篇作为当前 runtime-core volume 的已交付版本
+- 在仓库侧同步这一状态，避免后续 agent 继续按“卷二待写”推进
+- 如需继续，只做验收、轻修、结构同步，或推进后续卷
+
 Repository currently contains:
 
 - 31 architecture / implementation notes
@@ -31,6 +37,196 @@ The repo now has a usable progression:
 This is enough structure for future work to be selective rather than exploratory.
 
 ## Completed in this round
+
+### External runtime-core volume delivery confirmed
+
+File-level verification against `~/workspace/knowledge-vault/Inbox/Research/` confirms that the new runtime-core volume currently has **8 article files present**:
+
+- `2026-04-12-Codex-新卷二-01-一次请求怎么进入-Codex-的-runtime-主线-v1.md`
+- `2026-04-12-Codex-新卷二-02-ThreadManager-CodexThread-Codex-怎么接成主工作链-v1.md`
+- `2026-04-12-Codex-新卷二-03-当前工作面是怎么被组织出来的-v1.md`
+- `2026-04-12-Codex-新卷二-04-thread-和-turn-为什么不是两个平行名词-v1.md`
+- `2026-04-12-Codex-新卷二-05-系统怎么判断这一轮要不要调用能力-v1.md`
+- `2026-04-12-Codex-新卷二-06-动作结果怎么重新回到当前工作回合-v1.md`
+- `2026-04-12-Codex-新卷二-07-一轮工作回合什么时候继续什么时候收口-v1.md`
+- `2026-04-12-Codex-新卷二-08-把整条-runtime-core-主线重新压成稳定运行图-v1.md`
+
+Current verified file-level state:
+
+- all 8 files exist
+- all 8 files contain frontmatter + matching H1 titles
+- all 8 files are still marked `status: draft` in frontmatter
+- Feishu delivery is reported complete via a summary doc plus 8 per-article docs
+
+This means the blocking uncertainty is no longer “whether the volume exists”, but only whether later review should promote these drafts into a more final publishing state.
+
+### Volume 3 real status verified
+
+File-level verification against `~/workspace/knowledge-vault/Inbox/Research/` confirms that volume 3 currently has **5 draft article files plus both a writing-cards file and a production-order file**:
+
+- article files present: `卷三-01` through `卷三-05`
+- writing cards present: `2026-04-12-Codex-卷三线程状态恢复-README-writing-cards-v1.md`
+- production order present: `2026-04-12-Codex-卷三线程状态恢复-README-production-order-v1.md`
+
+Current verified state for volume 3:
+
+- all 5 article files exist
+- all 5 article files contain frontmatter + matching H1 titles
+- all 5 article files are still marked `status: draft`
+- the volume-level planning layer is structurally complete
+- no explicit Feishu delivery trace was found in the checked vault files
+
+So volume 3 should currently be treated as: **structurally complete at draft level, but not yet verified as formally delivered**.
+
+### Volume 4 real status verified
+
+File-level verification against `~/workspace/knowledge-vault/Inbox/Research/` now confirms that volume 4 has **5 draft article files plus both a writing-cards file and a production-order file**:
+
+- article files present: `卷四-01` through `卷四-05`
+- writing cards present: `2026-04-12-Codex-卷四控制面-README-writing-cards-v1.md`
+- production order present: `2026-04-13-Codex-卷四控制面-README-production-order-v1.md`
+
+Current verified state for volume 4:
+
+- all 5 article files exist
+- all 5 article files contain frontmatter + matching H1 titles
+- all 5 article files are still marked `status: draft`
+- the volume-level execution layer is now structurally complete
+- no explicit Feishu delivery trace was found in the checked vault files
+
+So volume 4 should currently be treated as: **structurally complete at draft level, but not yet verified as formally delivered**.
+
+### Coach-style readability / boundary pass applied
+
+A targeted explanatory-writing pass has now been applied to the highest-risk boundary chapters:
+
+- volume 3 chapter 03
+- volume 3 chapter 04
+- volume 3 chapter 05
+- volume 4 chapter 02
+- volume 4 chapter 03
+
+This pass focused on:
+
+- stronger reader-problem openings
+- clearer chapter-to-chapter boundary separation
+- lower-resolution mental models before dense mechanism detail
+- less accidental thesis overlap between adjacent chapters
+- sharper volume-tail closure for volume 3
+
+### Volume 3 acceptance-style closing pass applied
+
+A first acceptance-style closing pass has now been applied to volume 3.
+
+What was done:
+
+- tightened the chapter 03 / 04 / 05 boundary chain
+- reduced chapter-opening meta-explanation in the volume tail
+- made chapter 05 more explicitly function as the volume-3 closure chapter
+- preserved the core volume conclusion: Codex persists not because it stores history, but because runtime can recover a currently continuable working line
+
+Current read on volume 3 after this pass:
+
+- structure is stable
+- closure is stronger than before
+- files still remain `draft` until a later formal delivery/acceptance decision
+
+### Volume 4 acceptance-style closing pass applied
+
+A first acceptance-style closing pass has now been applied to volume 4.
+
+What was done:
+
+- tightened the chapter 01 / 02 / 05 spine so the volume reads more like one control-plane arc
+- reduced leftover setup/meta-explanation in the volume opener
+- made chapter 05 more explicitly function as the volume-4 closure chapter
+- reinforced the retained volume takeaway: app-server is not a parallel runtime, but the unified control-plane contract exposed above core runtime
+
+Current read on volume 4 after this pass:
+
+- structure is stable
+- the opener / mechanism / closure chain is clearer than before
+- files still remain `draft` until a later formal delivery/acceptance decision
+
+### Volume 5 orch drafting started
+
+The unified-exec volume has now moved beyond planning-only state.
+
+Verified artifacts now present under `~/workspace/knowledge-vault/Inbox/Research/`:
+
+- `2026-04-13-Codex-卷五统一执行子系统-README-writing-cards-v1.md`
+- `2026-04-13-Codex-卷五统一执行子系统-README-production-order-v1.md`
+- `2026-04-13-Codex-卷五-01-为什么-exec-rs-和-unified-exec-不是一回事-v1.md`
+- `2026-04-13-Codex-卷五-02-UnifiedExecHandler-和-UnifiedExecRuntime-是怎么把动作装成执行会话的-v1.md`
+- `2026-04-13-Codex-卷五-03-为什么-approval-sandbox-policy-不是执行外围而是在执行前就进入主链-v1.md`
+- `2026-04-13-Codex-卷五-04-输出为什么先进入-transcript-而不是直接变成最终结果-v1.md`
+- `2026-04-13-Codex-卷五-05-为什么-process-store-不是最终权威源而-unified-exec-更像-execution-control-plane-v1.md`
+
+Current read on volume 5:
+
+- volume-level planning layer exists
+- production-order exists
+- full first-pass drafting batch (01-05) now exists
+- all current volume-5 files are still `draft`
+- the next likely step is not more skeleton work, but an acceptance-style boundary/closure pass for the volume tail
+
+### Volume 5 acceptance-style pass applied
+
+A first acceptance-style pass has now been applied to volume 5.
+
+What was done:
+
+- checked the 01 / 02 / 03 chain for role overlap between primitive exec, session assembly, and execution-precondition control
+- checked the 04 / 05 tail for closure strength and repeated explanation
+- repaired the volume-5 closure chapter after detecting corrupted/duplicated text in chapter 05
+- kept the retained volume takeaway centered on execution sessions rather than command invocation
+
+Current read on volume 5 after this pass:
+
+- structure is stable
+- the 01–03 escalation path is clear enough
+- the 04 / 05 tail now closes more cleanly around transcript / process store / end event / execution control plane
+- files still remain `draft` until a later formal delivery/acceptance decision
+
+### Volume 6 orch drafting started
+
+The review/collab/high-runtime volume has now moved beyond planning-only state.
+
+Verified artifacts now present under `~/workspace/knowledge-vault/Inbox/Research/`:
+
+- `2026-04-13-Codex-卷六审查协作与高级runtime-README-writing-cards-v1.md`
+- `2026-04-13-Codex-卷六审查协作与高级runtime-README-production-order-v1.md`
+- `2026-04-13-Codex-卷六-01-为什么-review-和-guardian-不是一回事-v1.md`
+- `2026-04-13-Codex-卷六-02-guardian-为什么更像审查基础设施而不是普通feature链-v1.md`
+- `2026-04-13-Codex-卷六-03-realtime-collab-与-AgentControl-分别是什么层-v1.md`
+- `2026-04-13-Codex-卷六-04-为什么-memories-更像启动管线而不是普通-helper-v1.md`
+- `2026-04-13-Codex-卷六-05-为什么说-Codex-正在长成更高层-runtime-而不是只多了一些高级功能-v1.md`
+
+Current read on volume 6:
+
+- volume-level planning layer exists
+- production-order exists
+- full first-pass drafting batch (01-05) now exists
+- all current volume-6 files are still `draft`
+- the next likely step is not more skeleton work, but an acceptance-style boundary/closure pass for the volume tail
+
+### Volume 6 acceptance-style pass applied
+
+A first acceptance-style pass has now been applied to volume 6.
+
+What was done:
+
+- checked the 01 / 02 boundary so review workflow and guardian infrastructure do not collapse into one topic
+- checked the 03 / 04 boundary so collaboration runtime and memories pipeline do not collapse into one topic
+- tightened the volume opener and the volume closure so the retained takeaway is clearer
+- reinforced the volume-level judgment that Codex is growing higher-order runtime organization, not merely accumulating advanced features
+
+Current read on volume 6 after this pass:
+
+- structure is stable
+- the 01 / 02 and 03 / 04 boundaries are clearer than before
+- the final chapter now closes more explicitly as a true volume tail
+- files still remain `draft` until a later formal delivery/acceptance decision
 
 ### Micro-gap docs added
 - `00-guidebook/14-ServerRequestResolved覆盖面与未迁移疑点.md`
@@ -109,15 +305,20 @@ This is enough structure for future work to be selective rather than exploratory
 ## Next recommended moves
 
 1. do **not** resume broad source scanning unless a real正文 gap appears
-2. do one more light consistency sweep only if needed; the highest-value cross-link / terminology pass is now largely done
-3. if you still polish terms, focus on:
+2. do **not** continue treating the new runtime-core volume as unwritten; that work is now externally delivered and should be treated as present
+3. if more work is needed on volume 2, make it one of these only:
+   - review / reader-friction cleanup
+   - terminology tightening
+   - structure sync between repo notes and vault drafts
+   - status promotion from `draft` only after explicit acceptance criteria are met
+4. if you still polish terms, focus on:
    - runtime owner / facade / control plane
    - replay / reconstruction / projection
    - topic / appendix / micro-gap / evidence
-4. request-shape audit is now basically done for the current enum; if one more targeted pass is worth doing, it should focus on:
+5. request-shape audit is now basically done for the current enum; if one more targeted pass is worth doing, it should focus on:
    - whether any future/new request shapes are being added outside this 5+1+1+2 classification
    - or whether legacy V1 request paths are actually on a removal/deprecation path
-5. after that, prefer polish over expansion
+6. after that, prefer polish over expansion
 
 ## Open questions
 
