@@ -29,7 +29,7 @@ tags:
 
 > **Codex 在管理执行会话。**
 
-process store 只是这套会话系统中的托管层；transcript 提供正在发生的语义轨迹；end event 把完成态封装成稳定协议。三者合在一起，才构成 unified-exec 的 execution control plane。
+process store 只是这套会话系统中的托管层；transcript 提供正在发生的语义轨迹；end event 把完成态封装成稳定协议。三者合在一起，才构成 unified-exec 的 execution control plane。到这里，卷五也该把 retained takeaway 压成一句：**Codex 管理的是执行会话，而不是命令调用。**
 
 ---
 

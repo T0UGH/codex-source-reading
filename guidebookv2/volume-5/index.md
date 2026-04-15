@@ -8,6 +8,13 @@ updated: 2026-04-14
 
 卷五回答：Codex 怎么把动作组织成正式 execution session，而不是只做一次性命令调用。
 
+## 本卷读完后你应该得到什么
+
+1. 知道 `exec.rs` 与 unified-exec 为什么是上下层，而不是平替
+2. 知道 handler、runtime、session 启动之间的对象变化
+3. 知道 approval、policy、sandbox、route 为什么都属于执行前主链
+4. 知道 transcript、process store、end event 为什么共同构成 execution control plane
+
 ## 目录
 
 1. [为什么 `exec.rs` 和 unified-exec 不是一回事](./2026-04-13-Codex-卷五-01-为什么-exec-rs-和-unified-exec-不是一回事.md)
@@ -15,3 +22,19 @@ updated: 2026-04-14
 3. [为什么 approval、sandbox、policy 不是执行外围，而是在执行前就进入主链](./2026-04-13-Codex-卷五-03-为什么-approval-sandbox-policy-不是执行外围而是在执行前就进入主链.md)
 4. [输出为什么先进入 transcript 而不是直接变成最终结果](./2026-04-13-Codex-卷五-04-输出为什么先进入-transcript-而不是直接变成最终结果.md)
 5. [为什么 process store 不是最终权威源，而 unified-exec 更像 execution control plane](./2026-04-13-Codex-卷五-05-为什么-process-store-不是最终权威源而-unified-exec-更像-execution-control-plane.md)
+
+## 推荐阅读方式
+
+- 如果你是第一次进卷五：按 01 → 02 → 03 → 04 → 05 顺着读，先立边界，再立会话，再立控制链
+- 如果你最关心执行前控制：先读 02、03
+- 如果你最关心输出与收尾：先读 04、05
+
+## 本卷最后要留下的一句话
+
+> **Codex 真正管理的不是一次命令调用，而是一整个可批准、可观察、可统一收尾、可持续对账的执行会话。**
+
+## 卷间导流
+
+- **卷四** 解释 runtime 怎样被暴露成控制面
+- **卷五** 解释动作怎样被落成执行会话
+- **卷六** 会继续回答：这些执行能力怎样向上长成审查、协作与更高层 runtime 组织

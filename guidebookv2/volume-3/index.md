@@ -8,6 +8,13 @@ updated: 2026-04-14
 
 卷三回答：Codex 为什么不是跑完就散，而是能靠 rollout、replay、thread、turn 和 pending request 把工作线重新接起来。
 
+## 本卷读完后你应该得到什么
+
+1. 知道 rollout 为什么比 SQLite 更接近正文真相源
+2. 知道 Codex 的恢复为什么更像 replay，而不是查库拼对象
+3. 能把 thread、turn、pending request 讲成一条可继续推进的工作线结构
+4. 知道当前工作视图不是“最后一条历史”，而是“当前还能继续工作的前沿”
+
 ## 目录
 
 1. [为什么 rollout 才是正文真相源，而 SQLite 不是恢复核心](./2026-04-12-Codex-卷三-01-为什么-rollout-才是正文真相源而-SQLite-不是恢复核心.md)
@@ -15,3 +22,19 @@ updated: 2026-04-14
 3. [thread、turn 与 pending request 是怎么组成持续工作线的](./2026-04-12-Codex-卷三-03-thread-turn-与-pending-request-是怎么组成持续工作线的.md)
 4. [为什么 turn-history 不是 event log 镜像](./2026-04-12-Codex-卷三-04-为什么-turn-history-不是-event-log-镜像.md)
 5. [active_turn_snapshot、handle_user_message 与当前工作视图的边界](./2026-04-12-Codex-卷三-05-active-turn-snapshot-handle-user-message-与当前工作视图的边界.md)
+
+## 推荐阅读方式
+
+- 如果你刚读完卷二：按 01 → 02 → 03 → 04 → 05 顺着读，体会“怎么继续存在”这条线是怎样逐层压实的
+- 如果你最关心恢复主链：先读 01、02，再读 03
+- 如果你最关心当前工作视图：先读 03、04，再读 05
+
+## 本卷最后要留下的一句话
+
+> **Codex 之所以能持续，不是因为它把对象查回来，而是因为它能从正文历史中重新接回一条还能继续推进的工作线。**
+
+## 卷间导流
+
+- **卷二** 解释的是这条工作回合怎么跑起来
+- **卷三** 解释的是这条工作线为什么不会在中断后散掉
+- **卷四** 会继续回答：这条 runtime 工作线怎样被暴露成稳定控制面
