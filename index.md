@@ -7,23 +7,27 @@ date: 2026-04-14
 
 > 一套按 **6 个认知台阶** 重组 OpenAI Codex 内部结构的中文源码导读手册。
 
+这个首页现在只做三件事：
+
+- 告诉你这是什么项目
+- 告诉你正式阅读入口在哪里
+- 告诉你如果想继续下钻，证据层入口在哪里
+
 当前站点主入口已经切到 **guidebook v2**。其中：
 
 - 卷一沿用仓库中已经稳定的入口与系统总图
 - 从卷二开始，全部切换到最近这一轮新成稿内容
 - 老的 `00-guidebook/02-15` 已移入 `trash/2026-04-14-guidebookv2-replaced-content/`
 
-## 从哪里开始
+## 正式阅读入口
 
-### 第一次进入这个项目
-建议直接从这里开始：
+如果你是第一次进入，直接从这里开始：
 
 - [开始阅读｜Guidebook v2 总览](./guidebookv2/README.md)
 - [卷一｜系统入口与总图](./guidebookv2/volume-1/index.md)
 - [卷二｜runtime core 主线](./guidebookv2/volume-2/index.md)
 
-### 如果你想先抓整套结构
-可以直接按六卷导读进入：
+如果你已经知道自己要顺着整套结构读，可以直接按六卷入口进入：
 
 1. [卷一｜系统入口与总图](./guidebookv2/volume-1/index.md)
 2. [卷二｜runtime core 主线](./guidebookv2/volume-2/index.md)
@@ -32,7 +36,7 @@ date: 2026-04-14
 5. [卷五｜统一执行子系统](./guidebookv2/volume-5/index.md)
 6. [卷六｜审查协作与高级 runtime](./guidebookv2/volume-6/index.md)
 
-## 这套手册在讲什么
+## 这套手册到底在讲什么
 
 这套手册不是带你“逛源码目录”，而是在回答一串更关键的问题：
 
@@ -43,8 +47,8 @@ date: 2026-04-14
 - unified-exec 怎样把执行动作装成正式 execution session
 - `/review`、guardian、realtime、collab、AgentControl、memories 又怎样把系统推向更高层 runtime 组织
 
-## 当前入口说明
+## 如果你要继续下钻
 
 - `guidebookv2/` 是当前正式阅读入口
-- `00-guidebook/00-01` 继续承担卷一入口角色
-- 证据层与边界判断仍保留在仓库中，可通过导航的“证据层入口”继续下钻
+- 证据层与边界判断仍保留在仓库中，可通过导航里的“证据层入口”继续下钻
+- 如果你想先看“整本书怎么读”，请直接进入 [开始阅读｜Guidebook v2 总览](./guidebookv2/README.md)

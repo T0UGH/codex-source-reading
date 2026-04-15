@@ -8,6 +8,13 @@ updated: 2026-04-14
 
 卷四回答：app-server 为什么不是另一套 runtime，而是建立在 core 之上的控制面 facade，以及这套控制面怎样站稳。
 
+## 本卷读完后你应该得到什么
+
+1. 知道 app-server 为什么不是平行 runtime，而是控制面 facade
+2. 知道 listener task、协议投影、状态修正怎样共同撑起控制面
+3. 知道 `ServerRequestResolved` 与 `DynamicToolCall` 在控制面语义里分别站在哪里
+4. 知道 TUI 为什么越来越像跑在 app-server 之上，而不是直接抓 core
+
 ## 目录
 
 1. [为什么 app-server 不是另一套 runtime，而是建立在 core 之上的控制面 facade](./2026-04-12-Codex-卷四-01-为什么-app-server-不是另一套-runtime.md)
@@ -15,3 +22,19 @@ updated: 2026-04-14
 3. [Codex 卷四 03｜`ServerRequestResolved` 到底覆盖了什么控制面语义](./2026-04-12-Codex-卷四-03-ServerRequestResolved-到底覆盖了什么控制面语义.md)
 4. [Codex 卷四 04｜为什么 DynamicToolCall 不走 ServerRequestResolved](./2026-04-12-Codex-卷四-04-为什么-DynamicToolCall-不走-ServerRequestResolved.md)
 5. [Codex 卷四 05｜为什么 TUI 越来越像跑在 app-server 之上，而不是直接抓 core](./2026-04-12-Codex-卷四-05-为什么-TUI-越来越像跑在-app-server-之上.md)
+
+## 推荐阅读方式
+
+- 如果你顺着全书读到这里：按 01 → 02 → 03 → 04 → 05 顺着读，先立 app-server 边界，再立控制面语义，最后再看 TUI 怎样站在这层之上
+- 如果你最关心控制面 contract：先读 01、02、03
+- 如果你最关心 TUI 与控制面的关系：先读 01、05
+
+## 本卷最后要留下的一句话
+
+> **app-server 不是另一套 runtime，而是建立在 core runtime 之上的统一控制面 facade。**
+
+## 卷间导流
+
+- **卷三** 解释这条工作线怎样持续存在
+- **卷四** 解释这条 runtime 工作线怎样被暴露成稳定控制面
+- **卷五** 会继续回答：动作怎样在这套系统里被落成执行会话
