@@ -88,14 +88,13 @@ memories 更像这个，而不是“谁需要谁调用一下”的小工具。
 
 如果只从用户表面看，memories 容易被想成“运行时读一点长期记忆”。但从系统职责看，更稳的分层其实是下面这样：
 
-```mermaid
-flowchart TD
-    A[历史 threads] --> B[phase 1\nthread-level extraction]
-    B --> C[stage1 outputs / jobs / baseline]
-    C --> D[phase 2\nglobal consolidation]
-    D --> E[memory artifacts\nsummary / working set]
-    E --> F[startup / runtime read path\n注入当前 developer instructions]
-```
+![memories：先后台生成，再前台消费](../assets/codex-volume-6-04-memories-startup-pipeline.svg)
+
+看这张图时，建议按这个顺序读：
+
+- 先看上半段从历史 threads 到 memory artifacts 的生成链，确认 memories 先是后台流程
+- 再看下方 startup / runtime read path，确认运行时只是读取已经整理好的产物
+- 最后看底部“四个判断”，把后台生成、分阶段组织、前台消费这三层关系压实
 
 这张图最重要的不是具体文件名，而是四个判断：
 

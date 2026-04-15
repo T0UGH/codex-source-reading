@@ -1,0 +1,82 @@
+<svg width="1600" height="980" viewBox="0 0 1600 980" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.8"/>
+    </pattern>
+    <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="10" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#94a3b8"/>
+    </marker>
+    <style>
+      .title { font: 700 34px 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; fill: #f8fafc; }
+      .subtitle { font: 500 16px 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; fill: #94a3b8; }
+      .section { font: 700 15px 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; }
+      .label { font: 700 18px 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; fill: #f8fafc; }
+      .sub { font: 500 13px 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; fill: #94a3b8; }
+      .tiny { font: 500 12px 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; fill: #cbd5e1; }
+      .legend { font: 600 12px 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; fill: #cbd5e1; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="980" rx="28" fill="#020617"/>
+  <rect x="24" y="24" width="1552" height="932" rx="24" fill="url(#grid)"/>
+
+  <circle cx="88" cy="78" r="10" fill="#fb7185"/>
+  <text x="114" y="88" class="title">Codex 更高层 runtime 组织图</text>
+  <text x="88" y="120" class="subtitle">卷六真正要立住的，不是“功能更多了”，而是审查、协作、长期上下文都被上提成可组织、可回流、可观察的运行结构。</text>
+
+  <rect x="106" y="232" width="246" height="128" rx="18" fill="rgba(30,41,59,0.62)" stroke="#94a3b8" stroke-width="2"/>
+  <text x="229" y="274" text-anchor="middle" class="label">主执行链 / runtime base</text>
+  <text x="229" y="304" text-anchor="middle" class="sub">用户任务 · thread / turn 主线</text>
+  <text x="229" y="330" text-anchor="middle" class="tiny">卷一到卷五已经立住的主体</text>
+
+  <text x="146" y="204" class="legend">一切都建立在既有执行主线上</text>
+
+  <rect x="442" y="164" width="248" height="124" rx="18" fill="rgba(136,19,55,0.38)" stroke="#fb7185" stroke-width="2.2"/>
+  <text x="566" y="204" text-anchor="middle" class="label">/review 工作流层</text>
+  <text x="566" y="234" text-anchor="middle" class="sub">显式 reviewer conversation</text>
+  <text x="566" y="260" text-anchor="middle" class="tiny">把审查变成正式 workflow</text>
+
+  <rect x="442" y="330" width="248" height="124" rx="18" fill="rgba(136,19,55,0.38)" stroke="#fb7185" stroke-width="2.2"/>
+  <text x="566" y="370" text-anchor="middle" class="label">guardian 基础设施层</text>
+  <text x="566" y="400" text-anchor="middle" class="sub">approval review / fail-closed</text>
+  <text x="566" y="426" text-anchor="middle" class="tiny">把审批审查接回原执行链</text>
+
+  <rect x="762" y="164" width="248" height="124" rx="18" fill="rgba(56,189,248,0.12)" stroke="#38bdf8" stroke-width="2.2"/>
+  <text x="886" y="204" text-anchor="middle" class="label">realtime 会话控制层</text>
+  <text x="886" y="234" text-anchor="middle" class="sub">active conversation / handoff</text>
+  <text x="886" y="260" text-anchor="middle" class="tiny">活会话不是普通 transport 扩展</text>
+
+  <rect x="762" y="330" width="248" height="124" rx="18" fill="rgba(56,189,248,0.12)" stroke="#38bdf8" stroke-width="2.2"/>
+  <text x="886" y="370" text-anchor="middle" class="label">collab / AgentControl</text>
+  <text x="886" y="400" text-anchor="middle" class="sub">rooted thread-tree control plane</text>
+  <text x="886" y="426" text-anchor="middle" class="tiny">把多主体协作变成可编排结构</text>
+
+  <rect x="1082" y="248" width="266" height="124" rx="18" fill="rgba(168,85,247,0.16)" stroke="#a78bfa" stroke-width="2.2"/>
+  <text x="1215" y="288" text-anchor="middle" class="label">memories 启动组织层</text>
+  <text x="1215" y="318" text-anchor="middle" class="sub">extraction → consolidation → injection</text>
+  <text x="1215" y="344" text-anchor="middle" class="tiny">长期上下文被纳入正式运行结构</text>
+
+  <rect x="392" y="566" width="884" height="214" rx="24" fill="rgba(251,191,36,0.08)" stroke="#fbbf24" stroke-width="1.8" stroke-dasharray="12 8"/>
+  <text x="424" y="604" class="section" fill="#fbbf24">卷六最后要压成的一句判断</text>
+  <text x="834" y="656" text-anchor="middle" class="label">更高层 runtime 组织能力</text>
+  <text x="834" y="690" text-anchor="middle" class="sub">审查如何被组织 · 协作如何被编排 · 长期上下文如何被提炼并回注</text>
+  <text x="834" y="720" text-anchor="middle" class="tiny">重点不是“新增功能”，而是把原本分散的能力上提成可复用、可观察、可回流的系统结构</text>
+
+  <text x="470" y="812" class="legend">审查从 feature 上提为 workflow / infrastructure</text>
+  <text x="792" y="812" class="legend">协作从多开线程上提为会话与树状控制面</text>
+  <text x="1116" y="812" class="legend">长期上下文从 helper 上提为启动组织管线</text>
+
+  <rect x="116" y="842" width="1368" height="94" rx="18" fill="rgba(30,41,59,0.34)" stroke="#94a3b8" stroke-width="1.4"/>
+  <text x="800" y="882" text-anchor="middle" class="sub" style="font-size:15px">左侧是显式审查与基础设施化审查，中间是活会话与多主体协作，右侧是启动期长期上下文管线。它们都站在主执行链之上，继续组织系统如何运行。</text>
+  <text x="800" y="912" text-anchor="middle" class="tiny">因此卷六更像“系统角色上移”的证明，而不是“高级功能合集”。</text>
+
+  <path d="M 352 292 L 442 226" stroke="#fb7185" stroke-width="2.1" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 352 300 L 442 390" stroke="#fb7185" stroke-width="2.1" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 352 288 L 762 226" stroke="#38bdf8" stroke-width="2.1" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 352 304 L 762 390" stroke="#38bdf8" stroke-width="2.1" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 352 296 L 1082 310" stroke="#a78bfa" stroke-width="2.1" fill="none" marker-end="url(#arrowhead)"/>
+
+  <path d="M 566 454 L 646 566" stroke="#fb7185" stroke-width="2.1" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 886 454 L 850 566" stroke="#38bdf8" stroke-width="2.1" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 1215 372 L 1056 566" stroke="#a78bfa" stroke-width="2.1" fill="none" marker-end="url(#arrowhead)"/>
+</svg>

@@ -165,26 +165,13 @@ tags:
 
 如果把前四篇的判断压缩成一张图，可以得到下面这个分层：
 
-```mermaid
-flowchart TD
-    A[用户任务与主执行链] --> B[/review 工作流层]
-    A --> C[guardian 审查基础设施层]
-    A --> D[realtime 实时会话控制层]
-    A --> E[collab / agents 多主体协作控制层]
-    A --> F[memories 启动与长期组织层]
+![Codex 更高层 runtime 组织图：卷六收口总图](../assets/codex-volume-6-05-higher-order-runtime-map.svg)
 
-    B --> G[结构化 review 结果]
-    C --> H[approval 判断回流]
-    D --> I[实时会话状态与 handoff]
-    E --> J[rooted thread-tree 编排]
-    F --> K[长期上下文提炼与回注]
+看这张图时，建议按这个顺序读：
 
-    G --> L[更高层 runtime 组织能力]
-    H --> L
-    I --> L
-    J --> L
-    K --> L
-```
+- 先看左侧主执行链，确认卷六不是另起一个新主体
+- 再看中上部的 `/review`、guardian、realtime、collab / AgentControl、memories 五块，确认它们分别在组织什么运行问题
+- 最后看中下部黄色收口区，理解为什么这些能力要被一起压成“更高层 runtime 组织能力”
 
 这张图最想说明的不是“模块真多”，而是：
 

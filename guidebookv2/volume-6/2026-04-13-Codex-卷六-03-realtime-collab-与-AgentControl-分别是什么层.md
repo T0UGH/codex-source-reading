@@ -95,12 +95,13 @@ AgentControl 最容易被误会成“multi-agent 的某个内部 helper”。但
 
 但如果按系统职责排布，关系更接近下面这样：
 
-```mermaid
-flowchart TD
-    A[主线程 / 普通 turn runtime] --> B[realtime layer\n活的实时会话控制]
-    A --> C[collab runtime\n多主体协作运行]
-    C --> D[AgentControl\nrooted thread-tree control plane]
-```
+![realtime、collab、AgentControl：三段不同职责](../assets/codex-volume-6-03-realtime-collab-agentcontrol.svg)
+
+看这张图时，建议按这个顺序读：
+
+- 先看左侧主线程 / 普通 turn runtime，确认三者都不是原始 turn 主线本身
+- 再看中间的 realtime 与 collab，确认一个面向 live conversation，一个面向 live collaboration
+- 最后看下方 AgentControl，确认它不是并列 feature，而是 collab 内部那棵 thread tree 的控制面核心
 
 这张图最重要的不是箭头方向，而是三个判断：
 

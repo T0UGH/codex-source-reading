@@ -80,8 +80,9 @@ nav:
   - 开始阅读｜Guidebook v2 总览: guidebookv2/README.md
   - 卷一｜系统入口与总图:
       - 导读: guidebookv2/volume-1/index.md
-      - 00 如何阅读这份导读: 00-guidebook/00-如何阅读这份导读.md
-      - 01 系统总图与分层: 00-guidebook/01-系统总图与分层.md
+      - 01 Codex 到底是什么系统：从壳到主体的第一张总图: guidebookv2/volume-1/2026-04-14-Codex-卷一-01-Codex-到底是什么系统-从壳到主体的第一张总图.md
+      - 02 一条最基础的 interactive 主请求流怎么跑: guidebookv2/volume-1/2026-04-14-Codex-卷一-02-一条最基础的-interactive-主请求流怎么跑.md
+      - 03 Codex 各组件第一次认识与六卷地图: guidebookv2/volume-1/2026-04-14-Codex-卷一-03-Codex-各组件第一次认识与六卷地图.md
   - 卷二｜runtime core 主线:
       - 导读: guidebookv2/volume-2/index.md
       - 01 一次请求怎么进入 Codex 的 runtime 主线: guidebookv2/volume-2/2026-04-12-Codex-新卷二-01-一次请求怎么进入-Codex-的-runtime-主线.md

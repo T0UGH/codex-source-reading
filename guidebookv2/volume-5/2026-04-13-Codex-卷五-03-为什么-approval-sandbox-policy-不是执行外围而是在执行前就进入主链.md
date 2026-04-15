@@ -100,6 +100,14 @@ runtime route 可以先理解成：
 
 ## 分层：为什么这四件事必须在执行前合流
 
+![approval、policy、sandbox、route：都在执行前主链里合流](../assets/codex-volume-5-03-approval-policy-sandbox-route.svg)
+
+看这张图时，建议按这个顺序读：
+
+- 先看上面四层从 approval 到 runtime route 的合流，确认它们不是执行外围挂件
+- 再看下方 launch-ready `ExecRequest`，确认这些判断最后都会落到真实启动方案上
+- 最后看底部一句话收口，把“shell wrapper 心智”压掉，改成“执行请求成立条件”心智
+
 ### 第一层：如果把它们当外围检查，你会把 Codex 误读成 shell wrapper
 
 普通 shell wrapper 的思路通常是：

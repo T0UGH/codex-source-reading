@@ -94,14 +94,13 @@ tags:
 
 但如果把职责放在一起看，更准确的关系其实是下面这样：
 
-```mermaid
-flowchart TD
-    A[tool / agent action] --> B[UnifiedExecHandler]
-    B --> C[UnifiedExecRuntime]
-    C --> D[UnifiedExecProcessManager / session]
-    D --> E[exec.rs / sandboxing / execute_env]
-    E --> F[OS / exec backend]
-```
+![exec.rs 与 unified-exec：不是平替，而是上下层](../assets/codex-volume-5-01-exec-vs-unified-exec.svg)
+
+看这张图时，建议按这个顺序读：
+
+- 先看上面从 tool / agent action 到 session / process 管理的链，确认 unified-exec 先把动作请求装成系统对象
+- 再看下方 `exec.rs / sandbox / execute_env`，确认它靠近的是执行原语和环境约束，而不是整条执行会话的产品语义
+- 最后再看底部总结，确认这篇真正要压住的是“谁更靠近运行链，谁更靠近执行底盘”
 
 这张图最想说明的不是调用顺序，而是**层级落点**：
 

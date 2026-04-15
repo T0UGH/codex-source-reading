@@ -131,14 +131,13 @@ tags:
 
 可以先把整个模型压成一张图：
 
-```mermaid
-flowchart LR
-    A[process raw bytes] --> B[process_chunk]
-    B --> C[transcript]
-    B --> D[output delta]
-    C --> E[resolve_aggregated_output]
-    E --> F[final aggregated output]
-```
+![输出先进入 transcript：实时增量与最终结果共用同一条语义轨](../assets/codex-volume-5-04-transcript-first-output.svg)
+
+看这张图时，建议按这个顺序读：
+
+- 先看左到中的 `raw bytes → process_chunk → transcript`，确认输出真正跨进系统语义层的地方在哪里
+- 再看右上 `output delta` 和右中 `resolve_aggregated_output`，确认“进行中观察”和“收尾裁决”为什么不是一层对象
+- 最后看底部三层总结，把 raw stream、transcript / delta、final output 这三层彻底拆开
 
 这张图最关键的不是节点多少，而是谁是中轴：
 

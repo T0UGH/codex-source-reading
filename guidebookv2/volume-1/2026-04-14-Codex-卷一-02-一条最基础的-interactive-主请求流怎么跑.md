@@ -50,24 +50,24 @@ tags:
 
 ---
 
-## 二、先看最小主链
+## 二、先看一张 interactive 主请求流总图
 
-先把最小版本的 interactive 主请求流压成一条线：
+先把最小版本的 interactive 主请求流压成一张图：
 
-```text
-用户
-  → CLI
-  → TUI
-  → app-server
-  → ThreadManager
-  → CodexThread
-  → Codex
-  → 采样 / 动作 / 工具 / 执行
-  → 事件 / 结果回流
-  → app-server 投影
-  → TUI 渲染
-  → 用户继续下一步
-```
+![Codex interactive 主请求流：从用户输入到结果回显](../assets/codex-volume-1-02-interactive-request-flow.svg)
+
+看这张图时，建议按这个顺序读：
+
+- 先看上半段从用户、CLI、TUI 到 app-server 的进入链
+- 再看中间 `ThreadManager → CodexThread → Codex` 这条真正进入 runtime 主体的接力链
+- 最后看右侧动作路径和下方回程，确认结果为什么必须重新回到同一轮工作回合
+
+这张图先故意只回答 4 个问题：
+
+- 用户输入是怎么被带进正确入口的
+- 哪一层开始把请求挂到 live thread runtime 上
+- 动作为什么只是当前回合里的短暂分叉
+- 为什么最后用户看到的状态，一定已经经过了控制面投影和前端渲染
 
 这条线最重要的，不是你现在能背出所有对象名，而是你要先感受到：
 

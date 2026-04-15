@@ -1,0 +1,93 @@
+<svg width="1400" height="940" viewBox="0 0 1400 940" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.8"/>
+    </pattern>
+    <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="10" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#94a3b8"/>
+    </marker>
+    <style>
+      .title { font: 700 34px 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; fill: #f8fafc; }
+      .subtitle { font: 500 16px 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; fill: #94a3b8; }
+      .section { font: 700 15px 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; }
+      .label { font: 700 18px 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; fill: #f8fafc; }
+      .sub { font: 500 13px 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; fill: #94a3b8; }
+      .tiny { font: 500 12px 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; fill: #cbd5e1; }
+      .legend { font: 600 12px 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; fill: #cbd5e1; }
+    </style>
+  </defs>
+
+  <rect width="1400" height="940" rx="28" fill="#020617"/>
+  <rect x="24" y="24" width="1352" height="892" rx="24" fill="url(#grid)"/>
+
+  <circle cx="88" cy="78" r="10" fill="#34d399"/>
+  <text x="114" y="88" class="title">Codex runtime core 稳定运行图</text>
+  <text x="88" y="120" class="subtitle">卷二卷尾真正要留下的，是一条不断判断“继续还是收口”的工作回合主线。</text>
+
+  <rect x="84" y="194" width="200" height="106" rx="18" fill="rgba(8,51,68,0.32)" stroke="#22d3ee" stroke-width="2.2"/>
+  <text x="184" y="236" text-anchor="middle" class="label">请求进入</text>
+  <text x="184" y="264" text-anchor="middle" class="sub">CLI / TUI / app-server</text>
+  <text x="184" y="286" text-anchor="middle" class="tiny">把输入送入 runtime core</text>
+
+  <rect x="346" y="194" width="220" height="106" rx="18" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="2.3"/>
+  <text x="456" y="236" text-anchor="middle" class="label">形成当前工作面</text>
+  <text x="456" y="264" text-anchor="middle" class="sub">history / config / context / constraints</text>
+  <text x="456" y="286" text-anchor="middle" class="tiny">当前这一轮真正可判断的输入面</text>
+
+  <rect x="630" y="194" width="230" height="106" rx="18" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="2.3"/>
+  <text x="745" y="236" text-anchor="middle" class="label">产生当前判断</text>
+  <text x="745" y="264" text-anchor="middle" class="sub">run_turn / sampling</text>
+  <text x="745" y="286" text-anchor="middle" class="tiny">这一轮先做一次真实判断</text>
+
+  <rect x="932" y="180" width="270" height="136" rx="20" fill="rgba(251,146,60,0.16)" stroke="#fb923c" stroke-width="2.2"/>
+  <text x="1067" y="222" text-anchor="middle" class="label">动作路径</text>
+  <text x="1067" y="252" text-anchor="middle" class="sub">tool / exec / action</text>
+  <text x="1067" y="278" text-anchor="middle" class="sub">当当前判断不足以直接收口</text>
+  <text x="1067" y="302" text-anchor="middle" class="tiny">动作不是外挂，而是当前回合里的正式分叉</text>
+
+  <rect x="928" y="406" width="276" height="142" rx="20" fill="rgba(56,189,248,0.12)" stroke="#38bdf8" stroke-width="2.2"/>
+  <text x="1066" y="448" text-anchor="middle" class="label">结果回流当前 turn</text>
+  <text x="1066" y="476" text-anchor="middle" class="sub">tool result → history</text>
+  <text x="1066" y="502" text-anchor="middle" class="sub">再构造 sampling input</text>
+  <text x="1066" y="528" text-anchor="middle" class="tiny">下一次判断还是围绕同一轮工作回合展开</text>
+
+  <rect x="510" y="420" width="290" height="120" rx="20" fill="rgba(120,53,15,0.22)" stroke="#fbbf24" stroke-width="2.2"/>
+  <text x="655" y="462" text-anchor="middle" class="label">继续还是收口？</text>
+  <text x="655" y="490" text-anchor="middle" class="sub">needs_follow_up / pending_input</text>
+  <text x="655" y="516" text-anchor="middle" class="tiny">runtime 反复判断当前结果是否已足够</text>
+
+  <rect x="210" y="430" width="202" height="100" rx="18" fill="rgba(30,41,59,0.62)" stroke="#94a3b8" stroke-width="2"/>
+  <text x="311" y="470" text-anchor="middle" class="label">本轮 turn 收口</text>
+  <text x="311" y="498" text-anchor="middle" class="sub">这一轮正式 break</text>
+
+  <rect x="150" y="642" width="1090" height="188" rx="24" fill="rgba(30,41,59,0.34)" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="8 6"/>
+  <text x="182" y="680" class="section" fill="#94a3b8">卷二最终该保留的四个判断</text>
+  <text x="192" y="726" class="label" style="font-size:17px">1</text>
+  <text x="226" y="726" class="sub" style="font-size:15px">它是一条主线，不是一张对象表。</text>
+  <text x="192" y="764" class="label" style="font-size:17px">2</text>
+  <text x="226" y="764" class="sub" style="font-size:15px">它推进的是一轮工作回合，不是一问一答。</text>
+  <text x="192" y="802" class="label" style="font-size:17px">3</text>
+  <text x="226" y="802" class="sub" style="font-size:15px">动作结果会回流当前 turn，所以 tool call 属于正式闭环。</text>
+  <text x="748" y="726" class="label" style="font-size:17px">4</text>
+  <text x="782" y="726" class="sub" style="font-size:15px">4  真正的边界不在做没做动作，而在当前是否已足够收口。</text>
+
+  <line x1="284" y1="247" x2="346" y2="247" stroke="#22d3ee" stroke-width="2.2" marker-end="url(#arrowhead)"/>
+  <line x1="566" y1="247" x2="630" y2="247" stroke="#34d399" stroke-width="2.2" marker-end="url(#arrowhead)"/>
+  <path d="M 860 247 L 932 247" stroke="#34d399" stroke-width="2.2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="892" y="232" text-anchor="middle" class="legend">当前判断不足时进入动作</text>
+
+  <path d="M 1068 316 L 1068 406" stroke="#fb923c" stroke-width="2.2" marker-end="url(#arrowhead)"/>
+  <text x="1086" y="370" class="legend">结果回来，不停在执行层</text>
+
+  <path d="M 928 476 L 800 476" stroke="#38bdf8" stroke-width="2.2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="862" y="462" text-anchor="middle" class="legend">写回 history 后再次判断</text>
+
+  <path d="M 655 420 L 655 314 Q 655 286 682 286" stroke="#fbbf24" stroke-width="2.2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="532" y="350" class="legend">不够收口就回到下一次 sampling</text>
+
+  <path d="M 510 476 L 412 476" stroke="#94a3b8" stroke-width="2.2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="456" y="462" text-anchor="middle" class="legend">足够时本轮正式收口</text>
+
+  <path d="M 310 430 L 310 340 Q 310 316 334 316 L 718 316" stroke="#94a3b8" stroke-width="1.8" stroke-dasharray="6 4" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="176" y="346" class="legend">收口的是本轮 turn；thread 仍然继续存在</text>
+</svg>

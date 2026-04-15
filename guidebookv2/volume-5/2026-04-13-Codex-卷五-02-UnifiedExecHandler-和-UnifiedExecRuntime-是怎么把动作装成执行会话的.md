@@ -91,15 +91,13 @@ tags:
 
 更准确的分工应该是：
 
-```mermaid
-flowchart TD
-    A[模型动作 / tool call] --> B[UnifiedExecHandler]
-    B --> C[带身份的执行请求]
-    C --> D[UnifiedExecRuntime]
-    D --> E[当前环境下的 launch 方案]
-    E --> F[open_session_with_exec_env]
-    F --> G[真正启动的 process session]
-```
+![handler 建入口，runtime 压实落地，session 才真正启动](../assets/codex-volume-5-02-handler-runtime-session.svg)
+
+看这张图时，建议按这个顺序读：
+
+- 先看上面从模型动作到 runtime-ready request 的转换，确认 handler 做的不是薄转发，而是入口装配
+- 再看右侧 UnifiedExecRuntime，确认它负责把请求压成当前环境下可落地的 launch 方案
+- 最后看下方 `open_session_with_exec_env`，确认跨过 spawn 边界后主语才真正变成“已启动 process session”
 
 这张图里最重要的不是箭头顺序，而是对象变化：
 

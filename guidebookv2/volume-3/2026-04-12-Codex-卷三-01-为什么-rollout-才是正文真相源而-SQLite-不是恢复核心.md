@@ -94,6 +94,14 @@ tags:
 
 如果把所有持久化内容都混在一起，就很容易误以为 SQLite 一定是核心。更稳妥的读法，是先把 Codex 里的状态分成三层。
 
+![rollout 才是正文真相源，SQLite 更像索引与辅助状态层](../assets/codex-volume-3-01-rollout-vs-sqlite-source-of-truth.svg)
+
+看这张图时，建议按这个顺序读：
+
+- 先看上方三层状态，确认配置状态、rollout history、SQLite state DB 各自回答什么问题
+- 再看下方恢复主链，确认 resume 时首先相信的是 rollout history
+- 最后看底部一句话收口，把“rollout 保存正文、SQLite 保存索引与辅助状态”这层边界压住
+
 ### 1. 配置状态：系统该怎么运行
 
 这一层处理的是运行条件，例如：

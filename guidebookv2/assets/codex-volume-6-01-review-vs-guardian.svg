@@ -1,0 +1,27 @@
+<svg width="1500" height="860" viewBox="0 0 1500 860" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.8"/></pattern>
+  <marker id="arrow" markerWidth="12" markerHeight="8" refX="10" refY="4" orient="auto"><polygon points="0 0, 12 4, 0 8" fill="#94a3b8"/></marker>
+  <style>
+    .title{font:700 34px 'JetBrains Mono',monospace;fill:#f8fafc}.subtitle{font:500 16px 'JetBrains Mono',monospace;fill:#94a3b8}.label{font:700 18px 'JetBrains Mono',monospace;fill:#f8fafc}.sub{font:500 13px 'JetBrains Mono',monospace;fill:#94a3b8}.tiny{font:500 12px 'JetBrains Mono',monospace;fill:#cbd5e1}.section{font:700 15px 'JetBrains Mono',monospace}.legend{font:600 12px 'JetBrains Mono',monospace;fill:#cbd5e1}
+  </style>
+</defs>
+<rect width="1500" height="860" rx="28" fill="#020617"/><rect x="24" y="24" width="1452" height="812" rx="24" fill="url(#grid)"/>
+<circle cx="88" cy="78" r="10" fill="#fb7185"/><text x="114" y="88" class="title">/review vs guardian：两条链不是一回事</text><text x="88" y="120" class="subtitle">两边都可能调用 reviewer，但 /review 是用户工作流，guardian 是授权裁决基础设施。</text>
+<rect x="84" y="170" width="592" height="458" rx="24" fill="rgba(136,19,55,0.08)" stroke="#fb7185" stroke-width="1.8" stroke-dasharray="12 8"/>
+<text x="116" y="206" class="section" fill="#fb7185">用户侧：/review 工作流</text>
+<rect x="126" y="258" width="200" height="110" rx="18" fill="rgba(136,19,55,0.38)" stroke="#fb7185" stroke-width="2.2"/><text x="226" y="298" text-anchor="middle" class="label">用户发起 /review</text><text x="226" y="326" text-anchor="middle" class="sub">显式提出“帮我审一审”</text>
+<rect x="390" y="258" width="220" height="110" rx="18" fill="rgba(136,19,55,0.38)" stroke="#fb7185" stroke-width="2.2"/><text x="500" y="298" text-anchor="middle" class="label">review workflow</text><text x="500" y="326" text-anchor="middle" class="sub">组织 review 线程 / 交付面</text>
+<rect x="258" y="450" width="220" height="118" rx="18" fill="rgba(136,19,55,0.28)" stroke="#fb7185" stroke-width="2.2"/><text x="368" y="490" text-anchor="middle" class="label">受限 reviewer 子流程</text><text x="368" y="518" text-anchor="middle" class="sub">锁紧配置，生成审查内容</text><text x="368" y="544" text-anchor="middle" class="tiny">目标是形成 review 输出</text>
+<line x1="326" y1="314" x2="390" y2="314" stroke="#fb7185" stroke-width="2.2" marker-end="url(#arrow)"/><path d="M 500 368 L 500 426 Q 500 450 476 450 L 420 450" stroke="#fb7185" stroke-width="2.2" fill="none" marker-end="url(#arrow)"/>
+<rect x="824" y="170" width="592" height="458" rx="24" fill="rgba(56,189,248,0.08)" stroke="#38bdf8" stroke-width="1.8" stroke-dasharray="12 8"/>
+<text x="856" y="206" class="section" fill="#38bdf8">授权侧：guardian 裁决链</text>
+<rect x="866" y="258" width="220" height="110" rx="18" fill="rgba(56,189,248,0.18)" stroke="#38bdf8" stroke-width="2.2"/><text x="976" y="298" text-anchor="middle" class="label">执行链遇到 approval</text><text x="976" y="326" text-anchor="middle" class="sub">高风险动作进入授权场景</text>
+<rect x="1150" y="258" width="220" height="110" rx="18" fill="rgba(56,189,248,0.18)" stroke="#38bdf8" stroke-width="2.2"/><text x="1260" y="298" text-anchor="middle" class="label">guardian 路由</text><text x="1260" y="326" text-anchor="middle" class="sub">把请求接管到 reviewer backend</text>
+<rect x="1010" y="450" width="240" height="118" rx="18" fill="rgba(56,189,248,0.14)" stroke="#38bdf8" stroke-width="2.2"/><text x="1130" y="490" text-anchor="middle" class="label">guardian reviewer</text><text x="1130" y="518" text-anchor="middle" class="sub">高责任 / 低自由度裁决器</text><text x="1130" y="544" text-anchor="middle" class="tiny">目标是给出授权判断</text>
+<line x1="1086" y1="314" x2="1150" y2="314" stroke="#38bdf8" stroke-width="2.2" marker-end="url(#arrow)"/><path d="M 1260 368 L 1260 426 Q 1260 450 1236 450 L 1170 450" stroke="#38bdf8" stroke-width="2.2" fill="none" marker-end="url(#arrow)"/>
+<rect x="286" y="678" width="360" height="98" rx="18" fill="rgba(30,41,59,0.48)" stroke="#94a3b8" stroke-width="2"/><text x="466" y="716" text-anchor="middle" class="label">出口：review 结果交付给用户</text><text x="466" y="744" text-anchor="middle" class="sub">用户拿到的是一份审查内容</text>
+<rect x="932" y="678" width="376" height="98" rx="18" fill="rgba(30,41,59,0.48)" stroke="#94a3b8" stroke-width="2"/><text x="1120" y="716" text-anchor="middle" class="label">出口：批准 / 拒绝 / 超时 / 中止</text><text x="1120" y="744" text-anchor="middle" class="sub">结果写回原执行链</text>
+<path d="M 368 568 L 368 632 Q 368 678 414 678" stroke="#94a3b8" stroke-width="2.2" fill="none" marker-end="url(#arrow)"/><path d="M 1130 568 L 1130 632 Q 1130 678 1086 678" stroke="#94a3b8" stroke-width="2.2" fill="none" marker-end="url(#arrow)"/>
+<rect x="184" y="786" width="1132" height="42" rx="10" fill="rgba(251,191,36,0.12)" stroke="#fbbf24" stroke-width="1.4"/><text x="750" y="812" text-anchor="middle" class="legend">关键不是都用了 reviewer，而是回流位置完全不同。</text>
+</svg>

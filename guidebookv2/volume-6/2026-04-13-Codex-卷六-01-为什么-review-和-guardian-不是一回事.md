@@ -130,17 +130,13 @@ guardian 不是让用户“开一个 review 模式看看结果”，而是当系
 
 如果只记一张图，应该记这张。
 
-```mermaid
-flowchart TD
-    U[用户发起 /review] --> RW[review workflow]
-    RW --> RS[受限 reviewer 子流程]
-    RS --> RO[产出 review 结果]
+![`/review` vs guardian：入口、裁决对象、回流位置都不同](../assets/codex-volume-6-01-review-vs-guardian.svg)
 
-    A[执行链遇到 approval 需求] --> GR[guardian 路由]
-    GR --> GS[受限 guardian reviewer]
-    GS --> GD[产出批准/拒绝/超时/中止]
-    GD --> EX[结果回到原执行链]
-```
+看这张图时，建议按这个顺序读：
+
+- 先看左边 `/review` 这条链，确认它从用户显式发起开始，到 review 结果交付给用户结束
+- 再看右边 guardian 这条链，确认它从 approval 场景进入，到授权判断写回原执行链结束
+- 最后再看底部黄色收口句，把“同样都用了 reviewer”这层表面相似感压掉
 
 这张图里最重要的不是“都用了 reviewer”，而是两边的入口和出口完全不同。
 
