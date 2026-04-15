@@ -15,7 +15,3 @@ updated: 2026-04-14
 3. [realtime、collab 与 AgentControl 分别是什么层](./2026-04-13-Codex-卷六-03-realtime-collab-与-AgentControl-分别是什么层-v1.md)
 4. [为什么 memories 更像启动管线，而不是普通 helper](./2026-04-13-Codex-卷六-04-为什么-memories-更像启动管线而不是普通-helper-v1.md)
 5. [为什么说 Codex 正在长成更高层 runtime，而不是只多了一些高级功能](./2026-04-13-Codex-卷六-05-为什么说-Codex-正在长成更高层-runtime-而不是只多了一些高级功能-v1.md)
-
-## 辅助文件
-
-本卷对应的写作卡片与执行说明也已一并迁入仓库，但不放进主导航。

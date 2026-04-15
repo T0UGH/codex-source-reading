@@ -37,7 +37,3 @@ updated: 2026-04-14
 - **卷四**：解释 app-server 怎样把 runtime 暴露成稳定控制面
 - **卷五**：解释 unified-exec 怎样把动作装成可管理执行会话
 - **卷六**：解释 review / guardian / collab / memories 为什么不是边角功能，而是更高层 runtime 组织的一部分
-
-## 辅助文件
-
-- [卷一写作卡片](./2026-04-14-Codex-卷一系统入口与总图-README-writing-cards-v1.md)

@@ -45,6 +45,10 @@
 - `02-call-chain-drafts/`：调用链草图与主链草案
 - `03-boundary-judgments/`：模块职责 / 非职责判断
 
+### support / reference 层
+- `references/guidebookv2-support/`：各卷写作卡片、production-order 等生产辅助文件
+- 这层文件默认不算网站正文，只作为策划、验收、执行说明与后续回看材料
+
 ### 旧内容与迁移资产
 - `00-guidebook/`：较早一轮正文资产
 - `trash/2026-04-14-guidebookv2-replaced-content/`：从主入口退出后的旧内容备份
@@ -55,6 +59,8 @@
 
 - `guidebookv2/` 已经是默认入口
 - 卷一到卷六都已在仓库中落地
+- 网站导航实际使用的文章视为正文层
+- 未进入网站主导航、主要服务于策划/生产/执行说明的文件，默认归入 `references/` 等 support 层
 - 证据层、调用链草图、边界判断层继续保留，作为正文下钻依据
 - 后续工作重点更偏向：验收、轻修、结构同步、插图补充与导航整理
 
