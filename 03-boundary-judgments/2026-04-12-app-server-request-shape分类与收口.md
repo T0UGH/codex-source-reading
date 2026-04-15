@@ -242,4 +242,4 @@ status: done
 ## 延伸阅读
 
 - [2026-04-12-DynamicToolCall为什么不走ServerRequestResolved.md](2026-04-12-DynamicToolCall为什么不走ServerRequestResolved.md)
-- [卷四 03｜`ServerRequestResolved` 到底覆盖了什么控制面语义](../guidebookv2/volume-4/2026-04-12-Codex-卷四-03-ServerRequestResolved-到底覆盖了什么控制面语义-v1.md)
+- [卷四 03｜`ServerRequestResolved` 到底覆盖了什么控制面语义](../guidebookv2/volume-4/2026-04-12-Codex-卷四-03-ServerRequestResolved-到底覆盖了什么控制面语义.md)

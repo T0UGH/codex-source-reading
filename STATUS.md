@@ -42,14 +42,14 @@ This is enough structure for future work to be selective rather than exploratory
 
 File-level verification against `~/workspace/knowledge-vault/Inbox/Research/` confirms that the new runtime-core volume currently has **8 article files present**:
 
-- `2026-04-12-Codex-新卷二-01-一次请求怎么进入-Codex-的-runtime-主线-v1.md`
-- `2026-04-12-Codex-新卷二-02-ThreadManager-CodexThread-Codex-怎么接成主工作链-v1.md`
-- `2026-04-12-Codex-新卷二-03-当前工作面是怎么被组织出来的-v1.md`
-- `2026-04-12-Codex-新卷二-04-thread-和-turn-为什么不是两个平行名词-v1.md`
-- `2026-04-12-Codex-新卷二-05-系统怎么判断这一轮要不要调用能力-v1.md`
-- `2026-04-12-Codex-新卷二-06-动作结果怎么重新回到当前工作回合-v1.md`
-- `2026-04-12-Codex-新卷二-07-一轮工作回合什么时候继续什么时候收口-v1.md`
-- `2026-04-12-Codex-新卷二-08-把整条-runtime-core-主线重新压成稳定运行图-v1.md`
+- `2026-04-12-Codex-新卷二-01-一次请求怎么进入-Codex-的-runtime-主线.md`
+- `2026-04-12-Codex-新卷二-02-ThreadManager-CodexThread-Codex-怎么接成主工作链.md`
+- `2026-04-12-Codex-新卷二-03-当前工作面是怎么被组织出来的.md`
+- `2026-04-12-Codex-新卷二-04-thread-和-turn-为什么不是两个平行名词.md`
+- `2026-04-12-Codex-新卷二-05-系统怎么判断这一轮要不要调用能力.md`
+- `2026-04-12-Codex-新卷二-06-动作结果怎么重新回到当前工作回合.md`
+- `2026-04-12-Codex-新卷二-07-一轮工作回合什么时候继续什么时候收口.md`
+- `2026-04-12-Codex-新卷二-08-把整条-runtime-core-主线重新压成稳定运行图.md`
 
 Current verified file-level state:
 
@@ -156,11 +156,11 @@ Verified artifacts now present under `~/workspace/knowledge-vault/Inbox/Research
 
 - `2026-04-13-Codex-卷五统一执行子系统-README-writing-cards-v1.md`
 - `2026-04-13-Codex-卷五统一执行子系统-README-production-order-v1.md`
-- `2026-04-13-Codex-卷五-01-为什么-exec-rs-和-unified-exec-不是一回事-v1.md`
-- `2026-04-13-Codex-卷五-02-UnifiedExecHandler-和-UnifiedExecRuntime-是怎么把动作装成执行会话的-v1.md`
-- `2026-04-13-Codex-卷五-03-为什么-approval-sandbox-policy-不是执行外围而是在执行前就进入主链-v1.md`
-- `2026-04-13-Codex-卷五-04-输出为什么先进入-transcript-而不是直接变成最终结果-v1.md`
-- `2026-04-13-Codex-卷五-05-为什么-process-store-不是最终权威源而-unified-exec-更像-execution-control-plane-v1.md`
+- `2026-04-13-Codex-卷五-01-为什么-exec-rs-和-unified-exec-不是一回事.md`
+- `2026-04-13-Codex-卷五-02-UnifiedExecHandler-和-UnifiedExecRuntime-是怎么把动作装成执行会话的.md`
+- `2026-04-13-Codex-卷五-03-为什么-approval-sandbox-policy-不是执行外围而是在执行前就进入主链.md`
+- `2026-04-13-Codex-卷五-04-输出为什么先进入-transcript-而不是直接变成最终结果.md`
+- `2026-04-13-Codex-卷五-05-为什么-process-store-不是最终权威源而-unified-exec-更像-execution-control-plane.md`
 
 Current read on volume 5:
 
@@ -196,11 +196,11 @@ Verified artifacts now present under `~/workspace/knowledge-vault/Inbox/Research
 
 - `2026-04-13-Codex-卷六审查协作与高级runtime-README-writing-cards-v1.md`
 - `2026-04-13-Codex-卷六审查协作与高级runtime-README-production-order-v1.md`
-- `2026-04-13-Codex-卷六-01-为什么-review-和-guardian-不是一回事-v1.md`
-- `2026-04-13-Codex-卷六-02-guardian-为什么更像审查基础设施而不是普通feature链-v1.md`
-- `2026-04-13-Codex-卷六-03-realtime-collab-与-AgentControl-分别是什么层-v1.md`
-- `2026-04-13-Codex-卷六-04-为什么-memories-更像启动管线而不是普通-helper-v1.md`
-- `2026-04-13-Codex-卷六-05-为什么说-Codex-正在长成更高层-runtime-而不是只多了一些高级功能-v1.md`
+- `2026-04-13-Codex-卷六-01-为什么-review-和-guardian-不是一回事.md`
+- `2026-04-13-Codex-卷六-02-guardian-为什么更像审查基础设施而不是普通feature链.md`
+- `2026-04-13-Codex-卷六-03-realtime-collab-与-AgentControl-分别是什么层.md`
+- `2026-04-13-Codex-卷六-04-为什么-memories-更像启动管线而不是普通-helper.md`
+- `2026-04-13-Codex-卷六-05-为什么说-Codex-正在长成更高层-runtime-而不是只多了一些高级功能.md`
 
 Current read on volume 6:
 

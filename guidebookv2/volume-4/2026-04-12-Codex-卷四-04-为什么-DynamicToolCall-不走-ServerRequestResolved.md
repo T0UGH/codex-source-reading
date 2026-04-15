@@ -13,7 +13,7 @@ source_scope:
   - /Users/haha/workspace/codex/codex-rs/app-server/tests/suite/v2/turn_start.rs
   - /Users/haha/workspace/codex-source-reading/03-boundary-judgments/2026-04-12-DynamicToolCall为什么不走ServerRequestResolved.md
   - /Users/haha/workspace/codex-source-reading/03-boundary-judgments/2026-04-12-app-server-request-shape分类与收口.md
-  - /Users/haha/workspace/knowledge-vault/Inbox/Research/2026-04-12-Codex-卷四-03-ServerRequestResolved-到底覆盖了什么控制面语义-v1.md
+  - /Users/haha/workspace/knowledge-vault/Inbox/Research/2026-04-12-Codex-卷四-03-ServerRequestResolved-到底覆盖了什么控制面语义.md
 ---
 
 # Codex 卷四 04｜为什么 `DynamicToolCall` 不走 `ServerRequestResolved`
