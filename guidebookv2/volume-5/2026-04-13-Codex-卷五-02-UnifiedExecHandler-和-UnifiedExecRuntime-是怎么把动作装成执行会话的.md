@@ -398,3 +398,11 @@ flowchart TD
 下一篇要继续回答的就是：
 
 > **为什么 approval、sandbox、policy 不是执行外围，而是在真正执行前就进入 unified-exec 的主链。**
+---
+
+## 卷内导航
+
+- 上一篇：[《为什么 `exec.rs` 和 unified-exec 不是一回事》](./2026-04-13-Codex-卷五-01-为什么-exec-rs-和-unified-exec-不是一回事.md)
+- 回到本卷入口：[本卷导读](./index.md)
+- 下一篇：[《为什么 approval、sandbox、policy 不是执行外围，而是在执行前就进入主链》](./2026-04-13-Codex-卷五-03-为什么-approval-sandbox-policy-不是执行外围而是在执行前就进入主链.md)
+

@@ -35,6 +35,14 @@ tags:
 
 ---
 
+## 先记住这张三层职责图
+
+- **realtime = 活会话层**：回答一场实时 conversation 怎样活着、怎样 handoff、怎样接回主线程。
+- **collab = 协作运行层**：回答多个主体怎样形成正式协作关系，并持续暴露协作事件。
+- **AgentControl = 协作控制面**：回答这棵 rooted thread tree 由谁编排、寻址、等待、关闭和收束。
+
+如果后面一度读混，只要回到这三句：realtime 不等于协作，collab 不等于控制柄，AgentControl 也不是并列 feature，而是 collab 内部真正的控制面核心。
+
 ## 先把几个术语说白
 
 ### realtime
@@ -409,3 +417,11 @@ AgentControl 的意义在于，它让系统开始显式管理：
 **如果 memories 也不是普通 helper，那它为什么更像启动管线，而不是运行时顺手挂上的长期记忆功能？**
 
 这正是第 04 篇要进入的问题。
+---
+
+## 卷内导航
+
+- 上一篇：[《guardian 为什么更像审查基础设施，而不是一条普通 feature 链》](./2026-04-13-Codex-卷六-02-guardian-为什么更像审查基础设施而不是普通feature链.md)
+- 回到本卷入口：[本卷导读](./index.md)
+- 下一篇：[《为什么 memories 更像启动管线，而不是普通 helper》](./2026-04-13-Codex-卷六-04-为什么-memories-更像启动管线而不是普通-helper.md)
+

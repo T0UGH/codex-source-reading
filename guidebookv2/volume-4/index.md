@@ -15,6 +15,14 @@ updated: 2026-04-14
 3. 知道 `ServerRequestResolved` 与 `DynamicToolCall` 在控制面语义里分别站在哪里
 4. 知道 TUI 为什么越来越像跑在 app-server 之上，而不是直接抓 core
 
+## 本卷五篇分别在纠正什么误判
+
+- **01** app-server 不是另一套平行 runtime
+- **02** 控制面不是“顺手包一层 UI”，而是靠 listener / 协议投影 / 状态修正一起站稳
+- **03** `ServerRequestResolved` 不是“所有 request 最后都会经过的统一 resolved 事件”
+- **04** `DynamicToolCall` 不是 resolved 模型的漏网之鱼，而是一次有意的语义分叉
+- **05** TUI 越来越像跑在 app-server 之上，不是因为 core 不重要，而是因为正式控制面已经成立
+
 ## 目录
 
 1. [为什么 app-server 不是另一套 runtime，而是建立在 core 之上的控制面 facade](./2026-04-12-Codex-卷四-01-为什么-app-server-不是另一套-runtime.md)

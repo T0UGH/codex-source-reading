@@ -337,3 +337,11 @@ Codex 选择的做法，是从一开始就只承认一种对象：
 下一篇要继续回答的是：
 
 > **为什么 transcript / delta 不是附属日志，而是 unified-exec 的主语义轨。**
+---
+
+## 卷内导航
+
+- 上一篇：[《`UnifiedExecHandler` 和 `UnifiedExecRuntime` 是怎么把动作装成执行会话的》](./2026-04-13-Codex-卷五-02-UnifiedExecHandler-和-UnifiedExecRuntime-是怎么把动作装成执行会话的.md)
+- 回到本卷入口：[本卷导读](./index.md)
+- 下一篇：[《输出为什么先进入 transcript，而不是直接变成“最终结果”》](./2026-04-13-Codex-卷五-04-输出为什么先进入-transcript-而不是直接变成最终结果.md)
+

@@ -508,3 +508,11 @@ flowchart LR
 > **app-server 的意义，不是替代 core，而是把 core runtime 暴露成一套统一控制面 contract；TUI、SDK 和远端调用者，正在围绕这套 contract 收敛。**
 
 到这里，卷四就该收住。接下来再进入 unified-exec，问题才会自然切到“控制面已经成立之后，执行会话是怎样被真正组织出来的”。
+---
+
+## 卷内导航
+
+- 上一篇：[《Codex 卷四 04｜为什么 `DynamicToolCall` 不走 `ServerRequestResolved`》](./2026-04-12-Codex-卷四-04-为什么-DynamicToolCall-不走-ServerRequestResolved.md)
+- 回到本卷入口：[本卷导读](./index.md)
+- 这是本卷卷尾，读完建议先回到本卷入口再决定是否跳卷。
+

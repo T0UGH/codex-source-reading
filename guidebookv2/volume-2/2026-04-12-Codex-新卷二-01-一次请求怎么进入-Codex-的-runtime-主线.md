@@ -498,3 +498,11 @@ flowchart TB
 **一次 interactive 请求的主路径，是 `用户 → CLI → TUI → app-server → ThreadManager → CodexThread → Codex`。**
 
 只要这三句先立住，后面再看 thread、turn、action、result、continuation，就不会把外层壳误认成系统主体。
+---
+
+## 卷内导航
+
+- 这是本卷起点，建议先顺着往下读。
+- 回到本卷入口：[本卷导读](./index.md)
+- 下一篇：[《Codex 新卷二 02：`ThreadManager`、`CodexThread`、`Codex` 怎么接成一条 runtime 主工作链》](./2026-04-12-Codex-新卷二-02-ThreadManager-CodexThread-Codex-怎么接成主工作链.md)
+

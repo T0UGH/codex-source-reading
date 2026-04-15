@@ -294,3 +294,11 @@ flowchart LR
 所以下一篇会顺着这条线进入：
 
 > **`UnifiedExecHandler` 和 `UnifiedExecRuntime` 是怎么把动作装成执行会话的。**
+---
+
+## 卷内导航
+
+- 这是本卷起点，建议先顺着往下读。
+- 回到本卷入口：[本卷导读](./index.md)
+- 下一篇：[《`UnifiedExecHandler` 和 `UnifiedExecRuntime` 是怎么把动作装成执行会话的》](./2026-04-13-Codex-卷五-02-UnifiedExecHandler-和-UnifiedExecRuntime-是怎么把动作装成执行会话的.md)
+

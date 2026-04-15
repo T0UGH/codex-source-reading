@@ -322,23 +322,29 @@ flowchart TD
 
 ---
 
-## 七、现在最稳的一张覆盖面表
+## 七、现在最稳的一张覆盖面图
 
-把前面的判断压成表，会更容易记。
+把前面的判断压成分组卡片，会比横向表格更容易读，也更适合手机端回看。
 
-| request shape | 当前归类 | 为什么 |
-|---|---|---|
-| `CommandExecutionRequestApproval` | 已覆盖 `ServerRequestResolved` | V2、thread-scoped、handler 显式调用 `resolve_server_request_on_thread_listener(...)` |
-| `FileChangeRequestApproval` | 已覆盖 `ServerRequestResolved` | 同上 |
-| `ToolRequestUserInput` | 已覆盖 `ServerRequestResolved` | 同上 |
-| `McpServerElicitationRequest` | 已覆盖 `ServerRequestResolved` | 同上 |
-| `PermissionsRequestApproval` | 已覆盖 `ServerRequestResolved` | 同上 |
-| `DynamicToolCall` | 语义分叉 | transport 像 request，但完成语义不走 resolved |
-| `ChatgptAuthTokensRefresh` | global bridge request | 不站在 thread listener / thread-resolved 世界里 |
-| `ApplyPatchApproval` | legacy holdout | deprecated V1，callback 完成，但不走 V2 resolved path |
-| `ExecCommandApproval` | legacy holdout | deprecated V1，callback 完成，但不走 V2 resolved path |
+### 已覆盖 `ServerRequestResolved`
 
-这张表背后的真正结论是：
+- `CommandExecutionRequestApproval`：已覆盖；V2、thread-scoped，handler 会显式调用 `resolve_server_request_on_thread_listener(...)`。
+- `FileChangeRequestApproval`：已覆盖；归属同一条 V2 resolved path。
+- `ToolRequestUserInput`：已覆盖；本质上也是 thread-scoped interactive request。
+- `McpServerElicitationRequest`：已覆盖；同样走 resolved-notification 语义。
+- `PermissionsRequestApproval`：已覆盖；属于当前稳定可确认的 resolved 覆盖面。
+
+### 不属于这套 resolved 语义
+
+- `DynamicToolCall`：transport 像 request，但完成语义不走 resolved，而走 item lifecycle。
+- `ChatgptAuthTokensRefresh`：更像 global bridge request，不站在 thread listener / thread-resolved 这套世界里。
+
+### legacy holdout
+
+- `ApplyPatchApproval`：deprecated V1，callback 会完成，但不走 V2 resolved path。
+- `ExecCommandApproval`：deprecated V1，callback 会完成，但不走 V2 resolved path。
+
+这组卡片背后的真正结论是：
 
 > **`ServerRequestResolved` 的覆盖面是清楚且有限的。它不是 request 系统的大总名，而是 9 类 request 中其中一批的协议完成语义。**
 
@@ -425,3 +431,11 @@ flowchart TD
 > **为什么 `DynamicToolCall` 明明复用了 thread request transport，却不进入 `ServerRequestResolved`，而要落到 item lifecycle？**
 
 那会是第 04 篇的主问题。
+---
+
+## 卷内导航
+
+- 上一篇：[《listener task、协议投影与状态修正怎样把控制面撑起来》](./2026-04-12-Codex-卷四-02-listener-task-协议投影与状态修正怎样把控制面撑起来.md)
+- 回到本卷入口：[本卷导读](./index.md)
+- 下一篇：[《Codex 卷四 04｜为什么 `DynamicToolCall` 不走 `ServerRequestResolved`》](./2026-04-12-Codex-卷四-04-为什么-DynamicToolCall-不走-ServerRequestResolved.md)
+

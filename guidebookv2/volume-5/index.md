@@ -15,6 +15,19 @@ updated: 2026-04-14
 3. 知道 approval、policy、sandbox、route 为什么都属于执行前主链
 4. 知道 transcript、process store、end event 为什么共同构成 execution control plane
 
+## 为什么这一卷必须现在读
+
+如果你已经接受了 Codex 不是一个“会调命令的 agent 外壳”，这一卷就会继续把问题往前推一层：
+
+> **Codex 也不是把命令丢给系统就完了；它会先把动作装成正式执行会话，再把批准、环境约束、输出语义与统一收尾压进同一条执行主链。**
+
+## 本卷主问题链
+
+- `exec.rs` 和 unified-exec 先切层级
+- handler / runtime 再把动作装成执行会话
+- approval / sandbox / policy 说明执行前控制链从一开始就在主链里
+- transcript / process store / end event 继续说明 unified-exec 管的是执行会话，而不是单次命令
+
 ## 目录
 
 1. [为什么 `exec.rs` 和 unified-exec 不是一回事](./2026-04-13-Codex-卷五-01-为什么-exec-rs-和-unified-exec-不是一回事.md)

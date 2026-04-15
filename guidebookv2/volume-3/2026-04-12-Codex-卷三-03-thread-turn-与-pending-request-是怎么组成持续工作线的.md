@@ -426,3 +426,11 @@ pending request 之所以重要，是因为它直接描述了：
 所以更完整的结论是：
 
 > **Codex 的持续工作能力，不是靠多存一些消息成立的，而是靠 thread 提供正式承载、turn 提供运行轮次、pending request 保留未决状态，三者一起把会话组织成一条恢复后还能继续推进的工作线。**
+---
+
+## 卷内导航
+
+- 上一篇：[《为什么恢复更像 replay，而不是“查库拼对象”》](./2026-04-12-Codex-卷三-02-为什么恢复更像-replay-而不是-查库拼对象.md)
+- 回到本卷入口：[本卷导读](./index.md)
+- 下一篇：[《为什么 turn-history 不是 event log 镜像，而是一层 semantic projection》](./2026-04-12-Codex-卷三-04-为什么-turn-history-不是-event-log-镜像.md)
+

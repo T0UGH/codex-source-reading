@@ -67,6 +67,22 @@ source_scope:
 
 ---
 
+## 先把最容易混的两件事拆开
+
+### 像 request 的地方
+
+- 会通过 `send_request(...)` 发给客户端
+- 会进入 pending request registry
+- 会被 replay，也会被 cancel
+
+### 不像 resolved request 的地方
+
+- 产品语义更像 item lifecycle，而不是 resolved-notification
+- 对外重点是 `ItemStarted / ItemCompleted` 这类 item 世界里的生命周期
+- 客户端回包后，结果直接回 core，而不是先转成 `ServerRequestResolved`
+
+先把这组对照记住，整篇就不会一直把 transport reuse 误读成语义归属。
+
 ## 一、先把“像 request”这件事和“属于哪套完成语义”分开
 
 这是整篇最关键的阅读姿势。
@@ -375,3 +391,11 @@ dynamic tool call 本质上在问：
 一句话拍板：
 
 > **`DynamicToolCall` 不是 resolved 模型的缺口，而是 request transport 与 item semantics 在 Codex 控制面里一次很典型的有意分叉。**
+---
+
+## 卷内导航
+
+- 上一篇：[《Codex 卷四 03｜`ServerRequestResolved` 到底覆盖了什么控制面语义》](./2026-04-12-Codex-卷四-03-ServerRequestResolved-到底覆盖了什么控制面语义.md)
+- 回到本卷入口：[本卷导读](./index.md)
+- 下一篇：[《Codex 卷四 05｜为什么 TUI 越来越像跑在 app-server 之上，而不是直接抓 core》](./2026-04-12-Codex-卷四-05-为什么-TUI-越来越像跑在-app-server-之上.md)
+

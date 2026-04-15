@@ -36,6 +36,12 @@ tags:
 
 ## 先把两个关键词说白
 
+如果你嫌 `semantic projection` 这个词太硬，可以先只记一句白话：
+
+> **turn-history 不是日志复印件，而是一层把事件整理成 turn 轮次的语义整理层。**
+
+后面再看到 `semantic projection`，都可以先把它翻译回这句中文。
+
 ### builder
 
 本文会提到 `ThreadHistoryBuilder`。
@@ -54,6 +60,10 @@ tags:
 
 > **把原始事件材料，整理成一份更适合特定用途的结果视图。**
 
+如果换成更容易入口的中文，它也可以直接读成：
+
+> **语义整理层。**
+
 对 turn-history 来说，这个用途就是：
 
 - 让人能读懂一条工作线经历了几个 turn；
@@ -67,6 +77,12 @@ tags:
 ---
 
 ## 本文只讲一件事：为什么系统必须把事件整理成 turn，而不是直接展示事件
+
+如果只想先抓住这一篇的最低分辨率区别，可以先看这组对照：
+
+- **event log** 更关心：先后发生了什么
+- **turn-history** 更关心：这些事最后组织成了哪几个工作轮次
+- **semantic projection / 语义整理层** 更关心：哪些底层事件该被保留、归到哪个 turn、怎样呈现成可继续工作的历史
 
 如果只从“日志记录”角度看，一个很自然的直觉是：
 
@@ -468,3 +484,11 @@ turn-history 不是 event log 镜像，还有一个很重要的原因：
 这就是为什么，读 turn-history 时，正确的问题从来不是“它有没有把日志一条不漏地抄出来”，而应该是：
 
 > **它是怎样把这些事件解释成一条真正可读、可恢复、可继续推进的 turn 历史的。**
+---
+
+## 卷内导航
+
+- 上一篇：[《thread、turn 与 pending request 是怎么组成持续工作线的》](./2026-04-12-Codex-卷三-03-thread-turn-与-pending-request-是怎么组成持续工作线的.md)
+- 回到本卷入口：[本卷导读](./index.md)
+- 下一篇：[《active_turn_snapshot、handle_user_message 与当前工作视图的边界》](./2026-04-12-Codex-卷三-05-active-turn-snapshot-handle-user-message-与当前工作视图的边界.md)
+

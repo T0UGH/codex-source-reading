@@ -533,3 +533,11 @@ flowchart TD
 > **如果输出最终优先信 transcript，那 process store 为什么还不是最终权威源？**
 
 下一篇第 05 篇就进入这个问题：**process store 为什么不是最终真相，而 unified-exec 更像 execution control plane。**
+---
+
+## 卷内导航
+
+- 上一篇：[《为什么 approval、sandbox、policy 不是执行外围，而是在执行前就进入主链》](./2026-04-13-Codex-卷五-03-为什么-approval-sandbox-policy-不是执行外围而是在执行前就进入主链.md)
+- 回到本卷入口：[本卷导读](./index.md)
+- 下一篇：[《为什么 process store 不是最终权威源，而 unified-exec 更像 execution control plane》](./2026-04-13-Codex-卷五-05-为什么-process-store-不是最终权威源而-unified-exec-更像-execution-control-plane.md)
+

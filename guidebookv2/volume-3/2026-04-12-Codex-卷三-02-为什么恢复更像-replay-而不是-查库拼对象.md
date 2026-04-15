@@ -447,3 +447,11 @@ rollback 按 user turns 处理、历史按 turn segment 判断是否存活，这
 如果只留一句最短的话来记这一篇，可以记成：
 
 > **Codex 恢复的不是一个“库里的旧对象”，而是一条基于正文历史重新接起来的当前工作线；所以它更像 replay，而不是查库拼对象。**
+---
+
+## 卷内导航
+
+- 上一篇：[《为什么 rollout 才是正文真相源，而 SQLite 不是恢复核心》](./2026-04-12-Codex-卷三-01-为什么-rollout-才是正文真相源而-SQLite-不是恢复核心.md)
+- 回到本卷入口：[本卷导读](./index.md)
+- 下一篇：[《thread、turn 与 pending request 是怎么组成持续工作线的》](./2026-04-12-Codex-卷三-03-thread-turn-与-pending-request-是怎么组成持续工作线的.md)
+

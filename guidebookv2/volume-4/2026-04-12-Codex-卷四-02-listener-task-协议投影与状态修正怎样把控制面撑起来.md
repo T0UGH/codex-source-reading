@@ -40,6 +40,18 @@ tags:
 
 ---
 
+## 先记住这张三层卡
+
+- **listener task**：把 live event 和顺序敏感命令收进同一个串行上下文。
+- **`bespoke_event_handling`**：把 runtime signal 整理成客户端真正消费的协议语义。
+- **状态修正层**：把 thread-local state、watch 状态、重连/恢复后的对外视图持续校正到同一条线上。
+
+如果中途读乱了，回到这三层卡即可：这篇所有机制，最终都在回答控制面为什么能靠这三层配合站稳。
+
+再压成一句更适合记忆的话就是：
+
+> **listener 负责把顺序守住，协议投影负责把话说成人能消费的样子，状态修正负责保证前后看到的是同一条 thread。**
+
 ## 先把“控制面撑起来”这几个字说白
 
 这里的“撑起来”，不是一句抽象比喻，它至少要同时满足几件事：
@@ -759,3 +771,11 @@ generation guard、active-turn merge、pending request replay、note / abort / r
 > **既然控制面已经成立，那 `ServerRequestResolved` 到底覆盖了哪些 request semantics，哪些又根本不是同一种 resolved 语义？**
 
 但那已经是 request shape 分类问题了，不是本篇要展开的内容。
+---
+
+## 卷内导航
+
+- 上一篇：[《为什么 app-server 不是另一套 runtime，而是建立在 core 之上的控制面 facade》](./2026-04-12-Codex-卷四-01-为什么-app-server-不是另一套-runtime.md)
+- 回到本卷入口：[本卷导读](./index.md)
+- 下一篇：[《Codex 卷四 03｜`ServerRequestResolved` 到底覆盖了什么控制面语义》](./2026-04-12-Codex-卷四-03-ServerRequestResolved-到底覆盖了什么控制面语义.md)
+
