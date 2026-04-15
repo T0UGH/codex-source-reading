@@ -22,7 +22,7 @@
 
   <circle cx="88" cy="78" r="10" fill="#22d3ee"/>
   <text x="114" y="88" class="title">Codex interactive 主请求流总图</text>
-  <text x="88" y="120" class="subtitle">卷一第二篇先立住：请求层层换职责，动作会短暂分叉，结果还得回到同一轮工作回合。</text>
+  <text x="88" y="120" class="subtitle">卷一第二篇先立住：请求层层换职责，结果会回到同一轮工作回合。</text>
 
   <rect x="56" y="194" width="142" height="92" rx="16" fill="rgba(30,41,59,0.62)" stroke="#94a3b8" stroke-width="2"/>
   <text x="127" y="234" text-anchor="middle" class="label">用户</text>
@@ -76,7 +76,7 @@
   <line x1="414" y1="240" x2="462" y2="240" stroke="#22d3ee" stroke-width="2.2" marker-end="url(#arrowhead)"/>
   <line x1="632" y1="240" x2="680" y2="240" stroke="#22d3ee" stroke-width="2.2" marker-end="url(#arrowhead)"/>
   <line x1="804" y1="310" x2="804" y2="460" stroke="#fbbf24" stroke-width="2.2" marker-end="url(#arrowhead)"/>
-  <text x="824" y="390" class="legend">控制面把请求送入 live thread runtime</text>
+  <text x="824" y="390" class="legend">控制面把请求送入 live runtime</text>
 
   <line x1="546" y1="532" x2="602" y2="532" stroke="#34d399" stroke-width="2.4" marker-end="url(#arrowhead)"/>
   <line x1="796" y1="532" x2="852" y2="532" stroke="#34d399" stroke-width="2.4" marker-end="url(#arrowhead)"/>
@@ -85,7 +85,7 @@
   <text x="1088" y="518" text-anchor="middle" class="legend">需要动作时短暂分叉</text>
 
   <path d="M 1233 602 L 1233 648 Q 1233 676 1205 676 L 996 676 Q 966 676 966 598" stroke="#fb923c" stroke-width="2.2" fill="none" marker-end="url(#arrowhead)"/>
-  <text x="1170" y="702" class="legend">结果必须回流当前回合，再决定继续还是收口</text>
+  <text x="1170" y="702" class="legend">结果会回流当前回合，再决定是否收口</text>
 
   <path d="M 696 664 L 696 618" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowhead)"/>
   <path d="M 680 178 L 602 178 Q 564 178 564 154 L 564 136" stroke="none"/>

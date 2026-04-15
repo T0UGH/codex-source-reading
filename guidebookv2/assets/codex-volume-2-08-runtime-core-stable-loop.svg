@@ -22,7 +22,7 @@
 
   <circle cx="88" cy="78" r="10" fill="#34d399"/>
   <text x="114" y="88" class="title">Codex runtime core 稳定运行图</text>
-  <text x="88" y="120" class="subtitle">卷二卷尾真正要留下的，是一条不断判断“继续还是收口”的工作回合主线。</text>
+  <text x="88" y="120" class="subtitle">卷二卷尾真正要留下的，是一条不断判断“继续还是收口”的工作回合线。</text>
 
   <rect x="84" y="194" width="200" height="106" rx="18" fill="rgba(8,51,68,0.32)" stroke="#22d3ee" stroke-width="2.2"/>
   <text x="184" y="236" text-anchor="middle" class="label">请求进入</text>

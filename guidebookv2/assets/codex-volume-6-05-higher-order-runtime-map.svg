@@ -22,7 +22,7 @@
 
   <circle cx="88" cy="78" r="10" fill="#fb7185"/>
   <text x="114" y="88" class="title">Codex 更高层 runtime 组织图</text>
-  <text x="88" y="120" class="subtitle">卷六真正要立住的，不是“功能更多了”，而是审查、协作、长期上下文都被上提成可组织、可回流、可观察的运行结构。</text>
+  <text x="88" y="120" class="subtitle">卷六真正要立住的，不是“功能更多了”，而是它们都被上提成运行结构。</text>
 
   <rect x="106" y="232" width="246" height="128" rx="18" fill="rgba(30,41,59,0.62)" stroke="#94a3b8" stroke-width="2"/>
   <text x="229" y="274" text-anchor="middle" class="label">主执行链 / runtime base</text>
@@ -67,8 +67,8 @@
   <text x="1116" y="812" class="legend">长期上下文从 helper 上提为启动组织管线</text>
 
   <rect x="116" y="842" width="1368" height="94" rx="18" fill="rgba(30,41,59,0.34)" stroke="#94a3b8" stroke-width="1.4"/>
-  <text x="800" y="882" text-anchor="middle" class="sub" style="font-size:15px">左侧是显式审查与基础设施化审查，中间是活会话与多主体协作，右侧是启动期长期上下文管线。它们都站在主执行链之上，继续组织系统如何运行。</text>
-  <text x="800" y="912" text-anchor="middle" class="tiny">因此卷六更像“系统角色上移”的证明，而不是“高级功能合集”。</text>
+  <text x="800" y="882" text-anchor="middle" class="sub" style="font-size:15px">左侧是审查，中间是活会话与协作，右侧是长期上下文管线。</text>
+  <text x="800" y="912" text-anchor="middle" class="tiny">卷六更像“系统角色上移”的证明。</text>
 
   <path d="M 352 292 L 442 226" stroke="#fb7185" stroke-width="2.1" fill="none" marker-end="url(#arrowhead)"/>
   <path d="M 352 300 L 442 390" stroke="#fb7185" stroke-width="2.1" fill="none" marker-end="url(#arrowhead)"/>
