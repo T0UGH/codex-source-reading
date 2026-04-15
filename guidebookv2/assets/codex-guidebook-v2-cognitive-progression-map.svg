@@ -1,0 +1,107 @@
+<svg width="1680" height="1120" viewBox="0 0 1680 1120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.8"/>
+    </pattern>
+    <marker id="arrow" markerWidth="12" markerHeight="8" refX="10" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#94a3b8"/>
+    </marker>
+    <style>
+      .title { font: 700 34px 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; fill: #f8fafc; }
+      .subtitle { font: 500 16px 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; fill: #94a3b8; }
+      .label { font: 700 18px 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; fill: #f8fafc; }
+      .sub { font: 500 13px 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; fill: #94a3b8; }
+      .tiny { font: 500 12px 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; fill: #cbd5e1; }
+      .section { font: 700 15px 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; }
+      .legend { font: 600 12px 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; fill: #cbd5e1; }
+    </style>
+  </defs>
+
+  <rect width="1680" height="1120" rx="28" fill="#020617"/>
+  <rect x="24" y="24" width="1632" height="1072" rx="24" fill="url(#grid)"/>
+
+  <circle cx="88" cy="78" r="10" fill="#fbbf24"/>
+  <text x="114" y="88" class="title">Codex 六卷认知递进总图</text>
+  <text x="88" y="120" class="subtitle">这 6 卷不是材料分桶，而是一条连续问题链：先立系统总图，再进入 runtime、持续性、控制面、执行会话，最后上移到更高层 runtime 组织。</text>
+
+  <rect x="110" y="182" width="1460" height="122" rx="20" fill="rgba(251,191,36,0.08)" stroke="#fbbf24" stroke-width="1.8"/>
+  <text x="840" y="228" text-anchor="middle" class="label">整本书在回答同一条问题链</text>
+  <text x="840" y="262" text-anchor="middle" class="sub">Codex 到底是什么系统 → 它怎么跑起来 → 它怎么持续存在 → 它怎么暴露成控制面 → 它怎么把动作装成执行会话 → 它怎么长成高层运行组织</text>
+
+  <rect x="112" y="382" width="220" height="196" rx="20" fill="rgba(8,51,68,0.28)" stroke="#22d3ee" stroke-width="2.2"/>
+  <text x="222" y="430" text-anchor="middle" class="label">卷一</text>
+  <text x="222" y="460" text-anchor="middle" class="sub">系统入口与总图</text>
+  <text x="222" y="494" text-anchor="middle" class="tiny">回答：Codex 到底是什么，不是什么</text>
+  <text x="222" y="524" text-anchor="middle" class="tiny">CLI / TUI / app-server / runtime core</text>
+  <text x="222" y="552" text-anchor="middle" class="tiny">先立整机总图与六卷地图</text>
+
+  <rect x="372" y="382" width="220" height="196" rx="20" fill="rgba(6,78,59,0.34)" stroke="#34d399" stroke-width="2.2"/>
+  <text x="482" y="430" text-anchor="middle" class="label">卷二</text>
+  <text x="482" y="460" text-anchor="middle" class="sub">runtime core 主线</text>
+  <text x="482" y="494" text-anchor="middle" class="tiny">回答：这条工作回合怎么跑起来</text>
+  <text x="482" y="524" text-anchor="middle" class="tiny">请求进入 / 工作面形成 / 动作回流</text>
+  <text x="482" y="552" text-anchor="middle" class="tiny">继续 / 收口</text>
+
+  <rect x="632" y="382" width="220" height="196" rx="20" fill="rgba(168,85,247,0.18)" stroke="#a78bfa" stroke-width="2.2"/>
+  <text x="742" y="430" text-anchor="middle" class="label">卷三</text>
+  <text x="742" y="460" text-anchor="middle" class="sub">状态、恢复与持续工作线</text>
+  <text x="742" y="494" text-anchor="middle" class="tiny">回答：这条工作线为什么不会散掉</text>
+  <text x="742" y="524" text-anchor="middle" class="tiny">rollout / replay / thread / turn</text>
+  <text x="742" y="552" text-anchor="middle" class="tiny">pending request / 当前工作视图</text>
+
+  <rect x="892" y="382" width="220" height="196" rx="20" fill="rgba(120,53,15,0.28)" stroke="#fbbf24" stroke-width="2.2"/>
+  <text x="1002" y="430" text-anchor="middle" class="label">卷四</text>
+  <text x="1002" y="460" text-anchor="middle" class="sub">控制面与 app-server 语义</text>
+  <text x="1002" y="494" text-anchor="middle" class="tiny">回答：runtime 怎么暴露成稳定控制面</text>
+  <text x="1002" y="524" text-anchor="middle" class="tiny">listener / 投影 / 状态修正</text>
+  <text x="1002" y="552" text-anchor="middle" class="tiny">app-server 不是另一套 runtime</text>
+
+  <rect x="1152" y="382" width="220" height="196" rx="20" fill="rgba(251,146,60,0.18)" stroke="#fb923c" stroke-width="2.2"/>
+  <text x="1262" y="430" text-anchor="middle" class="label">卷五</text>
+  <text x="1262" y="460" text-anchor="middle" class="sub">统一执行子系统</text>
+  <text x="1262" y="494" text-anchor="middle" class="tiny">回答：动作怎么变成执行会话</text>
+  <text x="1262" y="524" text-anchor="middle" class="tiny">handler / runtime / session</text>
+  <text x="1262" y="552" text-anchor="middle" class="tiny">transcript / control plane</text>
+
+  <rect x="1412" y="382" width="156" height="196" rx="20" fill="rgba(136,19,55,0.32)" stroke="#fb7185" stroke-width="2.2"/>
+  <text x="1490" y="430" text-anchor="middle" class="label">卷六</text>
+  <text x="1490" y="460" text-anchor="middle" class="sub">更高层 runtime</text>
+  <text x="1490" y="494" text-anchor="middle" class="tiny">回答：系统怎样继续长成</text>
+  <text x="1490" y="524" text-anchor="middle" class="tiny">审查 / 协作 / 长期组织</text>
+  <text x="1490" y="552" text-anchor="middle" class="tiny">高层运行结构</text>
+
+  <line x1="332" y1="480" x2="372" y2="480" stroke="#94a3b8" stroke-width="2.4" marker-end="url(#arrow)"/>
+  <line x1="592" y1="480" x2="632" y2="480" stroke="#94a3b8" stroke-width="2.4" marker-end="url(#arrow)"/>
+  <line x1="852" y1="480" x2="892" y2="480" stroke="#94a3b8" stroke-width="2.4" marker-end="url(#arrow)"/>
+  <line x1="1112" y1="480" x2="1152" y2="480" stroke="#94a3b8" stroke-width="2.4" marker-end="url(#arrow)"/>
+  <line x1="1372" y1="480" x2="1412" y2="480" stroke="#94a3b8" stroke-width="2.4" marker-end="url(#arrow)"/>
+
+  <text x="352" y="466" class="legend">先立主体</text>
+  <text x="612" y="466" class="legend">再立主线</text>
+  <text x="872" y="466" class="legend">再立持续性</text>
+  <text x="1132" y="466" class="legend">再立控制面</text>
+  <text x="1392" y="466" class="legend">再立执行会话</text>
+
+  <rect x="160" y="678" width="1360" height="240" rx="24" fill="rgba(30,41,59,0.34)" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="8 6"/>
+  <text x="198" y="718" class="section" fill="#94a3b8">怎么读这张总图</text>
+
+  <text x="220" y="770" class="label" style="font-size:17px">路径 A｜第一次进入</text>
+  <text x="220" y="800" class="sub" style="font-size:15px">卷一 → 卷二 → 卷三 → 卷四 → 卷五 → 卷六</text>
+  <text x="220" y="826" class="tiny">适合第一次完整系统读 Codex。</text>
+
+  <text x="760" y="770" class="label" style="font-size:17px">路径 B｜runtime-first</text>
+  <text x="760" y="800" class="sub" style="font-size:15px">卷一 → 卷二 → 卷三</text>
+  <text x="760" y="826" class="tiny">适合先抓主体、主回合与持续工作线。</text>
+
+  <text x="220" y="876" class="label" style="font-size:17px">路径 C｜control / execution-first</text>
+  <text x="220" y="906" class="sub" style="font-size:15px">控制面：卷一 → 卷四 → 卷三 ｜ 执行链：卷一 → 卷二 → 卷五</text>
+  <text x="220" y="932" class="tiny">适合直接切到控制面或统一执行主线。</text>
+
+  <text x="760" y="876" class="label" style="font-size:17px">路径 D｜high-runtime-first</text>
+  <text x="760" y="906" class="sub" style="font-size:15px">卷一 → 卷五 → 卷六</text>
+  <text x="760" y="932" class="tiny">适合直接看 review、guardian、collab、memories 怎么建立在执行底盘上。</text>
+
+  <rect x="186" y="980" width="1308" height="86" rx="18" fill="rgba(251,191,36,0.1)" stroke="#fbbf24" stroke-width="1.4"/>
+  <text x="840" y="1018" text-anchor="middle" class="label">整本书最后最该带走的一句 retained takeaway</text>
+  <text x="840" y="1048" text-anchor="middle" class="sub">Codex 不是一堆并排功能，而是一套先形成 runtime 主体、再持续存在、再暴露控制面、再管理执行会话、最后继续长成高层运行组织的 agent 系统。</text>
+</svg>

@@ -7,6 +7,7 @@
 
 | 文件 | 对应章节 | 图类型 | 主问题 |
 | --- | --- | --- | --- |
+| `codex-guidebook-v2-cognitive-progression-map.svg` | 总入口 README | 总图 / 阅读地图 | 整本书为什么是 6 卷认知递进，以及不同读者该从哪里进入 |
 | `codex-volume-1-02-interactive-request-flow.svg` | 卷一 02 | 主链图 | interactive 请求从入口到回流怎么跑 |
 | `codex-volume-2-06-action-result-loop.svg` | 卷二 06 | 闭环图 | action 结果为什么会回到当前 turn |
 | `codex-volume-2-08-runtime-core-stable-loop.svg` | 卷二 08 | 收口图 | runtime core 为什么是一条不断判断继续/收口的工作回合线 |
