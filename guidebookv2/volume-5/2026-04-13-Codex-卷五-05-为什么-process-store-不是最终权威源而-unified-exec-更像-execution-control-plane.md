@@ -15,6 +15,11 @@ tags:
 
 ## 读者问题
 
+
+![05 为什么 process store 不是最终权威源而 unified exec 更像 execution control plane](../assets/codex-v5-05-imagegen2.png)
+
+*图：这张图把 process store 与 unified exec 的关系分开：process store 记录进程状态，但真正的执行控制面在 unified exec 链路中形成。*
+
 如果 unified-exec 已经维护了一套 process store，为什么我们还不能把它理解成“执行结果的最终真相库”？
 
 再往前走一步，为什么到了卷五收口时，更准确的判断反而是：**unified-exec 更像一层 execution control plane，而不只是一个管理进程条目的地方？**

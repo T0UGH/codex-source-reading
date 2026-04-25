@@ -16,6 +16,11 @@ tags:
 
 ## 读者问题
 
+
+![03 为什么 approval sandbox policy 不是执行外围而是在执行前就进入主链](../assets/codex-v5-03-imagegen2.png)
+
+*图：这张图说明 approval 与 sandbox policy 不是执行外围开关，而是在执行开始前就进入主链，决定动作是否能被安全地推进。*
+
 很多人第一次看 Codex 的执行层，都会自然地这么理解：
 
 - tool call 先变成命令

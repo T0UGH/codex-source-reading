@@ -14,6 +14,11 @@ tags:
 
 ## 读者问题
 
+
+![02 UnifiedExecHandler 和 UnifiedExecRuntime 是怎么把动作装成执行会话的](../assets/codex-v5-02-imagegen2.png)
+
+*图：这张图展示 UnifiedExecHandler 与 UnifiedExecRuntime 如何把一次动作包装成执行会话：先建立上下文，再进入 runtime，最后把输出、状态和结果回写。*
+
 当 Codex 真正执行一个动作时，为什么不是“模型发来一次 `exec_command`，系统立刻去 spawn 一个命令”，而是还要先经过 `UnifiedExecHandler` 和 `UnifiedExecRuntime` 这两层？
 
 换句话说，unified-exec 的入口到底在做什么：

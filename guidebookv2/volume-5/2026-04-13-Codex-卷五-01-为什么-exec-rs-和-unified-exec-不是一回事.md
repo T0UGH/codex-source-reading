@@ -14,6 +14,11 @@ tags:
 
 ## 先回答读者最容易问的那个问题
 
+
+![01 为什么 exec rs 和 unified exec 不是一回事](../assets/codex-v5-01-imagegen2.png)
+
+*图：这张图把 exec.rs 与 unified exec 的边界拆开：前者更像一次执行入口，后者则把动作、策略、会话与输出组织成统一执行链路。*
+
 **Codex 不就是执行命令吗？既然源码里已经有 `exec.rs`，那 unified-exec 难道不就是再包一层、更产品化一点的 exec 封装？**
 
 先给结论：

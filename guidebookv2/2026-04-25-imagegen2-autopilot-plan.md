@@ -61,6 +61,6 @@ Proceed volume by volume:
 - volume-1: 3/3 generated, inserted into Markdown, visual review passed, local strict build passed, committed and pushed (`3a88b6b`)
 - volume-2: 8/8 generated, inserted into Markdown, visual review passed, local strict build passed, committed and pushed (`893b1e0`)
 - volume-3: 5/5 generated, inserted into Markdown, visual review passed, local strict build passed, committed and pushed (`43af0fd`), Pages workflow passed (`24937994296`)
-- volume-4: 5/5 generated, inserted into Markdown, visual review passed, local strict build in progress
-- volume-5: pending
+- volume-4: 5/5 generated, inserted into Markdown, visual review passed, local strict build passed, committed and pushed (`6835072`), Pages workflow passed (`24938402682`)
+- volume-5: 5/5 generated, inserted into Markdown, visual review passed, local strict build in progress
 - volume-6: pending
