@@ -54,7 +54,9 @@ tags:
 
 先把最小版本的 interactive 主请求流压成一张图：
 
-![Codex interactive 主请求流：从用户输入到结果回显](../assets/codex-volume-1-02-interactive-request-flow.svg)
+![Codex interactive 主请求流](../assets/codex-v1-02-imagegen2.png)
+
+*图：这张图展示一条最基础的 interactive 请求如何从 CLI / TUI 进入 runtime，再经过 thread、turn、model、tool / sandbox，最后把结果回写到用户可见界面。*
 
 看这张图时，建议按这个顺序读：
 
