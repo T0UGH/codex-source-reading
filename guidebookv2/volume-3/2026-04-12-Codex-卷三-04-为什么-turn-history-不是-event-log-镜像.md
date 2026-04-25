@@ -14,6 +14,11 @@ tags:
 
 ## 先回答读者最容易问的那个问题
 
+
+![04 为什么 turn history 不是 event log 镜像](../assets/codex-v3-04-imagegen2.png)
+
+*图：这张图说明 turn history 与 event log 的差别：event log 保存发生过什么，turn history 则把运行事件投影成模型和工具都能继续使用的语义视图。*
+
 **上一章已经解释了：恢复回来后，真正继续工作的是 thread、turn 和 pending request 这条结构。那为什么系统接下来还不能直接把 event 按顺序摊出来，而必须再整理出一份 turn-history？**
 
 先给结论：

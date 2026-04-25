@@ -15,6 +15,11 @@ tags:
 
 ## 先回答读者最容易问的那个问题
 
+
+![05 active turn snapshot handle user message 与当前工作视图的边界](../assets/codex-v3-05-imagegen2.png)
+
+*图：这张图展示 active turn snapshot、handle_user_message 与当前工作视图的边界：用户新输入进入当前回合后，会被整理成可恢复、可继续推进的运行快照。*
+
 **前四篇已经解释了：历史从哪来、为什么恢复更像 replay、什么结构在继续工作、这些痕迹为什么会被整理成 turn-history。那卷三最后还剩下一个问题：系统怎么判断“当前哪一段工作”才是对外可见、还能继续推进的那一段？**
 
 先给结论：

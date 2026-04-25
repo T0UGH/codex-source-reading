@@ -15,6 +15,11 @@ tags:
 
 ## 先回答读者最容易问的那个问题
 
+
+![03 thread turn 与 pending request 是怎么组成持续工作线的](../assets/codex-v3-03-imagegen2.png)
+
+*图：这张图把 thread、turn 与 pending request 放到同一条持续工作线上：thread 承接长期上下文，turn 承接当前回合，pending request 让未完成工作继续向前。*
+
 **上一篇已经解释了：恢复为什么更像 replay。那 replay 完之后，真正被接回来的到底是什么？为什么 Codex 不能只靠“历史消息 + 数据库记录”继续跑，而必须分成 thread、turn、pending request 这几层？**
 
 先给结论：
