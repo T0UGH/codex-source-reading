@@ -14,6 +14,11 @@ tags:
 
 ## 本篇要回答的问题
 
+![thread 与 turn 的层级关系](../assets/codex-v2-04-imagegen2.png)
+
+*图：这张图把 thread 和 turn 的边界压清：thread 是持续工作线，turn 是其中一次可执行回合，两者共同决定 Codex 如何承接连续任务。*
+
+
 读到 Codex 的 runtime core 时，很多人会先遇到两个高频词：`thread` 和 `turn`。
 
 如果只看字面，这两个词很容易被理解成两个并排概念：

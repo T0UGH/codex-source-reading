@@ -100,7 +100,9 @@ Codex 的 runtime core 难点不在于单个概念多难，而在于：
 
 如果必须把这一卷压成最短的一版，我建议读者最后只记住下面这张图。
 
-![Codex runtime core 稳定运行图：一轮工作回合如何闭环推进](../assets/codex-volume-2-08-runtime-core-stable-loop.svg)
+![runtime core 稳定运行总图](../assets/codex-v2-08-imagegen2.png)
+
+*图：这张图把卷二拆开的入口、线程、turn、工具调用、结果回流和收口条件重新接成一条稳定运行链，形成 Codex runtime core 的低分辨率总图。*
 
 看这张图时，建议按这个顺序读：
 

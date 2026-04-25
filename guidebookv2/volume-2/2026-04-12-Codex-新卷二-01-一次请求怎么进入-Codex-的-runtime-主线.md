@@ -15,6 +15,11 @@ tags:
 
 ## 本篇先回答读者最容易卡住的那个问题
 
+![Codex runtime 入口主线](../assets/codex-v2-01-imagegen2.png)
+
+*图：这张图把一次用户请求进入 Codex runtime 的路径压成主链：入口层接收输入，ThreadManager 找到工作线，CodexThread 组织当前 turn，再把模型、工具和状态更新接入同一轮。*
+
+
 当你在终端里输入一次请求时，直觉上很容易把这件事想成：
 
 - 我敲了一句 prompt

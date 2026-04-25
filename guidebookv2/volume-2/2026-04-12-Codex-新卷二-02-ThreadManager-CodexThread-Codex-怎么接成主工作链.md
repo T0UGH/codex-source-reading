@@ -16,6 +16,11 @@ tags:
 
 ## 本篇要解决的问题
 
+![ThreadManager / CodexThread / Codex 主工作链](../assets/codex-v2-02-imagegen2.png)
+
+*图：这张图展示 ThreadManager、CodexThread 与 Codex 三者不是平级模块，而是一条由会话定位、线程封装、回合执行共同组成的主工作链。*
+
+
 到了 `core` 这一层，读者通常会先看到三个高频名字：`ThreadManager`、`CodexThread`、`Codex`。
 
 如果只看命名，很容易把它们误读成三个并排的组件：

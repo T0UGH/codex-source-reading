@@ -58,8 +58,8 @@ Proceed volume by volume:
 ## Status
 
 - autopilot: armed for 10 mechanical continuation turns
-- volume-1: 3/3 generated, inserted into Markdown, visual review passed, local strict build passed
-- volume-2: pending
+- volume-1: 3/3 generated, inserted into Markdown, visual review passed, local strict build passed, committed and pushed (`3a88b6b`)
+- volume-2: 8/8 generated, inserted into Markdown, visual review passed, verification in progress
 - volume-3: pending
 - volume-4: pending
 - volume-5: pending
