@@ -15,6 +15,11 @@ tags:
 
 ## 先回答读者最容易问的那个问题
 
+
+![01 为什么 app server 不是另一套 runtime](../assets/codex-v4-01-imagegen2.png)
+
+*图：这张图把 app-server 放回控制面位置：它负责协议接入、请求转译和状态投影，但真正推进工作回合的仍是 runtime core。*
+
 **Codex 里 app-server 看起来非常厚：有 message processor，有 listener，有 thread state，有 watch state，还有一整套对外协议。那为什么不能直接说：它就是 Codex 的另一套 runtime？**
 
 先给结论：

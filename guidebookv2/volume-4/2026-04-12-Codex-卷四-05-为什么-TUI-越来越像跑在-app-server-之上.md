@@ -15,6 +15,11 @@ tags:
 
 ## 先把问题说清楚
 
+
+![05 为什么 TUI 越来越像跑在 app server 之上](../assets/codex-v4-05-imagegen2.png)
+
+*图：这张图把 TUI、app-server 与 runtime core 的关系压成一张图：TUI 越来越像运行在 app-server 之上的交互前端，而不是直接持有 runtime。*
+
 卷四前几篇已经把几个边界立住了：
 
 - runtime 的真正持有者更靠近 `core / ThreadManager`

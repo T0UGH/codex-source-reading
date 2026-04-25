@@ -16,6 +16,11 @@ tags:
 
 ## 先回答读者最容易问的那个问题
 
+
+![02 listener task 协议投影与状态修正怎样把控制面撑起来](../assets/codex-v4-02-imagegen2.png)
+
+*图：这张图展示 listener task 如何把外部协议事件投影成可处理的控制面任务，并在状态修正后重新写回前端可观察的运行视图。*
+
 **上一篇已经把一个大边界立住了：app-server 不是另一套 runtime，而是 control-plane facade。那下一个问题就来了：既然它不是靠一个“大 runtime 对象”把一切都包住，控制面到底是靠什么机制变稳定的？**
 
 先给结论：

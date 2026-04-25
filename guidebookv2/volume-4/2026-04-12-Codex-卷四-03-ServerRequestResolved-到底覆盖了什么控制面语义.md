@@ -18,6 +18,11 @@ source_scope:
 
 ## 先问问题
 
+
+![03 ServerRequestResolved 到底覆盖了什么控制面语义](../assets/codex-v4-03-imagegen2.png)
+
+*图：这张图说明 ServerRequestResolved 覆盖的控制面语义：一次 server request 从发起、等待到 resolved，会被整理成前端和 runtime 都能对齐的状态边界。*
+
 到了卷四这里，读者最容易滑进一个很自然、但不够准确的理解：
 
 > 某个 request 完成了，所以系统发一个统一的 `serverRequest/resolved` 通知。

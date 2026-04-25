@@ -20,6 +20,11 @@ source_scope:
 
 ## 先问问题
 
+
+![04 为什么 DynamicToolCall 不走 ServerRequestResolved](../assets/codex-v4-04-imagegen2.png)
+
+*图：这张图突出 DynamicToolCall 的特殊性：它不是普通 server request 的 resolved 结果，而是运行中工具调用路径的一部分，所以不走同一套控制面闭环。*
+
 到第 03 篇为止，我们已经把一个边界压稳了：
 
 > `ServerRequestResolved` 不是“所有 request 完成时都会统一发出的通知”，而是一批 **thread-scoped、V2、interactive request** 的 resolved-notification 语义。

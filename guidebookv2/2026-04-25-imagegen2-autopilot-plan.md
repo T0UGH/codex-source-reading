@@ -60,7 +60,7 @@ Proceed volume by volume:
 - autopilot: armed for 10 mechanical continuation turns
 - volume-1: 3/3 generated, inserted into Markdown, visual review passed, local strict build passed, committed and pushed (`3a88b6b`)
 - volume-2: 8/8 generated, inserted into Markdown, visual review passed, local strict build passed, committed and pushed (`893b1e0`)
-- volume-3: 5/5 generated, inserted into Markdown, visual review passed, local strict build passed, committing/pushing now
-- volume-4: pending
+- volume-3: 5/5 generated, inserted into Markdown, visual review passed, local strict build passed, committed and pushed (`43af0fd`), Pages workflow passed (`24937994296`)
+- volume-4: 5/5 generated, inserted into Markdown, visual review passed, local strict build in progress
 - volume-5: pending
 - volume-6: pending
