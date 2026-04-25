@@ -15,6 +15,11 @@ tags:
 
 ## 先回答读者最容易混的那个问题
 
+
+![03 realtime collab 与 AgentControl 分别是什么层](../assets/codex-v6-03-imagegen2.png)
+
+*图：这张图把 realtime collab 与 AgentControl 放到不同层级：前者偏协同通道与实时状态，后者偏 agent 控制面与能力调度。*
+
 **realtime、collab、AgentControl 看起来都在处理“多主体”“多会话”“实时协作”。那它们是不是其实是一回事，只是从不同文件夹里露出来的不同名字？**
 
 先给结论：

@@ -62,5 +62,6 @@ Proceed volume by volume:
 - volume-2: 8/8 generated, inserted into Markdown, visual review passed, local strict build passed, committed and pushed (`893b1e0`)
 - volume-3: 5/5 generated, inserted into Markdown, visual review passed, local strict build passed, committed and pushed (`43af0fd`), Pages workflow passed (`24937994296`)
 - volume-4: 5/5 generated, inserted into Markdown, visual review passed, local strict build passed, committed and pushed (`6835072`), Pages workflow passed (`24938402682`)
-- volume-5: 5/5 generated, inserted into Markdown, visual review passed, local strict build in progress
-- volume-6: pending
+- volume-5: 5/5 generated, inserted into Markdown, visual review passed, local strict build passed, committed and pushed (`b3c9c0f`), Pages workflow passed (`24938743886`)
+- volume-6: 5/5 generated, inserted into Markdown, visual review passed, local strict build passed, final commit/push in progress
+- total: 31/31 articles have one imagegen2 diagram reference; full-book `missing_imagegen2 []`, `bad_refs []`, `mkdocs build --strict` passed

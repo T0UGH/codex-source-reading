@@ -16,6 +16,11 @@ tags:
 
 ## 先回答读者最容易冒出来的问题
 
+
+![04 为什么 memories 更像启动管线而不是普通 helper](../assets/codex-v6-04-imagegen2.png)
+
+*图：这张图说明 memories 更像启动管线：记忆不是运行中随手调用的 helper，而是在 agent 启动前后塑造上下文与行为边界。*
+
 很多读者第一次看到 memories，直觉都会很像这样：
 
 - 它是不是就是“长期记忆功能”；

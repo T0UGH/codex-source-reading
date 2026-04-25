@@ -18,6 +18,11 @@ tags:
 
 ## 读者问题
 
+
+![05 为什么说 Codex 正在长成更高层 runtime 而不是只多了一些高级功能](../assets/codex-v6-05-imagegen2.png)
+
+*图：这张图把全书最后的判断收束起来：Codex 正在从工具集合长成更高层 runtime，把协作、记忆、审查和执行控制纳入同一运行面。*
+
 如果把 `/review`、guardian、realtime、collab、memories、agents 放在一起看，一个很自然的问题是：
 
 > **它们是不是只是 Codex 后半段多出来的一批高级功能？**

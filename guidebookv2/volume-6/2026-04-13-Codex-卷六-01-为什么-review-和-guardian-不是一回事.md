@@ -15,6 +15,11 @@ tags:
 
 ## 读者问题
 
+
+![01 为什么 review 和 guardian 不是一回事](../assets/codex-v6-01-imagegen2.png)
+
+*图：这张图把 review 与 guardian 分成两层：review 更像一次审查动作，guardian 则像持续运行的安全与质量基础设施。*
+
 很多人第一次看到 Codex 里的 review 相关代码，都会自然把它们压成一句话：
 
 > 这不就是两种“让另一个 agent 帮我审一下”的功能吗？

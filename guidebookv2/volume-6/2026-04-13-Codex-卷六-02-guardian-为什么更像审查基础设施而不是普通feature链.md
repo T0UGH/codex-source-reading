@@ -16,6 +16,11 @@ tags:
 
 ## 读者最常见的问题
 
+
+![02 guardian 为什么更像审查基础设施而不是普通feature链](../assets/codex-v6-02-imagegen2.png)
+
+*图：这张图展示 guardian 为什么不是普通 feature 链：它横跨输入、工具、执行和结果，形成对运行过程的基础设施级守护。*
+
 很多读者第一次碰到 guardian，都会自然地把它理解成一种“高级审查功能”：
 
 - 它会拉起 reviewer 子 agent
